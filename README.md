@@ -56,3 +56,10 @@ node server.js list-users                 daftar akun
 - Akun mahasiswa lama (tersimpan di browser) tidak terbawa; mahasiswa perlu **Buat akun** lagi sekali.
 - Daftar nama mahasiswa bawaan tetap ada di kode halaman (bukan rahasia); data yang diedit admin hanya ada di database dan butuh login.
 - Menu "Buka Claude" sudah dihapus.
+
+## Jarvis AI (Gemini)
+Panel **J.A.R.V.I.S.** (tombol bulat kanan bawah, admin 2) menawarkan dua pilihan: **Mengobrol** (Google Gemini) atau **Pelaporan masalah**. Kunci API hanya ada di server.
+1. Buat kunci di https://aistudio.google.com ("Get API key").
+2. Salin `.env.example` menjadi `.env`, isi `GEMINI_API_KEY`. Di hosting Node.js, isi sebagai variabel lingkungan.
+3. Jalankan `node server.js`. Opsional: `GEMINI_MODEL` untuk mengganti model (bawaan `gemini-3.8-flash`).
+Tanpa kunci, mode Mengobrol menampilkan pesan bahwa kunci belum diisi. Batas 20 pertanyaan per 10 menit.

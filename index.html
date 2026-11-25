@@ -697,6 +697,18 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 #jarvisPanel .say,#jarvisPanel .it{animation:jvUp .5s both cubic-bezier(.32,1.25,.4,1)}
 @keyframes jvUp{from{opacity:0;transform:translateX(-22px);filter:blur(4px)}}
 #jarvisPanel .it:nth-child(2){animation-delay:.1s}#jarvisPanel .it:nth-child(3){animation-delay:.18s}#jarvisPanel .it:nth-child(4){animation-delay:.26s}#jarvisPanel .it:nth-child(5){animation-delay:.34s}#jarvisPanel .it:nth-child(n+6){animation-delay:.42s}
+#jarvisPanel .jb2{margin-left:auto;margin-right:6px}#jarvisPanel .jb2+.jx{margin-left:0}
+#jarvisPanel .jopt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid rgba(127,227,255,.3);background:rgba(255,255,255,.08);color:#e8fbff;border-radius:16px;padding:12px 14px;margin-bottom:9px;cursor:pointer;font:inherit}
+#jarvisPanel .jopt:hover{background:rgba(127,227,255,.18)}#jarvisPanel .jopt>span{font-size:1.6rem}
+#jarvisPanel .jopt b{display:block;font-weight:800}#jarvisPanel .jopt small{display:block;color:#a9d3df;margin-top:1px}
+#jarvisPanel.chat{height:min(74vh,560px)}#jarvisPanel.chat .jb{display:flex;flex-direction:column;gap:8px}
+#jarvisPanel .cm{max-width:88%;padding:9px 12px;border-radius:14px;white-space:pre-wrap;word-wrap:break-word;font-size:.9rem;line-height:1.4}
+#jarvisPanel .cm.u{align-self:flex-end;background:#1b82c8;color:#fff}
+#jarvisPanel .cm.j{align-self:flex-start;background:rgba(127,227,255,.12);border:1px solid rgba(127,227,255,.25)}
+#jarvisPanel .cm.e{align-self:flex-start;background:rgba(255,90,82,.18);border:1px solid rgba(255,90,82,.4)}
+#jarvisPanel .jc{display:flex;gap:8px;padding:10px 14px 14px;border-top:1px solid rgba(120,220,255,.2)}
+#jarvisPanel .jc input{flex:1;min-width:0;border:1px solid rgba(120,220,255,.35);border-radius:99px;padding:10px 14px;background:rgba(255,255,255,.08);color:#fff;font:inherit;outline:none}
+#jarvisPanel .jc button{border:0;border-radius:99px;padding:0 16px;font-weight:800;cursor:pointer;background:#1fb6e8;color:#04202c}#jarvisPanel .jc button:disabled{opacity:.5}
 @media(prefers-reduced-motion:reduce){#jarvisPanel *,#jarvisBtn *{animation:none!important}#jarvisPanel .boot div{width:100%}}
 </style>
 </head>
@@ -723,7 +735,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 
 <div id="site" class="hidden">
   <header class="mtop"><button id="sideBtn" type="button" aria-label="Buka menu (klik logo STIE Pasundan)" aria-expanded="false"><img src="img/logo.png" alt="Logo STIE Pasundan"></button><span class="mt-t">Manajemen D<small>KLIK LOGO UNTUK MENU</small></span></header>
-  <button class="hidden" id="jarvisBtn" type="button" data-admin aria-label="Buka J.A.R.V.I.S."><span class="rg"></span><span class="rg"></span><span class="rg"></span><img src="img/jarvis.png" alt="J.A.R.V.I.S."><span class="bd ok" id="jvBd">✓</span></button><div id="jarvisPanel" role="dialog" aria-label="J.A.R.V.I.S."><div class="jh"><img src="img/jarvis.png" alt=""><div><b>J.A.R.V.I.S.</b><small>Asisten pelapor masalah · Admin 2</small></div><button class="jx" id="jvX" type="button" aria-label="Tutup">✕</button></div><div class="jb" id="jvBody"></div><div class="jf"><button id="jvScan" type="button">🔄 Pindai ulang</button><button class="g" id="jvCopy" type="button">📋 Salin laporan</button></div></div>
+  <button class="hidden" id="jarvisBtn" type="button" data-admin aria-label="Buka J.A.R.V.I.S."><span class="rg"></span><span class="rg"></span><span class="rg"></span><img src="img/jarvis.png" alt="J.A.R.V.I.S."><span class="bd ok" id="jvBd">✓</span></button><div id="jarvisPanel" role="dialog" aria-label="J.A.R.V.I.S."><div class="jh"><img src="img/jarvis.png" alt=""><div><b>J.A.R.V.I.S.</b><small>Asisten AI &amp; pelapor masalah · Admin 2</small></div><button class="jx jb2" id="jvBack" type="button" aria-label="Kembali ke pilihan" style="display:none">←</button><button class="jx" id="jvX" type="button" aria-label="Tutup">✕</button></div><div class="jb" id="jvBody"></div><form class="jc" id="jvChat" style="display:none"><input id="jvIn" type="text" maxlength="1500" placeholder="Ketik pertanyaan untuk Jarvis…" autocomplete="off"><button id="jvSend" type="submit">Kirim</button></form><div class="jf" style="display:none"><button id="jvScan" type="button">🔄 Pindai ulang</button><button class="g" id="jvCopy" type="button">📋 Salin laporan</button></div></div>
 <div class="scrim" id="scrim"></div><div class="edge" id="edge"></div><div class="gs-wrap" id="gsWrap"><div class="gs" id="gs" role="dialog" aria-modal="true"></div></div>
   <aside class="side" id="side" aria-label="Menu utama">
     <div class="brand"><img src="img/logo.png" alt=""><span class="bt"><b>Manajemen D</b><small>STIE PASUNDAN BANDUNG</small></span></div>
@@ -1975,15 +1987,33 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
     function boot(){ clearTimeout(bt); var o=pan.querySelector('.scanline'); if(o) o.remove(); pan.insertAdjacentHTML('afterbegin','<div class="scanline"></div>');
       body.innerHTML='<div class="boot"><div>&gt; Mengaktifkan J.A.R.V.I.S...</div><div>&gt; Menghubungkan ke sistem web...</div><div>&gt; Memindai modul &amp; data...</div><div>&gt; Menyusun laporan...</div></div>';
       bt=setTimeout(function(){ draw(); var sl=pan.querySelector('.scanline'); if(sl) setTimeout(function(){sl.remove();},1200); },2050); }
+    var mode='menu',hist=[],busy=false,jfEl=pan.querySelector('.jf'),jc=$('#jvChat'),back=$('#jvBack'),inp=$('#jvIn'),snd=$('#jvSend');
+    function setMode(m){ mode=m; pan.classList.toggle('chat',m==='chat'); jfEl.style.display=m==='report'?'':'none'; jc.style.display=m==='chat'?'':'none'; back.style.display=m==='menu'?'none':''; }
+    function menu(){ clearTimeout(bt); var o=pan.querySelector('.scanline'); if(o) o.remove(); setMode('menu');
+      body.innerHTML='<div class="say">Selamat datang kembali, Boss Stark Abdullah. Apa yang ingin Anda lakukan?</div>'+
+        '<button class="jopt" data-m="chat" type="button"><span>💬</span><div><b>Mengobrol</b><small>Tanya apa saja ke Jarvis AI (Gemini)</small></div></button>'+
+        '<button class="jopt" data-m="report" type="button"><span>🛠️</span><div><b>Pelaporan masalah</b><small>Pindai sistem website dan lihat masalahnya</small></div></button>'; }
+    function say(t,c){ var d=document.createElement('div'); d.className='cm '+c; d.textContent=t; body.appendChild(d); body.scrollTop=body.scrollHeight; return d; }
+    function chatStart(){ setMode('chat'); hist=[]; body.innerHTML=''; say('Siap, Boss Stark Abdullah. Silakan bertanya.','j'); setTimeout(function(){ inp.focus(); },50); }
+    body.addEventListener('click',function(e){ var b=e.target.closest('[data-m]'); if(!b) return; if(b.dataset.m==='report'){ setMode('report'); boot(); } else chatStart(); });
+    back.addEventListener('click',menu);
+    jc.addEventListener('submit',function(e){ e.preventDefault(); var t=inp.value.trim(); if(!t||busy) return;
+      busy=true; snd.disabled=true; inp.value=''; say(t,'u'); var w=say('Jarvis sedang berpikir…','j');
+      fetch(APIB+'api/chat',{method:'POST',credentials:'same-origin',cache:'no-store',headers:{'Content-Type':'application/json','X-Requested-With':'kelas'},body:JSON.stringify({message:t,history:hist.slice(-10)})})
+        .then(function(r){ return r.json().catch(function(){ return null; }).then(function(j){ return {ok:r.ok,j:j}; }); })
+        .then(function(o){ if(o.ok&&o.j&&o.j.reply){ w.textContent=o.j.reply; hist.push({role:'user',text:t},{role:'model',text:o.j.reply}); if(hist.length>20) hist=hist.slice(-20); }
+            else { w.className='cm e'; w.textContent=(o.j&&o.j.error)||'Chat AI butuh server Node.js (jalankan: node server.js), bukan membuka index.html langsung.'; } },
+          function(){ w.className='cm e'; w.textContent='Koneksi ke server terputus.'; })
+        .then(function(){ busy=false; snd.disabled=false; body.scrollTop=body.scrollHeight; inp.focus(); }); });
     btn.addEventListener('click',function(){ btn.classList.remove('fire'); void btn.offsetWidth; btn.classList.add('fire');
-      var o=pan.classList.toggle('show'); if(o) boot(); else clearTimeout(bt); });
+      var o=pan.classList.toggle('show'); if(o) menu(); else clearTimeout(bt); });
     $('#jvX').addEventListener('click',function(){ pan.classList.remove('show'); });
     $('#jvScan').addEventListener('click',function(){ boot(); });
     $('#jvCopy').addEventListener('click',function(){
       var t='Laporan J.A.R.V.I.S. · '+new Date().toLocaleString('id-ID')+'\n'+last.map(function(x){return ({ok:'[OK] ',warn:'[PERHATIAN] ',bad:'[MASALAH] '})[x[0]]+x[1]+': '+x[2];}).join('\n');
       (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){ toast('Laporan disalin'); },function(){ toast('Gagal menyalin laporan'); });
     });
-    setInterval(function(){ if(canEdit()){ scan(); if(pan.classList.contains('show')) draw(); } },30000);
+    setInterval(function(){ if(canEdit()){ scan(); if(pan.classList.contains('show')&&mode==='report') draw(); } },30000);
     setTimeout(function(){ if(canEdit()) scan(); },2500);
     window.addEventListener('offline',function(){ if(canEdit()) scan(); });
     window.addEventListener('online',function(){ if(canEdit()) scan(); });
