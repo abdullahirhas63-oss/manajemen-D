@@ -63,3 +63,10 @@ Panel **J.A.R.V.I.S.** (tombol bulat kanan bawah, admin 2) menawarkan dua piliha
 2. Salin `.env.example` menjadi `.env`, isi `GEMINI_API_KEY`. Di hosting Node.js, isi sebagai variabel lingkungan.
 3. Jalankan `node server.js`. Opsional: `GEMINI_MODEL` untuk mengganti model (bawaan `gemini-3.8-flash`).
 Tanpa kunci, mode Mengobrol menampilkan pesan bahwa kunci belum diisi. Batas 20 pertanyaan per 10 menit.
+
+## Supaya hasil edit selalu tersimpan (wajib baca)
+Edit hanya masuk database bila website dijalankan lewat `node server.js` **dan** folder data ada di disk persisten.
+- Hosting statis (GitHub Pages/Netlify/Vercel) = tanpa database; data hanya di browser. Jangan dipakai untuk admin 2.
+- Render: unggah proyek ke GitHub, buat "Blueprint" dari `render.yaml`, isi `ADMIN1_PASSWORD` dan `ADMIN2_PASSWORD`. Disk `/var/data` menyimpan `kelas.db`.
+- Railway/Fly.io/VPS: pasang Volume lalu set `DATA_DIR` ke folder volume itu (contoh `/data`). `Dockerfile` sudah disediakan.
+- Cek: login admin 2, ubah pengumuman, deploy ulang; data harus tetap ada. Chip di pojok menampilkan "Tersimpan di database".

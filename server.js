@@ -222,6 +222,7 @@ function secHeaders(res, secure) {
     "font-src https://fonts.gstatic.com",
     "img-src 'self' data: blob:",
     "connect-src 'self'",
+    "frame-src https://drive.google.com",
     "form-action 'self'",
     "frame-ancestors 'none'",
     "base-uri 'none'",
@@ -265,6 +266,19 @@ function startSession(res, user, secure) {
 }
 
 /* ---------- Rute API ---------- */
+/* ---------- Rekap kas: ambil CSV Google Sheet lewat server (CSP klien hanya mengizinkan 'self') ---------- */
+const KAS_SHEET_ID = process.env.KAS_SHEET_ID || '1gRPTww5D2vARHgm3nqEYVVB3wROZGm44EEx53C6x-98';
+let kasCache = { at: 0, csv: '' };
+async function kasCsv() {
+  if (kasCache.csv && Date.now() - kasCache.at < 45000) return kasCache.csv;
+  const r = await fetch(`https://docs.google.com/spreadsheets/d/${KAS_SHEET_ID}/gviz/tq?tqx=out:csv&gid=0`, { signal: AbortSignal.timeout(10000) });
+  if (!r.ok) throw new Error('sheet ' + r.status);
+  const csv = await r.text();
+  if (csv.length > 2e6) throw new Error('terlalu besar');
+  kasCache = { at: Date.now(), csv };
+  return csv;
+}
+
 async function api(req, res, p, secure) {
   const ip = clientIp(req), m = req.method;
   if (m !== 'GET' && m !== 'HEAD') {
@@ -330,6 +344,11 @@ async function api(req, res, p, secure) {
   /* --- semua rute di bawah wajib login --- */
   if (!sess) return fail(res, 401, 'Sesi berakhir. Silakan masuk lagi.');
 
+  if (p === '/api/kas' && m === 'GET') {
+    try { return send(res, 200, await kasCsv(), { 'Content-Type': 'text/csv; charset=utf-8', 'Cache-Control': 'no-store' }); }
+    catch (e) { return fail(res, 502, 'Gagal mengambil data kas dari Google Sheet.'); }
+  }
+
   if (p === '/api/data' && m === 'GET') {
     const parts = Q.kvAll.all().filter((r) => KEYS[r.key]).map((r) => `${JSON.stringify(r.key)}:${r.value}`);
     return send(res, 200, `{"data":{${parts.join(',')}}}`, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' });
@@ -366,7 +385,7 @@ async function api(req, res, p, secure) {
       ['ok', 'Sesi login', 'Cookie HttpOnly + SameSite=Strict, kedaluwarsa 12 jam.'],
       ['ok', 'Penulisan data dibatasi di server', 'Hanya admin 2 yang bisa mengubah; permintaan lain ditolak server.'],
       ['ok', 'Batas percobaan login', '5 gagal per akun/alamat IP = kunci 10 menit; maks. 30 gagal per IP per 15 menit.'],
-      ['ok', 'Content-Security-Policy ketat', 'Skrip hanya dari halaman ini (berbasis hash), tanpa koneksi ke domain lain.'],
+      ['ok', 'Content-Security-Policy ketat', 'Skrip hanya dari halaman ini (berbasis hash), tanpa koneksi ke domain lain (pengecualian: bingkai folder materi Google Drive).'],
       [classCode() ? 'ok' : 'warn', 'Kode kelas untuk membuat akun', classCode() ? `Kode saat ini: ${classCode()} (bagikan hanya ke teman sekelas).` : 'Tidak aktif.'],
       ['ok', 'Cadangan database otomatis', 'Salinan data/kelas.db disimpan di data/backup/ (14 terakhir).'],
     ];
