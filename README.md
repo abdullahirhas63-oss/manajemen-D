@@ -70,3 +70,13 @@ Edit hanya masuk database bila website dijalankan lewat `node server.js` **dan**
 - Render: unggah proyek ke GitHub, buat "Blueprint" dari `render.yaml`, isi `ADMIN1_PASSWORD` dan `ADMIN2_PASSWORD`. Disk `/var/data` menyimpan `kelas.db`.
 - Railway/Fly.io/VPS: pasang Volume lalu set `DATA_DIR` ke folder volume itu (contoh `/data`). `Dockerfile` sudah disediakan.
 - Cek: login admin 2, ubah pengumuman, deploy ulang; data harus tetap ada. Chip di pojok menampilkan "Tersimpan di database".
+
+## Vercel (Jarvis AI lewat fungsi serverless)
+Vercel tidak menjalankan `node server.js`, jadi chat Jarvis memakai fungsi di folder `api/` (`chat.js`, `jarvis-login.js`).
+Di Vercel → Project → Settings → Environment Variables, isi (lalu **Redeploy**):
+- `GEMINI_API_KEY` : kunci dari https://aistudio.google.com
+- `ADMIN2_PASSWORD` : sama persis dengan password login admin 2 di website
+- `GEMINI_MODEL` (opsional, bawaan `gemini-3.8-flash`)
+
+`vercel.json` menyalin hanya `index.html`, `config.json`, dan `img/` ke folder `public/` saat build, sehingga `server.js`, README, dll. tidak ikut tampil di internet.
+Catatan: di Vercel website tetap mode statis (data admin hanya di browser). Untuk database bersama gunakan Render/Railway/VPS (lihat bagian atas).

@@ -1273,11 +1273,19 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
     return hashPw(pw,rec.s).then(function(h){ if(h===rec.h){ jset(LK,{n:0,t:0}); return {role:r,who:w}; } failedTry(); throw new Error(BADMSG); });
   }
 
+  /* Vercel (mode statis): setelah admin 2 masuk, minta token Jarvis ke fungsi /api/jarvis-login */
+  var JVK='mgmtD-jvtok';
+  function jvLogin(pw){
+    return fetch(APIB+'api/jarvis-login',{method:'POST',cache:'no-store',headers:{'Content-Type':'application/json','X-Requested-With':'kelas'},body:JSON.stringify({password:pw})})
+      .then(function(r){ return r.json().catch(function(){ return null; }).then(function(j){
+        try{ if(r.ok&&j&&j.token) sessionStorage.setItem(JVK,j.token); else sessionStorage.removeItem(JVK); }catch(e){} }); })
+      .catch(function(){}); }
+
     var busyLogin=false;
   $('#loginForm').addEventListener('submit',function(e){
     e.preventDefault(); if(entering||busyLogin) return;
     var raw=$('#u').value.trim(), pw=$('#p').value, err=$('#err');
-    function done(j){ role=j.role; who=j.who||''; busyLogin=false; if(STATIC){ try{ sessionStorage.setItem('mgmtD-auth',role); if(who) sessionStorage.setItem('mgmtD-who',nk(who)); else sessionStorage.removeItem('mgmtD-who'); }catch(e){} } err.textContent=''; $('#p').value=''; $('#p2').value=''; $('#code').value=''; enterAnim(); }
+    function done(j){ role=j.role; who=j.who||''; busyLogin=false; if(STATIC&&j.role==='admin2') jvLogin(pw); if(STATIC){ try{ sessionStorage.setItem('mgmtD-auth',role); if(who) sessionStorage.setItem('mgmtD-who',nk(who)); else sessionStorage.removeItem('mgmtD-who'); }catch(e){} } err.textContent=''; $('#p').value=''; $('#p2').value=''; $('#code').value=''; enterAnim(); }
     function bad(x){ busyLogin=false; var m=x&&x.message; err.textContent=m==='nocrypto'?'Browser ini tidak mendukung penyimpanan password aman. Buka website lewat https:// atau gunakan browser terbaru.':(m||'Gagal terhubung ke server.'); }
     if(!raw||!pw){ err.textContent='Isi username dan password.'; return; }
     if(regMode){
@@ -1294,7 +1302,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
   function endSession(msg){
     clearTimeout(pushT); role=''; who='';
     if(!STATIC){ Object.keys(DBK).concat([PK,SEEN]).forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} }); pend={}; }
-    try{ sessionStorage.removeItem('mgmtD-auth'); sessionStorage.removeItem('mgmtD-who'); }catch(e){}
+    try{ sessionStorage.removeItem('mgmtD-auth'); sessionStorage.removeItem('mgmtD-who'); sessionStorage.removeItem(JVK); }catch(e){}
     try{ if(window.__reload) window.__reload(); }catch(e){}
     $('#p').value=''; $('#p2').value=''; $('#code').value=''; setMode(false); show(false); if(msg) $('#err').textContent=msg;
   }
@@ -2293,12 +2301,20 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 
   /* ===== v25: J.A.R.V.I.S. pelapor masalah (admin 2) ===== */
   (function(){
-    var btn=$('#jarvisBtn'),pan=$('#jarvisPanel'),body=$('#jvBody'),bd=$('#jvBd'),last=[];
+    var btn=$('#jarvisBtn'),pan=$('#jarvisPanel'),body=$('#jvBody'),bd=$('#jvBd'),last=[],aiOk=null;
+    function checkAi(){ if(!STATIC){ aiOk=null; return; }
+      fetch(APIB+'api/chat',{cache:'no-store',headers:{'X-Requested-With':'kelas'}})
+        .then(function(r){ return (r.ok&&(r.headers.get('content-type')||'').indexOf('json')>-1)?r.json():null; })
+        .then(function(j){ aiOk=j?((j.ai&&j.auth)?'ok':'nokey'):'down'; },function(){ aiOk='down'; }); }
     function scan(){
       var L=[],np=Object.keys(pend||{}).length,q=0;
       try{ q=Math.round(JSON.stringify(localStorage).length/1024); }catch(e){}
       L.push(navigator.onLine?['ok','Koneksi internet','Perangkat terhubung ke internet.']:['bad','Koneksi internet','Perangkat sedang offline. Perubahan baru dikirim saat online.']);
-      if(STATIC) L.push(['warn','Mode tanpa server','Website dibuka tanpa server Node.js, data hanya tersimpan di browser ini.']);
+      if(STATIC) L.push(['warn','Mode hosting statis','Website berjalan di hosting statis (Vercel), data hanya tersimpan di browser ini.']);
+      if(STATIC){ var jt=''; try{ jt=sessionStorage.getItem(JVK)||''; }catch(e){}
+        if(aiOk==='ok') L.push(jt?['ok','Chat AI (Gemini)','Fungsi /api/chat aktif dan sesi Jarvis siap.']:['warn','Chat AI (Gemini)','Fungsi aktif, tetapi sesi Jarvis belum ada. Keluar lalu masuk lagi sebagai admin 2.']);
+        else if(aiOk==='nokey') L.push(['bad','Chat AI (Gemini)','Fungsi aktif, tetapi GEMINI_API_KEY atau ADMIN2_PASSWORD belum diisi di Vercel.']);
+        else if(aiOk==='down') L.push(['bad','Chat AI (Gemini)','Fungsi /api/chat tidak ditemukan. Pastikan folder api/ ikut ter-deploy di Vercel.']); }
       else L.push(dbState==='err'?['bad','Database server','Server tidak dapat dihubungi.']:['ok','Database server','Terhubung dan tersinkron.']);
       L.push(np?['warn','Perubahan belum tersinkron',np+' data menunggu dikirim ke server.']:['ok','Sinkronisasi data','Semua data sudah tersinkron.']);
       L.push(q>3500?['warn','Penyimpanan browser','Terpakai '+q+' KB dari ±5.000 KB, hampir penuh.']:['ok','Penyimpanan browser','Terpakai '+q+' KB dari ±5.000 KB.']);
@@ -2316,7 +2332,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
         L.slice().sort(function(a,b){return (a[0]==='ok')-(b[0]==='ok');}).map(function(x){ return '<div class="it '+x[0]+'"><span>'+ic[x[0]]+'</span><div><b>'+esc(x[1])+'</b><small>'+esc(x[2])+'</small></div></div>'; }).join('');
     }
     var bt=null;
-    function boot(){ clearTimeout(bt); var o=pan.querySelector('.scanline'); if(o) o.remove(); pan.insertAdjacentHTML('afterbegin','<div class="scanline"></div>');
+    function boot(){ checkAi(); clearTimeout(bt); var o=pan.querySelector('.scanline'); if(o) o.remove(); pan.insertAdjacentHTML('afterbegin','<div class="scanline"></div>');
       body.innerHTML='<div class="boot"><div>&gt; Mengaktifkan J.A.R.V.I.S...</div><div>&gt; Menghubungkan ke sistem web...</div><div>&gt; Memindai modul &amp; data...</div><div>&gt; Menyusun laporan...</div></div>';
       bt=setTimeout(function(){ draw(); var sl=pan.querySelector('.scanline'); if(sl) setTimeout(function(){sl.remove();},1200); },2050); }
     var mode='menu',hist=[],busy=false,jfEl=pan.querySelector('.jf'),jc=$('#jvChat'),back=$('#jvBack'),inp=$('#jvIn'),snd=$('#jvSend');
@@ -2352,12 +2368,22 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
         cst=setTimeout(function(){ body.innerHTML=''; inp.disabled=false; snd.disabled=false; var g=say('Siap, Boss Stark Abdullah. Silakan bertanya.','j'); talk(g.textContent,g); inp.focus(); },420); } })(); }
     body.addEventListener('click',function(e){ var b=e.target.closest('[data-m]'); if(!b) return; if(b.dataset.m==='report'){ setMode('report'); boot(); } else chatStart(); });
     back.addEventListener('click',function(){ clearTimeout(cst); stopTalk(); if(rec) rec.stop(); inp.disabled=snd.disabled=false; menu(); });
+    var APPS={tiktok:['TikTok','https://www.tiktok.com/'],youtube:['YouTube','https://www.youtube.com/'],instagram:['Instagram','https://www.instagram.com/'],ig:['Instagram','https://www.instagram.com/'],facebook:['Facebook','https://www.facebook.com/'],fb:['Facebook','https://www.facebook.com/'],whatsapp:['WhatsApp','https://web.whatsapp.com/'],wa:['WhatsApp','https://web.whatsapp.com/'],telegram:['Telegram','https://web.telegram.org/'],twitter:['X','https://x.com/'],x:['X','https://x.com/'],spotify:['Spotify','https://open.spotify.com/'],google:['Google','https://www.google.com/'],gmail:['Gmail','https://mail.google.com/'],drive:['Google Drive','https://drive.google.com/'],maps:['Google Maps','https://maps.google.com/'],classroom:['Google Classroom','https://classroom.google.com/']};
+    function openCmd(t){ var s=t.toLowerCase().replace(/[.!?]+$/,'').replace(/^\s*(?:halo|hai|hi|hey)?[\s,]*jarvis[\s,]*/,'');
+      var m=s.match(/^(?:tolong\s+)?(?:buka|bukakan|open)\s+(?:aplikasi\s+|situs\s+|website\s+)?([a-z0-9]+)$/);
+      return (m&&Object.prototype.hasOwnProperty.call(APPS,m[1]))?APPS[m[1]]:null; }
     jc.addEventListener('submit',function(e){ e.preventDefault(); var t=inp.value.trim(); if(!t||busy) return;
-      busy=true; snd.disabled=true; inp.value=''; say(t,'u'); var w=say('Jarvis sedang berpikir…','j');
-      fetch(APIB+'api/chat',{method:'POST',credentials:'same-origin',cache:'no-store',headers:{'Content-Type':'application/json','X-Requested-With':'kelas'},body:JSON.stringify({message:t,history:hist.slice(-10)})})
-        .then(function(r){ return r.json().catch(function(){ return null; }).then(function(j){ return {ok:r.ok,j:j}; }); })
+      inp.value=''; say(t,'u');
+      var ap=openCmd(t);
+      if(ap){ try{ window.open(ap[1],'_blank','noopener,noreferrer'); }catch(x){}
+        var g=say('Baik, Boss. Membuka '+ap[0]+'. ','j'); var a=document.createElement('a'); a.href=ap[1]; a.target='_blank'; a.rel='noopener noreferrer'; a.textContent='Ketuk di sini bila belum terbuka.'; a.style.color='inherit'; a.style.textDecoration='underline'; g.appendChild(a);
+        talk('Baik, Boss. Membuka '+ap[0]+'.',g); body.scrollTop=body.scrollHeight; return; }
+      busy=true; snd.disabled=true; var w=say('Jarvis sedang berpikir…','j');
+      var hd={'Content-Type':'application/json','X-Requested-With':'kelas'}; try{ var tk=sessionStorage.getItem(JVK); if(tk) hd['X-Jarvis-Token']=tk; }catch(x){}
+      fetch(APIB+'api/chat',{method:'POST',credentials:'same-origin',cache:'no-store',headers:hd,body:JSON.stringify({message:t,history:hist.slice(-10)})})
+        .then(function(r){ return r.json().catch(function(){ return null; }).then(function(j){ return {ok:r.ok,j:j,st:r.status}; }); })
         .then(function(o){ if(o.ok&&o.j&&o.j.reply){ w.textContent=o.j.reply; talk(o.j.reply,w); hist.push({role:'user',text:t},{role:'model',text:o.j.reply}); if(hist.length>20) hist=hist.slice(-20); }
-            else { w.className='cm e'; w.textContent=(o.j&&o.j.error)||'Chat AI butuh server Node.js (jalankan: node server.js), bukan membuka index.html langsung.'; } },
+            else { w.className='cm e'; w.textContent=(o.j&&o.j.error)||(o.st===404?'Chat AI belum tersambung: fungsi /api/chat tidak ditemukan. Pastikan folder api/ ikut ter-deploy (Vercel).':'Chat AI gagal ('+o.st+'). Coba lagi.'); } },
           function(){ w.className='cm e'; w.textContent='Koneksi ke server terputus.'; })
         .then(function(){ busy=false; snd.disabled=false; body.scrollTop=body.scrollHeight; inp.focus(); }); });
     btn.addEventListener('click',function(){ btn.classList.remove('fire'); void btn.offsetWidth; btn.classList.add('fire');
@@ -2368,8 +2394,8 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
       var t='Laporan J.A.R.V.I.S. · '+new Date().toLocaleString('id-ID')+'\n'+last.map(function(x){return ({ok:'[OK] ',warn:'[PERHATIAN] ',bad:'[MASALAH] '})[x[0]]+x[1]+': '+x[2];}).join('\n');
       (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){ toast('Laporan disalin'); },function(){ toast('Gagal menyalin laporan'); });
     });
-    setInterval(function(){ if(canEdit()){ scan(); if(pan.classList.contains('show')&&mode==='report') draw(); } },30000);
-    setTimeout(function(){ if(canEdit()) scan(); },2500);
+    setInterval(function(){ if(canEdit()){ checkAi(); scan(); if(pan.classList.contains('show')&&mode==='report') draw(); } },30000);
+    setTimeout(function(){ if(canEdit()){ checkAi(); scan(); setTimeout(scan,1500); } },2500);
     window.addEventListener('offline',function(){ if(canEdit()) scan(); });
     window.addEventListener('online',function(){ if(canEdit()) scan(); });
     var lo=$('#logout'); if(lo) lo.addEventListener('click',function(){ pan.classList.remove('show'); },true);
