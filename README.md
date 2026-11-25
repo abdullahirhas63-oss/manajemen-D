@@ -14,6 +14,16 @@ ADMIN1_PASSWORD="..." ADMIN2_PASSWORD="..." node server.js
 ```
 (`index.html` tidak bisa dibuka langsung dengan klik dua kali; harus lewat server agar database dan login bekerja.)
 
+## Hosting: dua mode, tanpa 404
+Website otomatis mendeteksi file `config.json`:
+- **Hosting Node.js** (Render, Railway, VPS, dll.; start command `node server.js`): mode penuh dengan database dan keamanan server.
+  Set variabel `ADMIN1_PASSWORD` dan `ADMIN2_PASSWORD` di hosting; password admin selalu mengikuti variabel itu (diganti saat restart).
+  Pakai disk persisten untuk folder `data/` (atau set `DATA_DIR`) agar database tidak hilang saat deploy ulang. Cek kesehatan: `/healthz`.
+- **Hosting statis** (GitHub Pages, Netlify, Vercel, dll.; unggah `index.html`, `config.json`, folder `img/`): mode tanpa server.
+  Login admin 1 dan admin 2 tetap bisa (password lama, kini disimpan sebagai hash), tetapi data hanya di browser dan keamanannya terbatas.
+  Ganti password mode ini: `node server.js static-hash`, lalu tempel `s:'…',h:'…'` ke `ADM` di `index.html`.
+Alamat tak dikenal (`/login`, `/kelas`, `/favicon.ico`) tidak lagi 404: dialihkan ke halaman utama atau dilayani.
+
 ## Database
 File `data/kelas.db` (SQLite) menyimpan: Mahasiswa, Informasi (UTS/UAS/Tugas), Pengumuman, Buku Kenangan, Struktur kelas,
 akun login, sesi, dan **log audit** (siapa mengubah apa dan kapan).

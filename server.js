@@ -104,9 +104,20 @@ function randCode() {
 }
 
 /* ---------- Inisialisasi akun admin & kode kelas ---------- */
+function verifySync(pw, stored) {
+  const [alg, saltHex, hashHex] = String(stored).split('$');
+  if (alg !== 'scrypt' || !saltHex || !hashHex) return false;
+  const want = Buffer.from(hashHex, 'hex'), got = crypto.scryptSync(pw, Buffer.from(saltHex, 'hex'), 64, SCRYPT);
+  return want.length === got.length && crypto.timingSafeEqual(want, got);
+}
 function seed() {
   for (const u of ['admin1', 'admin2']) {
-    if (Q.user.get(u)) continue;
+    const have = Q.user.get(u), envPw = process.env[u.toUpperCase() + '_PASSWORD'];
+    if (have && envPw && envPw.length >= 8 && !verifySync(envPw, have.pw)) {
+      Q.setPw.run(hashPwSync(envPw), u); db.prepare('DELETE FROM sessions WHERE username=?').run(u);
+      console.log(`Password ${u} disesuaikan dengan variabel lingkungan ${u.toUpperCase()}_PASSWORD.`);
+    }
+    if (have) continue;
     let pw = process.env[u.toUpperCase() + '_PASSWORD'], generated = false;
     if (!pw) { pw = randPw(); generated = true; }
     if (pw.length < 8) { console.error(`${u.toUpperCase()}_PASSWORD minimal 8 karakter.`); process.exit(1); }
@@ -361,7 +372,8 @@ function hashPwAsync(pw) {
 const MIME = { '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif', '.svg': 'image/svg+xml', '.ico': 'image/x-icon' };
 function serveStatic(req, res, p) {
   if (req.method !== 'GET' && req.method !== 'HEAD') return fail(res, 405, 'Metode tidak diizinkan.');
-  if (p === '/' || p === '/index.html') {
+  if (p === '/favicon.ico') p = '/img/logo.png';
+  if (['/', '/index.html', '/index', '/home', '/login'].includes(p.replace(/\/+$/, '') || '/')) {
     res.setHeader('Cache-Control', 'no-cache');
     return send(res, 200, req.method === 'HEAD' ? '' : HTML, { 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': HTML.length });
   }
@@ -374,6 +386,8 @@ function serveStatic(req, res, p) {
       return send(res, 200, req.method === 'HEAD' ? '' : buf, { 'Content-Type': MIME[ext], 'Cache-Control': 'public, max-age=86400', 'Content-Length': buf.length });
     } catch (e) { /* jatuh ke 404 */ }
   }
+  // alamat tanpa ekstensi (mis. /kelas, /beranda) dialihkan ke halaman utama, bukan 404
+  if (!path.extname(p) && !p.startsWith('/img')) { res.setHeader('Location', '/'); return send(res, 302, '', { 'Content-Length': 0 }); }
   return send(res, 404, 'Tidak ditemukan', { 'Content-Type': 'text/plain; charset=utf-8' });
 }
 
@@ -396,6 +410,10 @@ function createServer() {
       secHeaders(res, secure);
       let p;
       try { p = decodeURIComponent(new URL(req.url, 'http://x').pathname); } catch (e) { return fail(res, 400, 'URL tidak valid.'); }
+      const ai = p.indexOf('/api/'); if (ai > 0) p = p.slice(ai);        // hosting dengan prefix path
+      const ii = p.indexOf('/img/'); if (ii > 0) p = p.slice(ii);
+      if (p === '/healthz') return send(res, 200, 'ok', { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' });
+      if (p === '/config.json') return sendJson(res, 200, { server: true, needCode: !!classCode() });
       if (p.startsWith('/api/')) return await api(req, res, p, secure);
       return serveStatic(req, res, p);
     } catch (e) {
@@ -431,6 +449,9 @@ async function cli(cmd, args) {
   } else if (cmd === 'set-code') {
     const c = (args[0] || randCode()).toUpperCase();
     Q.setMeta.run('kode_kelas', c); console.log('Kode kelas sekarang:', c);
+  } else if (cmd === 'static-hash') {
+    const pw = args[0] || await prompt('Password untuk mode tanpa server: '), salt = crypto.randomBytes(16);
+    console.log(`s:'${salt.toString('hex')}',h:'${crypto.pbkdf2Sync(pw, salt, 100000, 32, 'sha256').toString('hex')}'`);
   } else if (cmd === 'list-users') {
     db.prepare('SELECT username,role,display_name,created_at FROM users ORDER BY role,username').all().forEach((u) => console.log(`${u.role.padEnd(7)} ${u.username}  ${new Date(u.created_at).toISOString()}`));
   } else {
@@ -439,7 +460,8 @@ async function cli(cmd, args) {
   node server.js set-password <user>      ganti password (admin1, admin2, atau nama lengkap mahasiswa)
   node server.js delete-user "<nama>"     hapus akun mahasiswa (mis. lupa password)
   node server.js set-code [KODE]          ganti kode kelas untuk pendaftaran akun
-  node server.js list-users               daftar akun`);
+  node server.js list-users               daftar akun
+  node server.js static-hash              cetak hash untuk mode tanpa server (ditempel di index.html)`);
   }
 }
 

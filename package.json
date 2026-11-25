@@ -1,6 +1,6 @@
 {
   "name": "kelas-manajemen-d",
-  "version": "22.0.0",
+  "version": "22.1.0",
   "private": true,
   "description": "Website Kelas Manajemen D dengan database SQLite dan login di server",
   "main": "server.js",
