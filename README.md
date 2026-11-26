@@ -1,4 +1,4 @@
-# Website Kelas Manajemen D (v22)
+# Website Kelas Manajemen D (v32)
 
 Website ini sekarang berjalan dengan **server Node.js + database SQLite**. Tidak perlu `npm install` (tanpa dependensi).
 Butuh **Node.js 22.13 atau lebih baru**.
@@ -105,3 +105,11 @@ Catatan: di Vercel website tetap mode statis (data admin hanya di browser). Untu
 3. Tambahkan Environment variables: `EDITOR_PASSWORD`, `SISWA_PASSWORD`, `TRUST_PROXY=1`, opsional `GEMINI_API_KEY`, `KODE_KELAS`.
 4. Klik **Run JS install** (boleh dilewati, tanpa dependensi) lalu **Restart**. Buka domain: jangan lewat file statis di public_html agar database aktif.
 5. Folder `data/` (kelas.db + backup) ada di folder aplikasi; ikut dibackup lewat cPanel.
+
+## v32: perapian mode terang, latar kampus, login kaca, Rekapan dari Google Sheet
+- **Mode terang** dirapikan: menu atas tidak lagi patah baris, footer menyatu dengan tata letak, dan bilah atas desktop tidak lagi bocor ke tampilan HP.
+- **Latar kampus otomatis**: foto kampus kini benar-benar tampil (sebelumnya tertutup warna solid pada `body`). Pengguna lama otomatis dipindah ke latar Kampus satu kali; pilihan Langit/Polos tetap bisa dipilih di Pengaturan.
+- **Pengaturan**: Mode (Terang/Gelap/Otomatis), Bahasa, Latar belakang, Intensitas kaca, Ukuran teks, dan Animasi semuanya berlaku langsung. Pilihan mode juga ada di pojok layar login.
+- **Jarvis** di atas menu dihapus (tombol bulat Jarvis di pojok kanan bawah tetap ada).
+- **Login** bergaya kaca (glassy), tanpa ornamen futuristik.
+- **Rekapan Kas** membaca Google Sheet kas langsung: tabel per mahasiswa (nominal + metode CASH/SPAY/SEABANK/TRANSFER per minggu), filter bulan, grafik per minggu, rincian metode, dan tabel pemasukan/pengeluaran (sheet kedua). Sheet harus dibagikan "siapa saja dengan link" (Viewer). ID sheet bisa diganti lewat variabel `KAS_SHEET_ID`.

@@ -280,12 +280,13 @@ function startSession(res, user, secure) {
 /* ---------- Rekap kas: ambil CSV Google Sheet lewat server (CSP klien hanya mengizinkan 'self') ---------- */
 const KAS_SHEET_ID = process.env.KAS_SHEET_ID || '1gRPTww5D2vARHgm3nqEYVVB3wROZGm44EEx53C6x-98';
 const kasCache = new Map();
-async function kasCsv(sid = KAS_SHEET_ID, gid = '0') {
-  const ck = sid + '|' + gid, hit = kasCache.get(ck);
+async function kasCsv(sid = KAS_SHEET_ID, gid = '0', sheet = '') {
+  const ck = sid + '|' + gid + '|' + sheet, hit = kasCache.get(ck);
   if (hit && Date.now() - hit.at < 45000) return hit.csv;
-  const r = await fetch(`https://docs.google.com/spreadsheets/d/${sid}/gviz/tq?tqx=out:csv&gid=${gid}`, { signal: AbortSignal.timeout(10000) });
+  const r = await fetch(`https://docs.google.com/spreadsheets/d/${sid}/gviz/tq?tqx=out:csv&${sheet ? 'sheet=' + encodeURIComponent(sheet) : 'gid=' + gid}`, { signal: AbortSignal.timeout(10000) });
   if (!r.ok) throw new Error('sheet ' + r.status);
   const csv = await r.text();
+  if (/^\s*</.test(csv)) throw new Error('sheet tidak dibagikan publik');
   if (csv.length > 2e6) throw new Error('terlalu besar');
   if (kasCache.size >= 20) kasCache.delete(kasCache.keys().next().value);
   kasCache.set(ck, { at: Date.now(), csv });
@@ -358,9 +359,9 @@ async function api(req, res, p, secure) {
   if (!sess) return fail(res, 401, 'Sesi berakhir. Silakan masuk lagi.');
 
   if (p === '/api/kas' && m === 'GET') {
-    const qs = new URL(req.url, 'http://x').searchParams, qsid = qs.get('sid') || KAS_SHEET_ID, qgid = qs.get('gid') || '0';
-    if (!/^[\w-]{20,80}$/.test(qsid) || !/^\d{1,12}$/.test(qgid)) return fail(res, 400, 'Link spreadsheet tidak valid.');
-    try { return send(res, 200, await kasCsv(qsid, qgid), { 'Content-Type': 'text/csv; charset=utf-8', 'Cache-Control': 'no-store' }); }
+    const qs = new URL(req.url, 'http://x').searchParams, qsid = qs.get('sid') || KAS_SHEET_ID, qgid = qs.get('gid') || '0', qsh = qs.get('sheet') || '';
+    if (!/^[\w-]{20,80}$/.test(qsid) || !/^\d{1,12}$/.test(qgid) || (qsh && !/^[\w .&-]{1,60}$/.test(qsh))) return fail(res, 400, 'Link spreadsheet tidak valid.');
+    try { return send(res, 200, await kasCsv(qsid, qgid, qsh), { 'Content-Type': 'text/csv; charset=utf-8', 'Cache-Control': 'no-store' }); }
     catch (e) { return fail(res, 502, 'Gagal mengambil data kas dari Google Sheet.'); }
   }
 
