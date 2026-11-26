@@ -4,6 +4,13 @@
   "private": true,
   "description": "Website Kelas Manajemen D dengan database SQLite dan login di server",
   "main": "server.js",
-  "scripts": { "start": "node server.js" },
-  "engines": { "node": "22.x" }
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "dependencies": {
+    "@vercel/speed-insights": "^2.1.0"
+  }
 }
