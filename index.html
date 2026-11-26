@@ -1719,6 +1719,119 @@ html[data-theme=light] .rk-wrap table.kas{background:rgba(255,255,255,.7)}
 .rk-wrap table.kas td.fut,.rk-wrap table.kas th.fut{opacity:.5}
 @media(max-width:600px){.rk-wrap table.kas .c-nm{min-width:150px}.rk-head h2{font-size:1rem}}
 </style>
+<style>
+.pk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;padding:4px 2px 24px}
+.pk{background:var(--kas-c,rgba(255,255,255,.7));border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.pk-top{display:flex;align-items:center;gap:8px}
+.pk-no{flex:none;min-width:24px;height:24px;border-radius:99px;display:grid;place-items:center;font-size:.7rem;font-weight:800;background:var(--kas-h);color:var(--cy)}
+.pk-nm{flex:1;min-width:0;font-size:.92rem;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pk-st{flex:none;font-size:.62rem;font-weight:800;padding:3px 9px;border-radius:99px;white-space:nowrap}
+.st-ok{background:rgba(34,197,94,.18);color:#16a34a}.st-mid{background:rgba(245,158,11,.2);color:#d97706}.st-no{background:rgba(239,68,68,.16);color:#dc2626}.st-z{background:var(--kas-h);color:var(--muted)}
+.pk-amt{font-size:1.25rem;font-weight:800;color:var(--ink);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.pk-amt small{font-size:.72rem;font-weight:600;color:var(--muted)}
+.pk-bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.pk-bar i{display:block;height:100%;border-radius:99px}
+.pk-wk{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.pk-m{font-style:normal;font-size:.6rem;font-weight:800;color:var(--muted);margin:0 2px 0 6px}.pk-m:first-child{margin-left:0}
+.pk-c{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-size:.64rem;font-weight:800}
+.pk-c.on{background:#22c55e;color:#fff}.pk-c.off{background:rgba(239,68,68,.16);color:#dc2626}.pk-c.fut{background:var(--kas-h);color:var(--muted);opacity:.55}
+</style>
+<style>
+/* ===== v33: animasi hubungi Boss Stark ===== */
+.stk-ov{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:rgba(3,11,18,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);animation:stkIn .3s ease both}
+.stk-ov.out{animation:stkOut .45s ease forwards}
+.stk-box{display:grid;justify-items:center;gap:16px;padding:34px 38px;border-radius:26px;background:linear-gradient(155deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid rgba(127,227,255,.35);box-shadow:0 30px 70px -30px #000,0 0 60px -10px rgba(95,224,255,.45);text-align:center;max-width:88vw;color:#e8f9ff}
+.stk-core{position:relative;width:116px;height:116px;display:grid;place-items:center}
+.stk-core i{position:absolute;inset:0;border-radius:50%;border:3px solid transparent;border-top-color:#5fe0ff;border-bottom-color:#5fe0ff;animation:stkSp 1.1s linear infinite}
+.stk-core i:nth-child(2){inset:14px;border-top-color:transparent;border-left-color:#7fe3ff;border-right-color:#7fe3ff;animation-direction:reverse;animation-duration:.8s}
+.stk-core i:nth-child(3){inset:28px;border-color:rgba(95,224,255,.35);border-top-color:#fff;animation-duration:1.6s}
+.stk-core b{font-size:1.5rem;animation:stkPu .9s ease-in-out infinite;filter:drop-shadow(0 0 10px #5fe0ff)}
+.stk-t{font:800 1rem 'Inter',system-ui,sans-serif;min-height:1.4em;animation:stkTx .5s ease}
+.stk-bar{width:240px;max-width:70vw;height:6px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden}
+.stk-bar s{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#46d4f6,#fff);animation:stkBar 2.4s ease forwards}
+.stk-sub{font:700 .7rem ui-monospace,Menlo,monospace;letter-spacing:.14em;color:#7fe3ff}
+@keyframes stkIn{from{opacity:0}to{opacity:1}}@keyframes stkOut{to{opacity:0;transform:scale(1.04)}}
+@keyframes stkSp{to{transform:rotate(360deg)}}@keyframes stkPu{50%{transform:scale(1.25)}}
+@keyframes stkBar{to{width:100%}}@keyframes stkTx{from{opacity:0;transform:translateY(6px)}}
+@media(prefers-reduced-motion:reduce){.stk-core i,.stk-core b,.stk-bar s{animation:none!important}.stk-bar s{width:100%}}
+
+/* ===== v33: Rekap kas (mode visualisasi) glass ===== */
+#kasRekap{background:radial-gradient(circle at 12% 8%,rgba(70,212,246,.28),transparent 38%),radial-gradient(circle at 90% 20%,rgba(167,139,250,.22),transparent 40%),radial-gradient(circle at 50% 100%,rgba(91,140,255,.22),transparent 45%),linear-gradient(180deg,#06202f,#030b12)}
+html[data-theme=light] #kasRekap{background:radial-gradient(circle at 12% 8%,rgba(70,212,246,.4),transparent 40%),radial-gradient(circle at 90% 20%,rgba(167,139,250,.28),transparent 42%),linear-gradient(180deg,#e6f4ff,#bfe0f8)}
+#kasRekap .rk-viz{padding:4px 18px 16px}
+#kasRekap .rk-kpi div,#kasRekap .rk-card{background:linear-gradient(155deg,rgba(255,255,255,.14),rgba(255,255,255,.04));border:1px solid var(--gl-bd,rgba(255,255,255,.16));border-radius:22px;-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);box-shadow:0 22px 46px -28px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.18);transition:transform .25s ease,box-shadow .25s ease;animation:rkUp .5s ease both}
+#kasRekap .rk-kpi div:hover,#kasRekap .rk-card:hover{transform:translateY(-3px);box-shadow:0 28px 50px -26px rgba(0,0,0,.75),0 0 28px -8px rgba(95,224,255,.45),inset 0 1px 0 rgba(255,255,255,.25)}
+#kasRekap .rk-kpi div:nth-child(2){animation-delay:.06s}#kasRekap .rk-kpi div:nth-child(3){animation-delay:.12s}#kasRekap .rk-kpi div:nth-child(4){animation-delay:.18s}
+#kasRekap .rk-kpi b{background:linear-gradient(90deg,#7fe3ff,#fff);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+html[data-theme=light] #kasRekap .rk-kpi b{background:linear-gradient(90deg,#0b79c2,#2ea6f2);-webkit-background-clip:text;background-clip:text}
+#kasRekap .rk-tabs{padding:0 18px 14px}
+#kasRekap .rk-tabs button,#kasRekap .rk-mo button{-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);transition:.25s}
+#kasRekap .rk-tabs button:hover,#kasRekap .rk-mo button:hover{transform:translateY(-2px)}
+#kasRekap .rk-link input,#kasRekap .rk-tools input{background:rgba(255,255,255,.07);border:1px solid rgba(127,227,255,.28);color:var(--ink);border-radius:14px;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+#kasRekap .rk-link input:focus,#kasRekap .rk-tools input:focus{outline:0;box-shadow:0 0 0 3px rgba(95,224,255,.25);border-color:rgba(127,227,255,.6)}
+#kasRekap .rk-wrap table.kas{border-radius:18px;overflow:hidden;background:rgba(255,255,255,.05);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+#kasRekap .rk-row{transition:.2s}#kasRekap .rk-row:hover{background:rgba(95,224,255,.12);border-radius:10px}
+#kasRekap .rk-mrow .tr{background:rgba(255,255,255,.12)}
+@keyframes rkUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){#kasRekap .rk-kpi div,#kasRekap .rk-card{animation:none}}
+</style>
+<style>
+/* ===== v34: rekap kas saling terhubung & bisa diklik ===== */
+#kasRekap .kx,#kasRekap .mx,#kasRekap .pk,#kasRekap .pk-c,#kasRekap .bg{cursor:pointer}
+#kasRekap .kx:active,#kasRekap .pk:active{transform:scale(.98)}
+#kasRekap .kx:focus-visible,#kasRekap .mx:focus-visible,#kasRekap .pk:focus-visible,#kasRekap .bg:focus-visible{outline:2px solid #5fe0ff;outline-offset:2px}
+#kasRekap .bg{transition:opacity .25s}#kasRekap .bg:hover .bar{filter:brightness(1.25)}
+#kasRekap .bg.dim{opacity:.35}#kasRekap .bg.sel .bar{stroke:#fff;stroke-width:2;filter:drop-shadow(0 0 8px #5fe0ff)}
+#kasRekap .mx{border-radius:12px;padding:5px 8px;margin:0 -8px;transition:.2s}
+#kasRekap .mx:hover{background:rgba(95,224,255,.12)}#kasRekap .mx.sel{background:rgba(95,224,255,.2);box-shadow:inset 0 0 0 1px rgba(127,227,255,.5)}
+#kasRekap .pk{transition:transform .25s,box-shadow .25s,border-color .25s;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+#kasRekap .pk:hover{transform:translateY(-3px);border-color:rgba(127,227,255,.55);box-shadow:0 18px 36px -22px rgba(0,0,0,.7),0 0 24px -8px rgba(95,224,255,.5)}
+#kasRekap .pk-c{transition:.2s}#kasRekap .pk-c:hover{transform:scale(1.25)}#kasRekap .pk-c.sel{outline:2px solid #5fe0ff;box-shadow:0 0 10px #5fe0ff}
+.rk-fb{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 12px;padding:0 2px}
+.rk-pills{display:flex;gap:8px;flex-wrap:wrap}
+.rk-pills button,.rk-reset{border:1px solid rgba(127,227,255,.28);background:rgba(255,255,255,.07);color:var(--ink);border-radius:99px;padding:7px 14px;font:700 .8rem 'Inter',system-ui,sans-serif;cursor:pointer;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);transition:.2s}
+.rk-pills button small{margin-left:4px;color:var(--muted);font-weight:700}
+.rk-pills button:hover,.rk-reset:hover{transform:translateY(-2px);background:rgba(95,224,255,.16)}
+.rk-pills button.on{background:linear-gradient(180deg,#46d4f6,#16a9dc);color:#031a26;border-color:transparent;box-shadow:0 8px 20px -10px rgba(25,181,230,1)}.rk-pills button.on small{color:#04405a}
+.rk-reset{background:rgba(249,115,22,.16);border-color:rgba(249,115,22,.4);animation:rkUp .3s ease both}
+.kp-ov{position:fixed;inset:0;z-index:400;display:grid;place-items:center;padding:16px;background:rgba(3,11,18,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);animation:stkIn .25s ease both}
+.kp-box{position:relative;width:min(440px,100%);max-height:86vh;overflow:auto;padding:22px;border-radius:26px;color:var(--ink);background:linear-gradient(155deg,rgba(255,255,255,.16),rgba(255,255,255,.05));border:1px solid rgba(127,227,255,.35);-webkit-backdrop-filter:blur(26px) saturate(170%);backdrop-filter:blur(26px) saturate(170%);box-shadow:0 30px 70px -30px #000,0 0 50px -12px rgba(95,224,255,.4);animation:rkUp .35s ease both}
+html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,255,.88),rgba(235,247,255,.7))}
+.kp-box h3{margin:0 34px 12px 0;font-size:1.1rem}
+.kp-x{position:absolute;top:14px;right:14px;border:1px solid rgba(127,227,255,.3);background:rgba(255,255,255,.08);color:var(--ink);width:32px;height:32px;border-radius:50%;cursor:pointer}
+.kp-sum{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.kp-sum div{padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(127,227,255,.2)}
+.kp-sum small,.kp-h{color:var(--muted);font-weight:700;font-size:.72rem}.kp-sum b{display:block;font-size:1.1rem;margin-top:2px}
+.kp-list{display:grid;gap:7px;margin-bottom:10px}
+.kp-w{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;text-align:left;border:1px solid rgba(127,227,255,.2);background:rgba(255,255,255,.06);color:var(--ink);border-radius:14px;padding:9px 12px;font:600 .85rem 'Inter',system-ui,sans-serif;cursor:pointer;transition:.2s}
+.kp-w:hover{background:rgba(95,224,255,.16);transform:translateX(3px)}
+.kp-w.on b{color:#22c55e}.kp-w.off b{color:#ef4444}.kp-w.fut{opacity:.5}.kp-w i{font-style:normal;font-size:.7rem;color:var(--muted)}
+</style>
+<style>
+/* ===== v35: detail UTS/UAS/tugas ===== */
+.inf.clk{cursor:pointer;transition:transform .25s,box-shadow .25s}
+.inf.clk:hover{transform:translateY(-3px);box-shadow:0 18px 36px -22px rgba(0,0,0,.6),0 0 24px -8px rgba(95,224,255,.5)}
+.inf.clk:focus-visible{outline:2px solid #5fe0ff;outline-offset:2px}
+.inf .hint{font-size:.72rem;font-weight:700;color:var(--muted);opacity:.85}
+.dt-box{width:min(520px,100%)}
+.dt-top{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 36px 8px 0}
+.dt-k{font:800 .72rem 'Inter',system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.dt-cd{font:800 .78rem 'Inter',system-ui,sans-serif;padding:4px 12px;border-radius:99px;background:rgba(95,224,255,.18);color:#0b8fc2}
+.dt-cd.urg{background:rgba(249,115,22,.2);color:#ea6a0a;animation:stkPu 1.4s ease-in-out infinite}.dt-cd.late{background:rgba(120,130,150,.22);color:var(--muted)}.dt-cd.ok{background:rgba(34,197,94,.18);color:#16a34a}
+.dt-rows{display:grid;gap:8px;margin:12px 0}
+.dt-rows>div{display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(127,227,255,.2)}
+.dt-rows small,.dt-sec small{display:block;color:var(--muted);font-weight:800;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em}
+.dt-rows b{display:block;font-size:.92rem}
+.dt-sec{margin:12px 0}.dt-p{margin:6px 0 0;line-height:1.55;font-size:.92rem}
+.dt-ol{margin:6px 0 0;padding-left:20px;display:grid;gap:5px;font-size:.92rem;line-height:1.5}
+.dt-tip{padding:10px 12px;border-radius:14px;background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.35);font-size:.85rem;font-weight:600;margin:12px 0}
+.dt-rels{display:grid;gap:7px;margin-top:6px}
+.dt-rel{display:flex;justify-content:space-between;gap:10px;text-align:left;border:1px solid rgba(127,227,255,.2);background:rgba(255,255,255,.06);color:var(--ink);border-radius:14px;padding:9px 12px;font:700 .84rem 'Inter',system-ui,sans-serif;cursor:pointer;transition:.2s}
+.dt-rel:hover{background:rgba(95,224,255,.16);transform:translateX(3px)}.dt-rel i{font-style:normal;font-weight:600;color:var(--muted);font-size:.76rem}
+.dt-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.dt-acts button,.dt-acts a{flex:1;min-width:140px;text-align:center;text-decoration:none;border:1px solid rgba(127,227,255,.3);background:linear-gradient(180deg,#46d4f6,#16a9dc);color:#031a26;border-radius:14px;padding:10px 14px;font:800 .84rem 'Inter',system-ui,sans-serif;cursor:pointer}
+.dt-acts button{background:rgba(255,255,255,.08);color:var(--ink)}
+.dt-box .imgs{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}.dt-box .imgs img{width:92px;height:92px;object-fit:cover;border-radius:12px;cursor:zoom-in}
+</style>
 </head>
 <body class="on-home">
 <div class="bgfx" aria-hidden="true"><i></i><b></b></div>
@@ -2494,6 +2607,7 @@ html[data-theme=light] .rk-wrap table.kas{background:rgba(255,255,255,.7)}
 
   /* ===== Rekap kas ===== */
   (function(){
+    var KAS_CSV="1,,,,,,,,,,,,,,,,,,,,,,,,,,,\n2,,NO,NAMA,OKTOBER,,,,,,,,NOVEMBER,,,,,,,,,,DESEMBER,,,,,\n3,,,,M-1,,M-2,,M-3,,M-4,,M-1,,M-2,,M-3,,M-4,,M-5,,M-1,,M-2,,M-3,\n4,,1,ADITYA PRATAMA,5.000,CASH,5.000,CASH,,,,,,,,,,,,,,,,,,,,\n5,,2,ABDURRAHMAN,5.000,CASH,5.000,CASH,5.000,CASH,5.000,CASH,,,,,,,,,,,,,,,,\n6,,3,ANDITA PUTRI APRILIANI,5.000,SEABANK,5.000,SEABANK,5.000,SEABANK,5.000,SEABANK,5000,SEABANK,5000,SEABANK,5000,SEABANK,,,,,,,,,,\n7,,4,ARIS SETIA KOMARA,5.000,CASH,5.000,CASH,5.000,CASH,5.000,CASH,5000,CASH,5000,CASH,5000,CASH,20000,CASH,,,,,,,,\n8,,5,AWAN KURNIAWAN,5.000,CASH,5.000,TRANSFER,5.000,TRANSFER,5.000,CASH,5000,CASH,5000,CASH,5000,CASH,5000,CASH,,,,,,,,\n9,,6,BISMA ARYA PRADANA,,,,,,,,,,,,,,,,,,,,,,,,\n10,,7,BUNGA KIRANI,,,,,,,,,,,,,,,,,,,,,,,,\n11,,8,DARA LAILA NURMALA S,5.000,CASH,5.000,CASH,5.000,CASH,5.000,CASH,5000,CASH,,,,,,,,,,,,,,\n12,,9,DERI JULISTIO,5.000,CASH,5.000,CASH,5.000,CASH,5.000,CASH,5000,SPAY,5000,SPAY,5000,SPAY,5000,SPAY,5000,CASH,,,,,,\n13,,10,DESTINA MAHARANI PUTRI,5.000,TRANSFER,5.000,TRANSFER,5.000,TRANSFER,5.000,TRANSFER,5000,SEABANK,5000,SEABANK,5000,SEABANK,5000,SEABANK,,,,,,,,\n14,,11,ERISA AGUSTIN,5.000,CASH,5.000,CASH,5.000,CASH,5.000,CASH,5000,CASH,5000,CASH,5000,CASH,,,,,,,,,,\n15,,12,FAHMIATUN MUTTAMIMAH,5.000,CASH,5.000,CASH,5.000,CASH,,,,,,,,,,,,,,,,,,\n16,,13,FAJAR PURNAMA,,,,,,,,,,,,,,,,,,,,,,,,\n17,,14,GALANT SATRIA HAMDANI,5.000,CASH,5.000,CASH,5.000,CASH,5.000,CASH,5000,CASH,5000,CASH,,,,,,,,,,,,\n18,,15,IRHAS ABDULLAH,5.000,SPAY,5.000,SPAY,5.000,SPAY,5.000,SPAY,5000,CASH,,,,,,,,,,,,,,\n19,,16,JAYANTI RAHMI,5.000,CASH,5.000,TRANSFER,5.000,TRANSFER,5.000,CASH,5000,CASH,5000,CASH,5000,CASH,5000,CASH,,,,,,,,\n20,,17,KEISHA AZZAHRA,5.000,TRANSFER,5.000,TRANSFER,5.000,TRANSFER,5.000,TRANSFER,5000,SEABANK,5000,SEABANK,5000,SEABANK,5000,SEABANK,,,,,,,,\n21,,18,LARASSATI,5.000,TRANSFER,5.000,TRANSFER,5.000,TRANSFER,5.000,CASH,5000,CASH,,,,,,,,,,,,,,\n22,,19,LEO AGUSTINUS KRISTIAN,5.000,SPAY,5.000,SPAY,5.000,SPAY,5.000,CASH,5000,CASH,,,,,,,,,,,,,,\n23,,20,MARIA ANA GULTOM,5.000,CASH,5.000,CASH,5.000,CASH,5.000,CASH,,,,,,,,,,,,,,,,\n24,,21,MARWAH SHAFIYAH NUR ALIDA,5.000,TRANSFER,5.000,TRANSFER,5.000,TRANSFER,5.000,CASH,5000,CASH,5000,SPAY,5000,SPAY,,,,,,,,,,\n25,,22,MAULDYNA KAMILAH PUTRI,5.000,CASH,5.000,CASH,,,,,,,,,,,,,,,,,,,,\n26,,23,MUHAMAD IKHSAL PRAMUDYA,5.000,TRANSFER,5.000,TRANSFER,5.000,TRANSFER,,,,,,,,,,,,,,,,,,\n27,,24,MUTIA CAHYANI,5.000,TRANSFER,5.000,TRANSFER,5.000,CASH,5.000,CASH,5000,CASH,5000,CASH,5000,SPAY,5000,SPAY,5000,SPAY,5000,SPAY,,,,\n28,,25,NABILA AZZAHRA SEPTIANI,5.000,CASH,5.000,CASH,5.000,CASH,5.000,CASH,5000,CASH,5000,CASH,,,,,,,,,,,,\n29,,26,NARA SURYANTO,5.000,CASH,5.000,CASH,5.000,CASH,5.000,CASH,5000,CASH,5000,CASH,5000,CASH,,,,,,,,,,\n30,,27,PRICILIA PANGESTU,5.000,CASH,,,,,,,,,,,,,,,,,,,,,,\n31,,28,RASYA PUTRA SUKANDAR,5.000,CASH,5.000,TRANSFER,5.000,TRANSFER,5.000,SPAY,5000,SPAY,5000,SPAY,,,,,,,,,,,,\n32,,29,RINE DESTIANA USMAN,5.000,CASH,5.000,CASH,5.000,CASH,5.000,CASH,,,,,,,,,,,,,,,,\n33,,30,SARLA,5.000,CASH,5.000,CASH,5.000,CASH,5.000,CASH,5000,CASH,5000,CASH,5000,CASH,,,,,,,,,,\n34,,31,SELLY AURELIA SIDIK,5.000,CASH,5.000,CASH,5.000,CASH,5.000,CASH,5000,CASH,5000,CASH,5000,CASH,10000,CASH,,,,,,,,\n35,,32,SELVI PERMATASARI,5.000,CASH,5.000,CASH,5.000,CASH,5.000,CASH,5000,CASH,5000,CASH,5000,CASH,15000,CASH,,,,,,,,\n36,,33,SUSAN AMELIA,5.000,CASH,5.000,CASH,5.000,CASH,5.000,CASH,5000,CASH,5000,CASH,,,,,,,,,,,,\n37,,34,TRIANA NOVIANI,5.000,CASH,5.000,CASH,5.000,CASH,,,,,,,,,,,,,,,,,,\n38,,35,VERA SAFIRA MUHAMAD,,,,,,,,,,,,,,,,,,,,,,,,\n39,,36,VERLY ANGGRAENI,5.000,TRANSFER,5.000,TRANSFER,5.000,TRANSFER,,,,,,,,,,,,,,,,,,\n40,,37,WIRANTO SULISTIO,5.000,CASH,5.000,TRANSFER,5.000,TRANSFER,5.000,CASH,5000,CASH,,,,,,,,,,,,,,\n41,,38,YULI SRI MULYATI,,,,,,,,,,,,,,,,,,,,,,,,\n42,,39,YONA,,,,,,,,,5000,CASH,5000,CASH,,,,,,,,,,,,\n43,,40,ZIQRI A SIDQI HANAFI,5.000,CASH,5.000,CASH,,CASH,,,,,,,,,,,,,,,,,,\n44,,41,HOLISNA SITI SHOLIHAH,5.000,CASH,5.000,CASH,5.000,CASH,5.000,CASH,5000,CASH,5000,CASH,5000,CASH,5000,CASH,,,,,,,,\n45,,TOTAL,,635.000,,,,,,,,380.000,,,,,,,,15.000,,,,,,,\n", SAL_CSV="1,,,,\n2,BULAN,PEMASUKAN,PENGELUARAN,SALDO\n3,OKTOBER,1.030.000,,1.030.000\n4,,,,\n5,,,,\n6,,,,\n7,,,,\n8,,,,\n9,,,,\n10,,,,\n11,,,,\n";
     var SID='1gRPTww5D2vARHgm3nqEYVVB3wROZGm44EEx53C6x-98', rk=document.getElementById('kasRekap'), body=document.getElementById('rkBody'), sum=document.getElementById('rkSum'), rows=[];
     function parseCSV(t){var r=[],row=[],c='',q=false,i,ch;for(i=0;i<t.length;i++){ch=t[i];if(q){if(ch=='"'){if(t[i+1]=='"'){c+='"';i++}else q=false}else c+=ch}else if(ch=='"')q=true;else if(ch==','){row.push(c);c=''}else if(ch=='\n'||ch=='\r'){if(ch=='\r'&&t[i+1]=='\n')i++;row.push(c);r.push(row);row=[];c=''}else c+=ch}if(c||row.length){row.push(c);r.push(row)}return r}
     function esc(x){return String(x==null?'':x).replace(/[&<>"]/g,function(m){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]})}
@@ -2532,7 +2646,7 @@ html[data-theme=light] .rk-wrap table.kas{background:rgba(255,255,255,.7)}
     }
 
     /* ===== v32: tampilan khusus sheet kas (header bulan + minggu, tiap minggu = nominal + metode) ===== */
-    var kasMonth='all', kasSaldo=null, MN={cash:'Cash',spay:'SPay',sea:'SeaBank',tf:'Transfer',ot:'Lainnya'}, MC={cash:'#10b981',spay:'#f97316',sea:'#14b8a6',tf:'#3b82f6',ot:'#94a3b8'};
+    var kasWeek=-1,kasMeth='',kasStat='',kasMonth='all', kasSaldo=null, MN={cash:'Cash',spay:'SPay',sea:'SeaBank',tf:'Transfer',ot:'Lainnya'}, MC={cash:'#10b981',spay:'#f97316',sea:'#14b8a6',tf:'#3b82f6',ot:'#94a3b8'};
     function kn(v){ v=String(v==null?'':v).replace(/[^\d]/g,''); return v?parseInt(v,10):0; }
     function kShort(n){ return n%1000===0?(n/1000)+'rb':rp(n); }
     function mcls(m){ m=String(m||'').toLowerCase(); return m.indexOf('cash')>-1?'cash':(m.indexOf('spay')>-1||m.indexOf('shopee')>-1)?'spay':m.indexOf('sea')>-1?'sea':m.indexOf('trans')>-1?'tf':'ot'; }
@@ -2566,17 +2680,17 @@ html[data-theme=light] .rk-wrap table.kas{background:rgba(255,255,255,.7)}
       var pct=activeCells?Math.round(paidCells/activeCells*100):0;
       /* bulan */
       var mo='<div class="rk-mo"><button type="button" data-mo="all" class="'+(kasMonth==='all'?'on':'')+'">Semua<small>'+rp(total)+'</small></button>'+d.months.map(function(m){ return '<button type="button" data-mo="'+esc(m)+'" class="'+(kasMonth===m?'on':'')+'">'+esc(cap(m))+'<small>'+rp(perM[m]||0)+'</small></button>'; }).join('')+'</div>';
-      var kpi='<div class="rk-kpi"><div><small>Total terkumpul</small><b>'+rp(total)+'</b></div><div><small>Mahasiswa</small><b>'+d.people.length+' orang</b></div><div><small>Pembayaran terisi</small><b>'+pct+'%</b></div><div><small>Belum pernah bayar</small><b>'+never+' orang</b></div></div>';
+      var kpi='<div class="rk-kpi"><div class="kx" data-kpi="all" role="button" tabindex="0"><small>Total terkumpul</small><b>'+rp(total)+'</b></div><div class="kx" data-kpi="all" role="button" tabindex="0"><small>Mahasiswa</small><b>'+d.people.length+' orang</b></div><div class="kx" data-kpi="mid" role="button" tabindex="0"><small>Pembayaran terisi</small><b>'+pct+'%</b></div><div class="kx" data-kpi="no" role="button" tabindex="0"><small>Belum pernah bayar</small><b>'+never+' orang</b></div></div>';
       /* grafik per minggu */
       var vis=idx.map(function(i){ return d.weeks[i]; }), mx=Math.max.apply(null,vis.map(function(x){ return x.t; }))||1, bw=40,gap=10,H=176,top=18,bot=40,ch=H-top-bot,W=Math.max(300,vis.length*(bw+gap)+gap);
       var bars='<line class="grid" x1="0" x2="'+W+'" y1="'+(top+ch)+'" y2="'+(top+ch)+'"/>';
       vis.forEach(function(x,k){ var h=Math.max(x.t?3:0,x.t/mx*ch),X=gap+k*(bw+gap);
-        bars+='<g><title>'+esc(cap(x.m)+' '+x.k)+': '+rp(x.t)+' ('+x.c+'/'+d.people.length+' orang)</title><rect class="bar" x="'+X+'" y="'+(top+ch-h)+'" width="'+bw+'" height="'+h+'" rx="6"/>'
+        bars+='<g class="bg'+(kasWeek===idx[k]?' sel':(kasWeek>-1?' dim':''))+'" data-wk="'+idx[k]+'" role="button" tabindex="0"><title>'+esc(cap(x.m)+' '+x.k)+': '+rp(x.t)+' ('+x.c+'/'+d.people.length+' orang)</title><rect class="bar" x="'+X+'" y="'+(top+ch-h)+'" width="'+bw+'" height="'+h+'" rx="6"/>'
           +'<text class="val" x="'+(X+bw/2)+'" y="'+(top+ch-h-5)+'" text-anchor="middle">'+(x.t?Math.round(x.t/1000)+'k':'')+'</text>'
           +'<text x="'+(X+bw/2)+'" y="'+(H-24)+'" text-anchor="middle">'+esc(x.k)+'</text><text x="'+(X+bw/2)+'" y="'+(H-11)+'" text-anchor="middle">'+esc(cap(x.m).slice(0,3))+'</text></g>'; });
       /* metode */
       var mk=Object.keys(meth).sort(function(a,b){ return meth[b].a-meth[a].a; }), mt=mk.reduce(function(a,k){ return a+meth[k].a; },0)||1;
-      var mrows=mk.map(function(k){ var o=meth[k]; return '<div class="rk-mrow"><span>'+MN[k]+'</span><span class="tr"><span class="fl" style="width:'+Math.round(o.a/mt*100)+'%;background:'+MC[k]+'"></span></span><span class="pc">'+o.n+'x · '+rp(o.a)+'</span></div>'; }).join('')||'<div class="rk-msg">Belum ada pembayaran.</div>';
+      var mrows=mk.map(function(k){ var o=meth[k]; return '<div class="rk-mrow mx'+(kasMeth===k?' sel':'')+'" data-mt="'+k+'" role="button" tabindex="0" title="Klik untuk memfilter mahasiswa"><span>'+MN[k]+'</span><span class="tr"><span class="fl" style="width:'+Math.round(o.a/mt*100)+'%;background:'+MC[k]+'"></span></span><span class="pc">'+o.n+'x · '+rp(o.a)+'</span></div>'; }).join('')||'<div class="rk-msg">Belum ada pembayaran.</div>';
       /* saldo (sheet kedua) */
       var sal='';
       if(kasSaldo){ var si=-1; kasSaldo.forEach(function(r,i){ if(si<0&&r.some(function(c){ return /^\s*bulan\s*$/i.test(c||''); })) si=i; });
@@ -2585,19 +2699,45 @@ html[data-theme=light] .rk-wrap table.kas{background:rgba(255,255,255,.7)}
       vizEl.innerHTML=mo+kpi+'<div class="rk-grid"><div class="rk-card"><h3>Terkumpul per minggu</h3><div class="rk-chart"><svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Grafik uang kas per minggu">'+bars+'</svg></div></div>'
         +'<div class="rk-card"><h3>Metode pembayaran</h3>'+mrows+'</div></div>'+(sal?sal:'');
       /* tabel */
-      var gh='',cur0='',span=0;
-      idx.forEach(function(i,k){ var m=d.weeks[i].m; if(m!==cur0){ if(span) gh+='<th colspan="'+span+'">'+esc(cap(cur0))+'</th>'; cur0=m; span=0; } span++; if(k===idx.length-1) gh+='<th colspan="'+span+'">'+esc(cap(cur0))+'</th>'; });
-      var h='<table class="kas"><thead><tr><th rowspan="2" class="c-no">No</th><th rowspan="2" class="c-nm">Nama</th>'+gh+'<th rowspan="2">Total</th></tr><tr>'+idx.map(function(i){ return '<th class="'+(d.weeks[i].t?'':'fut')+'">'+esc(d.weeks[i].k)+'</th>'; }).join('')+'</tr></thead><tbody>';
-      people.forEach(function(p){ var pt=0; var tds=idx.map(function(i){ var c=p.cells[i]; if(c.n>0){ pt+=c.n; return '<td class="pay"><b>'+kShort(c.n)+'</b>'+(c.m?'<i class="mt-'+mcls(c.m)+'">'+esc(c.m)+'</i>':'')+'</td>'; } return '<td class="no'+(d.weeks[i].t?'':' fut')+'">–</td>'; }).join('');
-        h+='<tr><td class="c-no">'+esc(p.no)+'</td><td class="c-nm">'+esc(cap(p.name).replace(/\b\w/g,function(c){ return c.toUpperCase(); }))+'</td>'+tds+'<td class="c-tt">'+(pt?rp(pt):'–')+'</td></tr>'; });
-      if(!people.length) h+='<tr><td colspan="'+(idx.length+3)+'" class="rk-msg">Nama tidak ditemukan.</td></tr>';
-      var ft=idx.map(function(i){ return '<td>'+(d.weeks[i].t?rp(d.weeks[i].t):'–')+'</td>'; }).join(''), gt=idx.reduce(function(a,i){ return a+d.weeks[i].t; },0);
-      h+='</tbody><tfoot><tr><td class="c-no"></td><td class="c-nm">TOTAL</td>'+ft+'<td>'+rp(gt)+'</td></tr></tfoot></table>';
+      if(kasWeek>-1&&idx.indexOf(kasWeek)<0) kasWeek=-1; var fidx=kasWeek>-1?[kasWeek]:idx; var wk=fidx.filter(function(i){ return d.weeks[i].t>0; }), tw=wk.length;
+      var list0=people.map(function(p){ var pt=0,n=0,mh=!kasMeth; fidx.forEach(function(i){ var c=p.cells[i]; if(c.n>0){ pt+=c.n; if(d.weeks[i].t>0) n++; if(kasMeth&&mcls(c.m)===kasMeth) mh=true; } }); return {p:p,t:pt,n:n,mh:mh}; }).filter(function(x){ return x.mh; }).sort(function(x,y){ return y.t-x.t||(x.p.name<y.p.name?-1:1); });
+      var stOf=function(x){ return !tw?'z':x.n>=tw?'ok':x.n===0?'no':'mid'; }, cn={ok:0,mid:0,no:0}; list0.forEach(function(x){ var q2=stOf(x); if(cn[q2]!=null) cn[q2]++; });
+      var list=list0.filter(function(x){ return !kasStat||stOf(x)===kasStat; });
+      var tags=[]; if(kasWeek>-1) tags.push('Minggu '+cap(d.weeks[kasWeek].m)+' '+d.weeks[kasWeek].k); if(kasMeth) tags.push(MN[kasMeth]); if(kasStat) tags.push({ok:'Lunas',mid:'Kurang',no:'Belum bayar'}[kasStat]);
+      var fb='<div class="rk-fb"><div class="rk-pills">'+[['','Semua',list0.length],['ok','Lunas',cn.ok],['mid','Kurang',cn.mid],['no','Belum bayar',cn.no]].map(function(a){ return '<button type="button" data-st="'+a[0]+'" class="'+(kasStat===a[0]?'on':'')+'">'+a[1]+' <small>'+a[2]+'</small></button>'; }).join('')+'</div>'+(tags.length?'<button type="button" class="rk-reset" data-reset="1">✕ '+esc(tags.join(' · '))+'</button>':'')+'</div>';
+      var h=fb+'<div class="pk-grid">'+list.map(function(x){
+        var pc=tw?Math.min(100,Math.round(x.n/tw*100)):0, col=pc>=100?'#22c55e':pc>=50?'#f59e0b':'#ef4444';
+        var st=!tw?['–','z']:x.n>=tw?['Lunas','ok']:x.n===0?['Belum bayar','no']:['Kurang '+(tw-x.n)+' minggu','mid'], lm='';
+        var chips=idx.map(function(i){ var w=d.weeks[i],c=x.p.cells[i],pre='';
+          if(kasMonth==='all'&&w.m!==lm){ lm=w.m; pre='<em class="pk-m">'+esc(cap(w.m).slice(0,3))+'</em>'; }
+          var on=c.n>0, cls=on?'on':(w.t>0?'off':'fut'), tt=cap(w.m)+' '+w.k+': '+(on?rp(c.n)+(c.m?' · '+c.m:''):(w.t>0?'belum bayar':'belum berjalan'));
+          return pre+'<span class="pk-c '+cls+(kasWeek===i?' sel':'')+'" data-wk="'+i+'" title="'+esc(tt)+'">'+esc(String(w.k).replace(/^M-?/i,''))+'</span>'; }).join('');
+        return '<div class="pk" data-p="'+esc(x.p.name)+'" role="button" tabindex="0" title="Klik untuk detail"><div class="pk-top"><span class="pk-no">'+esc(x.p.no)+'</span><b class="pk-nm">'+esc(cap(x.p.name).replace(/\b\w/g,function(c){ return c.toUpperCase(); }))+'</b><span class="pk-st st-'+st[1]+'">'+st[0]+'</span></div>'
+          +'<div class="pk-amt">'+(x.t?rp(x.t):'Rp0')+'<small>'+x.n+' dari '+tw+' minggu</small></div>'
+          +'<div class="pk-bar"><i style="width:'+pc+'%;background:'+col+'"></i></div><div class="pk-wk">'+chips+'</div></div>'; }).join('')
+        +(list.length?'':'<div class="rk-msg">Nama tidak ditemukan.</div>')+'</div>';
       body.innerHTML=h;
       sum.innerHTML='<span>'+people.length+' mahasiswa</span><span>'+idx.length+' minggu</span>'+(lastAt?'<span>🔄 Sinkron '+lastAt+'</span>':'');
       return true;
     }
-    vizEl.addEventListener('click',function(e){ var b=e.target.closest('[data-mo]'); if(!b) return; kasMonth=b.getAttribute('data-mo'); render(); });
+    function scrollList(){ setTimeout(function(){ var f=body.querySelector('.rk-fb'); if(f&&f.scrollIntoView) f.scrollIntoView({behavior:'smooth',block:'start'}); },60); }
+    function openKasP(name){ var d=parseKas(); if(!d) return; var p=d.people.filter(function(x){ return x.name===name; })[0]; if(!p) return;
+      var tot=0,n=0,act=0, lis=d.weeks.map(function(w,i){ var c=p.cells[i],on=c.n>0; if(on) tot+=c.n; if(w.t>0) act++; if(on&&w.t>0) n++;
+        return '<button type="button" class="kp-w '+(on?'on':(w.t>0?'off':'fut'))+'" data-kw="'+i+'"><span>'+esc(cap(w.m)+' '+w.k)+'</span><b>'+(on?rp(c.n):(w.t>0?'Belum bayar':'—'))+'</b><i>'+(on&&c.m?esc(c.m):'')+'</i></button>'; }).join('');
+      var ov=document.createElement('div'); ov.className='kp-ov';
+      ov.innerHTML='<div class="kp-box"><button type="button" class="kp-x" aria-label="Tutup">✕</button><h3>'+esc(cap(name).replace(/\b\w/g,function(c){ return c.toUpperCase(); }))+'</h3><div class="kp-sum"><div><small>Total</small><b>'+rp(tot)+'</b></div><div><small>Terbayar</small><b>'+n+'/'+act+' minggu</b></div></div><div class="kp-list">'+lis+'</div><small class="kp-h">Klik sebuah minggu untuk melihat siapa saja yang sudah / belum bayar di minggu itu</small></div>';
+      ov.addEventListener('click',function(e){ if(e.target===ov||e.target.closest('.kp-x')){ ov.remove(); return; } var b=e.target.closest('[data-kw]'); if(b){ kasWeek=+b.getAttribute('data-kw'); kasMonth='all'; kasMeth=''; kasStat=''; ov.remove(); render(); scrollList(); } });
+      document.body.appendChild(ov); }
+    function kasClick(e){ if(cur.custom) return; var t=e.target,b;
+      if(b=t.closest('[data-mo]')){ kasMonth=b.getAttribute('data-mo'); kasWeek=-1; render(); return; }
+      if(b=t.closest('[data-reset]')){ kasWeek=-1; kasMeth=''; kasStat=''; render(); return; }
+      if(b=t.closest('[data-kpi]')){ var k=b.getAttribute('data-kpi'); kasWeek=-1; kasMeth=''; kasStat=(k==='no'||k==='mid')?k:''; render(); scrollList(); return; }
+      if(b=t.closest('[data-st]')){ kasStat=b.getAttribute('data-st'); render(); return; }
+      if(b=t.closest('[data-mt]')){ var m=b.getAttribute('data-mt'); kasMeth=kasMeth===m?'':m; render(); scrollList(); return; }
+      if(b=t.closest('[data-wk]')){ var w=+b.getAttribute('data-wk'); kasWeek=kasWeek===w?-1:w; render(); scrollList(); return; }
+      if(b=t.closest('[data-p]')) openKasP(b.getAttribute('data-p')); }
+    vizEl.addEventListener('click',kasClick); body.addEventListener('click',kasClick);
+    [vizEl,body].forEach(function(el){ el.addEventListener('keydown',function(e){ if((e.key==='Enter'||e.key===' ')&&e.target.getAttribute&&e.target.getAttribute('role')==='button'){ e.preventDefault(); if(e.target.dispatchEvent) e.target.dispatchEvent(new MouseEvent('click',{bubbles:true})); } }); });
     function render(){
       var q=document.getElementById('rkQ').value.toLowerCase().trim();
       if(!rows.length){body.innerHTML='<div class="rk-msg">Data kosong.</div>';vizEl.innerHTML='';return}
@@ -2616,11 +2756,11 @@ html[data-theme=light] .rk-wrap table.kas{background:rgba(255,255,255,.7)}
       var p=(STATIC?direct(sh):fetch(APIB+'api/kas?'+(cur.custom||sh?'sid='+encodeURIComponent(cur.id)+'&':'')+(sh?'sheet='+encodeURIComponent(sh):'gid='+encodeURIComponent(cur.gid)),{credentials:'same-origin',cache:'no-store',headers:{'X-Requested-With':'kelas'}}).then(function(r){if(!r.ok)throw 0;return r.text()}));
       return p.then(function(t){ if(/^\s*</.test(t)) throw 0; return t; }); /* HTML = sheet belum dibagikan publik */
     }
-    function loadSaldo(){ if(cur.custom) return; fetchCsv('PEMASUKAN DAN PENGELUARAN').then(function(t){ kasSaldo=parseCSV(t); if(!cur.custom&&rows.length) render(); }).catch(function(){}); }
+    function loadSaldo(){ if(cur.custom) return; fetchCsv('PEMASUKAN DAN PENGELUARAN').then(function(t){ kasSaldo=parseCSV(t); if(!cur.custom&&rows.length) render(); }).catch(function(){ if(!cur.custom&&SAL_CSV){ kasSaldo=parseCSV(SAL_CSV); if(rows.length) render(); } }); }
     function load(silent){
       if(silent!==true)body.innerHTML='<div class="rk-msg">Memuat data…</div>';
       fetchCsv().then(function(t){rows=parseCSV(t);var d=new Date();lastAt=('0'+d.getHours()).slice(-2)+'.'+('0'+d.getMinutes()).slice(-2);render()})
-      .catch(function(){if(silent===true&&rows.length)return;vizEl.innerHTML='';body.innerHTML='<div class="rk-msg">Gagal memuat data (cek koneksi atau pastikan Sheet dibagikan “siapa saja dengan link”).<br><br><a class="btn" target="_blank" rel="noopener" href="'+sheetUrl()+'">Buka Google Sheet</a></div>'});
+      .catch(function(){if(silent===true&&rows.length)return;if(!cur.custom&&KAS_CSV){rows=parseCSV(KAS_CSV);lastAt='data tersimpan';render();return}vizEl.innerHTML='';body.innerHTML='<div class="rk-msg">Gagal memuat data (cek koneksi atau pastikan Sheet dibagikan “siapa saja dengan link”).<br><br><a class="btn" target="_blank" rel="noopener" href="'+sheetUrl()+'">Buka Google Sheet</a></div>'});
     }
     function startAuto(){clearInterval(timer);timer=setInterval(function(){if(!rk.classList.contains('hidden'))load(true)},60000)}
     /* v27: visualisasi umum untuk link Google Spreadsheet apa pun (kolom pertama = label, kolom angka = nilai) */
@@ -2756,6 +2896,10 @@ html[data-theme=light] .rk-wrap table.kas{background:rgba(255,255,255,.7)}
 
   /* ===== Informasi: UTS, UAS, Deadline Tugas (edit hanya admin2) ===== */
   var IK='mgmtD-info-v1', itab='uts', editing=null, uc=0;
+  var UTS0=[{"id": "uts2600", "m": "Pendidikan Pancasila", "title": "UTS", "date": "2026-11-30", "time": "18.30 – 20.00", "room": "", "note": ""}, {"id": "uts2601", "m": "Pengantar Akuntansi", "title": "UTS", "date": "2026-11-30", "time": "20.00 – 21.30", "room": "", "note": ""}, {"id": "uts2602", "m": "Bahasa Inggris", "title": "UTS", "date": "2026-12-01", "time": "18.30 – 20.00", "room": "", "note": ""}, {"id": "uts2603", "m": "Matematika", "title": "UTS", "date": "2026-12-01", "time": "20.00 – 21.30", "room": "", "note": ""}, {"id": "uts2604", "m": "Bahasa Indonesia", "title": "UTS", "date": "2026-12-02", "time": "18.30 – 20.00", "room": "", "note": ""}, {"id": "uts2605", "m": "Sunda & Kepasundanan", "title": "UTS", "date": "2026-12-02", "time": "20.00 – 21.30", "room": "", "note": ""}, {"id": "uts2606", "m": "Pengantar Bisnis", "title": "UTS", "date": "2026-12-03", "time": "18.30 – 20.00", "room": "", "note": ""}, {"id": "uts2607", "m": "TIK", "title": "UTS", "date": "2026-12-03", "time": "20.00 – 21.30", "room": "", "note": ""}];
+  var TUG0=[{"id": "tg2600", "m": "Matematika", "title": "Pelajari tugas quiz yang kemarin", "date": "", "time": "", "room": "", "note": "Kemungkinan muncul di UTS, meski hitungan dan kasusnya tidak sama. Deadline: sesuai kepercayaan masing-masing."}, {"id": "tg2601", "m": "Bahasa Inggris", "title": "Tugas presentasi (kelompok)", "date": "", "time": "", "room": "", "note": "Tugas kelompok."}, {"id": "tg2602", "m": "Bahasa Sunda", "title": "Tugas 1: Sejarah, arti & budaya Sunda", "date": "", "time": "", "room": "", "note": "1. Sejarah Sunda 2. Arti Sunda 3. Karakteristik orang Sunda 4. Tempat peninggalan budaya 5. Kesenian-kesenian yang populer"}, {"id": "tg2603", "m": "Bahasa Sunda", "title": "Tugas 2: Paguyuban Pasundan", "date": "2026-12-02", "time": "", "room": "", "note": "1. Sejarah Paguyuban Pasundan (berdiri pra-kemerdekaan 1913, memberantas kebodohan dan kemiskinan, bergerak di bidang pendidikan dan sosial). 2. Misi Sekolah: Nyunda, Nyantri, Nyakola, Nyantika. Pakai KERTAS POLIO. Deadline: sebelum UTS."}, {"id": "tg2604", "m": "Bahasa Sunda", "title": "Kisi-kisi UTS", "date": "", "time": "", "room": "", "note": "Film Paguyuban Pasundan yang kemarin ditonton, dan beberapa kisi-kisi dari tugas yang sudah dikerjakan."}, {"id": "tg2605", "m": "Bahasa Indonesia", "title": "Kisi-kisi UTS", "date": "", "time": "", "room": "", "note": "1. Bentuk bahasa 2. Sejarah bahasa dan kaitannya dengan Sumpah Pemuda 3. Analisis struktur kebahasaan, seperti tugas kelompok."}, {"id": "tg2606", "m": "Pengantar Bisnis", "title": "Pembahasan UTS", "date": "", "time": "", "room": "", "note": "1. Pendapat/jelaskan menurut Anda: bisnis global yang diketahui dan cara Anda melakukan bisnis global. 2. Bisnis itu apa dan harus seperti apa. 3. Bisnis digital: fenomena yang kalian alami dan rasakan."}, {"id": "tg2607", "m": "Pendidikan Pancasila", "title": "Tugas kelompok: makalah & PPT", "date": "", "time": "", "room": "", "note": "1. Buat seperti skripsi (pembahasan lainnya dengan kelompok). 2. PPT minimal 10 slide. Tanya kelompok masing-masing. Mulai dilaksanakan setelah UTS."}, {"id": "tg2608", "m": "Pengantar Akuntansi", "title": "Tugas 1: Dasar akuntansi", "date": "2026-11-23", "time": "", "room": "", "note": "1. Pengertian akuntansi 2. Pengertian akuntansi menurut para ahli 3. Siklus akuntansi 4. Hukum debit kredit beserta contoh (mis. aset bertambah di mana) 5. Tulis nomor-nomor akun. Pakai bahasa sendiri, kecuali nomor 2 dan 5."}, {"id": "tg2609", "m": "Pengantar Akuntansi", "title": "Tugas 2: Transaksi & laporan keuangan", "date": "2026-11-23", "time": "", "room": "", "note": "1. Buat soal dan jawaban 15 transaksi 2. Jurnal umum 3. Buku besar 4. Neraca saldo 5. Laporan keuangan"}, {"id": "tg2610", "m": "Pengantar Akuntansi", "title": "Tugas 3: Tulis materi dari dosen", "date": "2026-11-23", "time": "", "room": "", "note": "Tulis materi yang ibu dosen berikan, lalu upload di drive."}];
+  function seedTugas(o){ o.tugas=o.tugas||[]; var h={}; o.tugas.forEach(function(x){ h[x.m+'|'+x.title]=1; }); TUG0.forEach(function(x){ if(!h[x.m+'|'+x.title]) o.tugas.push({id:x.id,m:x.m,title:x.title,date:x.date,time:x.time,room:x.room,note:x.note,imgs:[]}); }); return o; }
+  function seedUts(o){ seedTugas(o); var have={}; o.uts=o.uts.filter(function(x){ return x.title||x.date||x.note||x.time||(x.imgs&&x.imgs.length); }); o.uts.forEach(function(x){ have[x.m+'|'+x.date]=1; }); UTS0.forEach(function(x){ if(!have[x.m+'|'+x.date]) o.uts.push({id:x.id,m:x.m,title:x.title,date:x.date,time:x.time,room:x.room,note:x.note,imgs:[]}); }); return o; }
   var ITABS=[['uts','📝 UTS'],['uas','🎓 UAS'],['tugas','⏰ Deadline Tugas']];
   var MN=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
   var BN=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
@@ -2769,11 +2913,11 @@ html[data-theme=light] .rk-wrap table.kas{background:rgba(255,255,255,.7)}
   }
   function defInfo(){
     var f=function(){ return courseNames.map(function(m){ return {id:uid(),m:m,title:'',date:'',time:'',room:'RG 401',note:''}; }); };
-    return {uts:f(),uas:f(),tugas:[]};
+    return seedUts({uts:f(),uas:f(),tugas:[]});
   }
   function loadInfo(){
     try{ var j=JSON.parse(localStorage.getItem(IK));
-      if(j&&Array.isArray(j.uts)&&Array.isArray(j.uas)&&Array.isArray(j.tugas)) return {uts:cleanItems(j.uts),uas:cleanItems(j.uas),tugas:cleanItems(j.tugas)};
+      if(j&&Array.isArray(j.uts)&&Array.isArray(j.uas)&&Array.isArray(j.tugas)) return seedUts({uts:cleanItems(j.uts),uas:cleanItems(j.uas),tugas:cleanItems(j.tugas)});
     }catch(e){}
     return defInfo();
   }
@@ -2810,9 +2954,9 @@ html[data-theme=light] .rk-wrap table.kas{background:rgba(255,255,255,.7)}
       var meta='<span>🗓 '+(d?esc(fdate(d)):'Tanggal belum diumumkan')+'</span>'
         +(it.time?'<span>🕒 '+esc(it.time)+(itab==='tugas'?'':' WIB')+'</span>':'')
         +(itab==='tugas'?(it.m?'<span>📚 '+esc(it.m)+'</span>':''):(it.room?'<span>🏫 '+esc(it.room)+'</span>':''))
-        +tag;
+        +tag+'<span class="hint">Ketuk untuk detail ›</span>';
       var acts=canEdit()?'<div class="acts"><button type="button" data-e="'+esc(it.id)+'">Ubah</button><button type="button" class="del" data-d="'+esc(it.id)+'">Hapus</button></div>':'';
-      return '<div class="inf'+(d&&df<0?' past':'')+'">'+big+'<div><h3>'+(itab==='tugas'?'⏰ ':'📝 ')+esc(title)+'</h3><div class="meta">'+meta+'</div>'+(it.note?'<div class="nt">'+esc(it.note)+'</div>':'')+((it.imgs&&it.imgs.length)?'<div class="imgs">'+it.imgs.map(function(u){ return '<img class="thumb" src="'+u+'" alt="Gambar '+esc(title)+'">'; }).join('')+'</div>':'')+'</div>'+acts+'</div>';
+      return '<div class="inf clk'+(d&&df<0?' past':'')+'" data-i="'+esc(it.id)+'" role="button" tabindex="0" title="Ketuk untuk melihat detail">'+big+'<div><h3>'+(itab==='tugas'?'⏰ ':'📝 ')+esc(title)+'</h3><div class="meta">'+meta+'</div>'+(it.note?'<div class="nt">'+esc(it.note)+'</div>':'')+((it.imgs&&it.imgs.length)?'<div class="imgs">'+it.imgs.map(function(u){ return '<img class="thumb" src="'+u+'" alt="Gambar '+esc(title)+'">'; }).join('')+'</div>':'')+'</div>'+acts+'</div>';
     }).join('');
   }
   $('#infTabs').addEventListener('click',function(e){ var b=e.target.closest('button[data-t]'); if(!b) return; itab=b.dataset.t; drawInfo(); });
@@ -2863,7 +3007,7 @@ html[data-theme=light] .rk-wrap table.kas{background:rgba(255,255,255,.7)}
     fr.onload=function(){ try{
       var j=JSON.parse(fr.result);
       if(!(j&&Array.isArray(j.uts)&&Array.isArray(j.uas)&&Array.isArray(j.tugas))) throw 0;
-      info={uts:cleanItems(j.uts),uas:cleanItems(j.uas),tugas:cleanItems(j.tugas)};
+      info=seedUts({uts:cleanItems(j.uts),uas:cleanItems(j.uas),tugas:cleanItems(j.tugas)});
       if(saveInfo()){ drawInfo(); toast('Data diimpor ✓'); }
     }catch(x){ toast('File tidak valid'); } };
     fr.readAsText(f);
@@ -2898,6 +3042,46 @@ html[data-theme=light] .rk-wrap table.kas{background:rgba(255,255,255,.7)}
     var t=e.target.closest('.thumb'); if(!t) return;
     $('#lbImg').src=t.src; $('#lb').classList.remove('hidden');
   });
+
+  /* ===== v35: detail UTS / UAS / Deadline yang bisa diklik ===== */
+  var KIND={uts:['UTS','📝'],uas:['UAS','🎓'],tugas:['Deadline Tugas','⏰']};
+  function findInfo(id){ for(var k in KIND){ var a=(info[k]||[]).filter(function(x){ return x.id===id; })[0]; if(a) return {it:a,k:k}; } return null; }
+  function countdown(d){ if(!d) return {t:'Tanggal belum diumumkan',c:'nd'}; var df=dayDiff(d);
+    if(df<0) return {t:'Sudah lewat '+(-df)+' hari lalu',c:'late'}; if(df===0) return {t:'Hari ini!',c:'urg'}; if(df===1) return {t:'Besok',c:'urg'};
+    return {t:df+' hari lagi',c:df<=3?'urg':'ok'}; }
+  function ymd(d){ function z(n){ return (n<10?'0':'')+n; } return d.getFullYear()+z(d.getMonth()+1)+z(d.getDate()); }
+  function noteHtml(n){ n=String(n||'').trim(); if(!n) return '';
+    var parts=n.split(/\s*(?=\b\d{1,2}\.\s)/).map(function(x){ return x.trim(); }).filter(Boolean);
+    if(parts.length>1&&/^1\./.test(parts[0])){ return '<ol class="dt-ol">'+parts.map(function(x){ return '<li>'+esc(x.replace(/^\d{1,2}\.\s*/,''))+'</li>'; }).join('')+'</ol>'; }
+    return '<p class="dt-p">'+esc(n)+'</p>'; }
+  function relRow(x,k){ var d=pd(x.date); return '<button type="button" class="dt-rel" data-ri="'+esc(x.id)+'"><span>'+KIND[k][1]+' '+esc(k==='tugas'?(x.title||'Tugas'):KIND[k][0]+' '+x.m)+'</span><i>'+(d?esc(fdate(d)):'Tanggal belum diumumkan')+'</i></button>'; }
+  function openInfoDetail(id){ var f=findInfo(id); if(!f) return; var it=f.it,k=f.k,d=pd(it.date),cd=countdown(d),title=k==='tugas'?(it.title||'Tugas'):KIND[k][0]+' '+it.m;
+    var rows=[['🗓','Tanggal',d?fdate(d):'Belum diumumkan'],['🕒','Waktu',it.time?it.time+(k==='tugas'?'':' WIB'):'Belum ada info'],['📚','Mata kuliah',it.m||'-']];
+    if(k!=='tugas') rows.push(['🏫','Ruang',it.room||'Belum ada info']);
+    var rel=[]; if(k==='tugas'){ ['uts','uas'].forEach(function(kk){ (info[kk]||[]).filter(function(x){ return x.m===it.m&&x.id!==it.id; }).forEach(function(x){ rel.push(relRow(x,kk)); }); });
+      (info.tugas||[]).filter(function(x){ return x.m===it.m&&x.id!==it.id; }).forEach(function(x){ rel.push(relRow(x,'tugas')); }); }
+    else { (info.tugas||[]).filter(function(x){ return x.m===it.m; }).forEach(function(x){ rel.push(relRow(x,'tugas')); });
+      if(d) (info[k]||[]).filter(function(x){ return x.id!==it.id&&x.date===it.date; }).forEach(function(x){ rel.push(relRow(x,k)); }); }
+    var tip=k==='tugas'?(d?(cd.c==='late'?'Deadline sudah lewat. Tanyakan ke teman atau dosen bila belum mengumpulkan.':'Kumpulkan sebelum atau tepat pada tanggal ini.'):'Deadline belum ditentukan, pantau terus informasi dari dosen.'):(d?(cd.c==='late'?'Ujian sudah dilaksanakan.':'Datang 15 menit lebih awal dan bawa alat tulis serta kartu ujian.'):'Jadwal belum diumumkan.');
+    var ov=document.createElement('div'); ov.className='kp-ov';
+    ov.innerHTML='<div class="kp-box dt-box"><button type="button" class="kp-x" aria-label="Tutup">✕</button>'
+      +'<div class="dt-top"><span class="dt-k">'+KIND[k][1]+' '+esc(KIND[k][0])+'</span><span class="dt-cd '+cd.c+'">'+esc(cd.t)+'</span></div>'
+      +'<h3>'+esc(title)+'</h3>'
+      +'<div class="dt-rows">'+rows.map(function(r){ return '<div><span>'+r[0]+'</span><div><small>'+r[1]+'</small><b>'+esc(r[2])+'</b></div></div>'; }).join('')+'</div>'
+      +(it.note?'<div class="dt-sec"><small>'+(k==='tugas'?'Isi tugas / catatan':'Catatan')+'</small>'+noteHtml(it.note)+'</div>':'')
+      +((it.imgs&&it.imgs.length)?'<div class="dt-sec"><small>Gambar</small><div class="imgs">'+it.imgs.map(function(u){ return '<img class="thumb" src="'+u+'" alt="Gambar '+esc(title)+'">'; }).join('')+'</div></div>':'')
+      +'<div class="dt-tip">💡 '+esc(tip)+'</div>'
+      +(rel.length?'<div class="dt-sec"><small>Terkait</small><div class="dt-rels">'+rel.join('')+'</div></div>':'')
+      +'<div class="dt-acts"><button type="button" data-cp="1">📋 Salin info</button>'+(d?'<a target="_blank" rel="noopener noreferrer" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(title+' - '+(it.m||''))+'&dates='+ymd(d)+'/'+ymd(new Date(d.getFullYear(),d.getMonth(),d.getDate()+1))+'&details='+encodeURIComponent((it.time?'Waktu: '+it.time+'\n':'')+(it.note||''))+'">📅 Tambah ke kalender</a>':'')+'</div></div>';
+    ov.addEventListener('click',function(e){ var t=e.target;
+      if(t===ov||t.closest('.kp-x')){ ov.remove(); return; }
+      var th=t.closest('.thumb'); if(th){ $('#lbImg').src=th.src; $('#lb').classList.remove('hidden'); return; }
+      var r=t.closest('[data-ri]'); if(r){ ov.remove(); openInfoDetail(r.getAttribute('data-ri')); return; }
+      if(t.closest('[data-cp]')){ var txt=title+'\n'+rows.map(function(r2){ return r2[1]+': '+r2[2]; }).join('\n')+(it.note?'\nCatatan: '+it.note:'')+'\n('+cd.t+')';
+        try{ navigator.clipboard.writeText(txt).then(function(){ toast('Info disalin'); },function(){ toast('Gagal menyalin'); }); }catch(x){ toast('Gagal menyalin'); } } });
+    document.body.appendChild(ov); }
+  $('#infList').addEventListener('click',function(e){ if(e.target.closest('.acts,.thumb')) return; var c=e.target.closest('.inf[data-i]'); if(c) openInfoDetail(c.getAttribute('data-i')); });
+  $('#infList').addEventListener('keydown',function(e){ if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('inf')){ e.preventDefault(); openInfoDetail(e.target.getAttribute('data-i')); } });
 
   /* ===== Pengumuman Beranda (edit hanya admin2) ===== */
   var AK='mgmtD-ann-v1', ANN0={t:'Selamat datang di Kelas Manajemen D!',m:'Cek menu Informasi untuk jadwal UTS/UAS dan deadline tugas ya. Jangan lupa bayar uang kas tepat waktu 💸',at:''};
@@ -3379,6 +3563,7 @@ html[data-theme=light] .rk-wrap table.kas{background:rgba(255,255,255,.7)}
     function menu(){ clearTimeout(bt); var o=pan.querySelector('.scanline'); if(o) o.remove(); setMode('menu');
       body.innerHTML='<div class="say">Selamat datang kembali, '+sapa()+'. Apa yang ingin Anda lakukan?</div>'+
         '<button class="jopt" data-m="chat" type="button"><span>💬</span><div><b>Mengobrol</b><small>Ketik pesan, Jarvis langsung membawa Anda ke J.A.R.V.I.S. AI</small></div></button>'+
+        '<button class="jopt" data-m="wa" type="button"><span>📲</span><div><b>Hubungi Boss Stark Abdullah</b><small>Chat langsung lewat WhatsApp</small></div></button>'+
         (canEdit()?'<button class="jopt" data-m="report" type="button"><span>🛠️</span><div><b>Pelaporan masalah</b><small>Pindai sistem website dan lihat masalahnya</small></div></button>':''); }
     function say(t,c){ var d=document.createElement('div'); d.className='cm '+c; d.textContent=t; body.appendChild(d); body.scrollTop=body.scrollHeight; return d; }
     var SS=window.speechSynthesis,SR=window.SpeechRecognition||window.webkitSpeechRecognition,spk=$('#jvSpk'),mic=$('#jvMic'),voiceOn=true,rec=null,cst=null;
@@ -3400,12 +3585,21 @@ html[data-theme=light] .rk-wrap table.kas{background:rgba(255,255,255,.7)}
       rec.onerror=function(e){ if(e.error==='not-allowed'||e.error==='service-not-allowed') toast('Izin mikrofon ditolak'); };
       rec.onend=function(){ mic.classList.remove('rec'); inp.placeholder='Ketik pesan atau tekan ikon mikrofon…'; rec=null; if(fin.trim()) jc.requestSubmit(); };
       try{ rec.start(); }catch(e){ rec=null; } });
+    var WAURL='https://wa.me/qr/D7YRUPHS6GNIF1'; function openWa(){
+      var w=null; try{ w=window.open('about:blank','_blank'); if(w) w.opener=null; }catch(x){}
+      var ov=document.createElement('div'); ov.className='stk-ov';
+      ov.innerHTML='<div class="stk-box"><div class="stk-core"><i></i><i></i><i></i><b>⚡</b></div><div class="stk-t" id="stkT">Akan saya hubungkan dengan Boss Stark…</div><div class="stk-bar"><s></s></div><div class="stk-sub">J.A.R.V.I.S. · SECURE CHANNEL</div></div>';
+      document.body.appendChild(ov);
+      var st=['Akan saya hubungkan dengan Boss Stark…','Membuka jalur aman…','Menyambungkan ke WhatsApp…','Terhubung ✓'],n=0,t=ov.querySelector('#stkT');
+      var iv=setInterval(function(){ n++; if(st[n]) t.textContent=st[n]; },620);
+      setTimeout(function(){ clearInterval(iv); try{ if(w&&!w.closed) w.location.href=WAURL; else window.open(WAURL,'_blank','noopener,noreferrer'); }catch(x){}
+        ov.classList.add('out'); setTimeout(function(){ ov.remove(); },450); },2500); }
     function chatStart(){ clearTimeout(cst); stopTalk(); setMode('chat'); hist=[];
       body.innerHTML='<div class="jv-start"><div class="jv-core"><i></i><i></i><i></i><b></b></div><div class="t" id="jvT">MENGAKTIFKAN VOICE…</div></div>';
       var steps=['MENGAKTIFKAN VOICE…','KALIBRASI SUARA…','MENYAMBUNGKAN AI…','J.A.R.V.I.S. ONLINE'],n=0,tt=$('#jvT'); inp.disabled=snd.disabled=true;
       (function nx(){ if(tt&&steps[n]) tt.textContent=steps[n]; n++; if(n<=steps.length){ cst=setTimeout(nx,520); } else { var st=body.querySelector('.jv-start'); if(st) st.classList.add('out');
         cst=setTimeout(function(){ body.innerHTML=''; inp.disabled=false; snd.disabled=false; var g=say('Siap, '+sapa()+'. Ketik pesan Anda, saya akan membawa Anda ke J.A.R.V.I.S. AI.','j'); talk(g.textContent,g); inp.focus(); },420); } })(); }
-    body.addEventListener('click',function(e){ var b=e.target.closest('[data-m]'); if(!b) return; if(b.dataset.m==='report'){ if(!canEdit()) return; setMode('report'); boot(); } else chatStart(); });
+    body.addEventListener('click',function(e){ var b=e.target.closest('[data-m]'); if(!b) return; if(b.dataset.m==='wa'){ openWa();  } else if(b.dataset.m==='report'){ if(!canEdit()) return; setMode('report'); boot(); } else chatStart(); });
     back.addEventListener('click',function(){ clearTimeout(cst); stopTalk(); if(rec) rec.stop(); inp.disabled=snd.disabled=false; menu(); });
     var APPS={tiktok:['TikTok','https://www.tiktok.com/'],youtube:['YouTube','https://www.youtube.com/'],instagram:['Instagram','https://www.instagram.com/'],ig:['Instagram','https://www.instagram.com/'],facebook:['Facebook','https://www.facebook.com/'],fb:['Facebook','https://www.facebook.com/'],whatsapp:['WhatsApp','https://web.whatsapp.com/'],wa:['WhatsApp','https://web.whatsapp.com/'],telegram:['Telegram','https://web.telegram.org/'],twitter:['X','https://x.com/'],x:['X','https://x.com/'],spotify:['Spotify','https://open.spotify.com/'],google:['Google','https://www.google.com/'],gmail:['Gmail','https://mail.google.com/'],drive:['Google Drive','https://drive.google.com/'],maps:['Google Maps','https://maps.google.com/'],classroom:['Google Classroom','https://classroom.google.com/']};
     function openCmd(t){ var s=t.toLowerCase().replace(/[.!?]+$/,'').replace(/^\s*(?:halo|hai|hi|hey)?[\s,]*jarvis[\s,]*/,'');
@@ -3447,6 +3641,7 @@ html[data-theme=light] .rk-wrap table.kas{background:rgba(255,255,255,.7)}
     window.addEventListener('pageshow',warpStop);
     jc.addEventListener('submit',function(e){ e.preventDefault(); var t=inp.value.trim(); if(!t||busy) return;
       inp.value=''; say(t,'u');
+      if(/stark|boss/i.test(t)){ openWa(); var gw=say('Baik, '+sapa()+'. Menghubungkan Anda ke Boss Stark Abdullah lewat WhatsApp. ','j'); var aw=document.createElement('a'); aw.href=WAURL; aw.target='_blank'; aw.rel='noopener noreferrer'; aw.textContent='Ketuk di sini bila belum terbuka.'; aw.style.color='inherit'; aw.style.textDecoration='underline'; gw.appendChild(aw); talk('Baik, '+sapa()+'. Menghubungkan ke Boss Stark Abdullah.',gw); body.scrollTop=body.scrollHeight; return; }
       var ap=openCmd(t);
       if(ap){ try{ window.open(ap[1],'_blank','noopener,noreferrer'); }catch(x){}
         var g=say('Baik, '+sapa()+'. Membuka '+ap[0]+'. ','j'); var a=document.createElement('a'); a.href=ap[1]; a.target='_blank'; a.rel='noopener noreferrer'; a.textContent='Ketuk di sini bila belum terbuka.'; a.style.color='inherit'; a.style.textDecoration='underline'; g.appendChild(a);
