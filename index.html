@@ -1928,6 +1928,40 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
 #belajar .bj-jv-ask{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 14px;border-radius:12px;border:1px solid rgba(47,159,230,.45);background:linear-gradient(135deg,rgba(47,159,230,.16),rgba(14,165,233,.14));color:inherit;font:600 .84rem inherit;cursor:pointer;transition:transform .18s,background .18s}
 #belajar .bj-jv-ask:hover{background:#2f9fe6;color:#fff;transform:translateY(-1px)}
 
+
+/* ===== v34: Menu Belajar Super Nyaman Baca & Terjemahan Interaktif Bahasa Inggris ===== */
+#belajar .bj-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin:0 0 12px;padding:10px 14px;border-radius:16px;background:rgba(255,255,255,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.55)}
+[data-theme="dark"] #belajar .bj-toolbar{background:rgba(15,23,38,.82);border-color:rgba(255,255,255,.12)}
+#belajar .bj-search{flex:1 1 200px;padding:8px 12px;border-radius:11px;border:1px solid rgba(127,127,127,.32);background:rgba(255,255,255,.8);color:inherit;font:inherit;font-size:.88rem;outline:none}
+[data-theme="dark"] #belajar .bj-search{background:rgba(15,23,42,.85)}
+#belajar .bj-search:focus{border-color:#2f9fe6}
+#belajar .bj-tools{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+#belajar .bj-tbtn{border:1px solid rgba(127,127,127,.32);background:rgba(127,127,127,.1);color:inherit;padding:7px 11px;border-radius:11px;font:600 .8rem inherit;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .18s}
+#belajar .bj-tbtn:hover{border-color:#2f9fe6;background:rgba(47,159,230,.15)}
+#belajar .bj-tbtn.on{background:#2f9fe6;color:#fff;border-color:#2f9fe6}
+
+/* Mode baca lega (font lebih besar & spasi nyaman) */
+#belajar.bj-lg .bj-card ul>li,#belajar.bj-lg .bj-card ol>li,#belajar.bj-lg details>div,#belajar.bj-lg .bj-exp,#belajar.bj-lg p{font-size:1.05rem;line-height:1.85}
+#belajar.bj-lg .bj-card h3{font-size:1.18rem}
+
+/* Card & Typography Upgrade */
+#belajar .bj-card{background:rgba(255,255,255,.84);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.68);border-radius:20px;padding:20px 22px;margin:0 0 14px;box-shadow:0 8px 26px rgba(15,23,42,.06)}
+[data-theme="dark"] #belajar .bj-card{background:rgba(13,20,34,.9);border-color:rgba(255,255,255,.12);box-shadow:0 10px 28px rgba(0,0,0,.35)}
+#belajar .bj-card h3{font-size:1.1rem;font-weight:700;color:#0f172a;margin:0 0 10px;padding-bottom:8px;border-bottom:1px solid rgba(148,163,184,.22)}
+[data-theme="dark"] #belajar .bj-card h3{color:#f1f5f9}
+#belajar .bj-card ul{padding-left:0;margin:8px 0 0;list-style:none}
+#belajar .bj-card ul>li{position:relative;padding-left:16px;margin:11px 0;line-height:1.75;max-width:74ch}
+#belajar .bj-card ul>li::before{content:"";position:absolute;left:0;top:.68em;width:6px;height:6px;border-radius:50%;background:#2f9fe6}
+#belajar .bj-exbox{margin-top:8px;padding:12px 14px;border-radius:14px;background:rgba(47,159,230,.08);border:1px solid rgba(47,159,230,.28);border-left:4px solid #2f9fe6;font-size:.93rem;line-height:1.7}
+
+/* Ikon & Tombol Terjemahan Interaktif Bahasa Inggris */
+#belajar .bj-tr-wrap{display:block;margin-top:6px}
+#belajar .bj-tr-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:99px;border:1px solid rgba(16,185,129,.45);background:rgba(16,185,129,.12);color:#047857;font:600 .76rem inherit;cursor:pointer;transition:all .18s}
+[data-theme="dark"] #belajar .bj-tr-btn{color:#34d399;background:rgba(16,185,129,.15)}
+#belajar .bj-tr-btn:hover,#belajar .bj-tr-btn.active{background:#10b981;color:#fff;border-color:#10b981}
+#belajar .bj-tr-text{display:block;margin-top:6px;padding:9px 12px;border-radius:12px;background:rgba(16,185,129,.1);border-left:3px solid #10b981;font-style:normal;font-size:.9rem;line-height:1.65;color:inherit}
+#belajar.hide-tr .bj-tr-text{display:none}
+
 /* ===== Beranda: semua bisa diklik ===== */
 #beranda [data-link]{cursor:pointer;-webkit-tap-highlight-color:transparent}
 #beranda .dcard[data-link],#beranda .ann[data-link]{transition:transform .2s,box-shadow .2s}
@@ -2147,6 +2181,13 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
 
     <section id="belajar" class="panel view">
       <div class="sec-title"><h2>Belajar</h2><p>Ringkasan materi, latihan soal &amp; kisi-kisi UTS · disusun sesuai jadwal kuliah</p></div>
+      <div class="bj-toolbar">
+        <input type="text" id="bjSearch" class="bj-search" placeholder="🔍 Cari kata kunci materi atau kisi-kisi..." autocomplete="off">
+        <div class="bj-tools">
+          <button type="button" id="bjFontBtn" class="bj-tbtn" title="Perbesar ukuran huruf agar nyaman dibaca">🔠 Huruf Besar</button>
+          <button type="button" id="bjTrBtn" class="bj-tbtn on" title="Tampilkan atau sembunyikan terjemahan Bahasa Indonesia">🌐 Terjemahan ID</button>
+        </div>
+      </div>
       <div class="bj-mode" id="bjMode"></div>
       <div class="bj-days" id="bjDays"></div>
       <div class="bj-slots" id="bjSlots"></div>
@@ -4618,78 +4659,59 @@ es:[
 ['Jelaskan apa itu BEP dan hitung BEP rupiah bila FC = Rp6.000.000, harga Rp20.000 per unit, dan biaya variabel Rp8.000 per unit.','BEP adalah titik saat TR = TC (laba nol). BEP unit = 6.000.000 / (20.000 − 8.000) = <b>500 unit</b>. BEP rupiah = 500 × 20.000 = <b>Rp10.000.000</b>. Di atas 500 unit perusahaan untung, di bawahnya rugi.'],
 ['Bandingkan bunga sederhana dan majemuk untuk modal Rp5.000.000, bunga 8% per tahun, selama 3 tahun.','Sederhana: Fn = 5.000.000 × (1 + 0,08 × 3) = <b>Rp6.200.000</b>. Majemuk: Fn = 5.000.000 × 1,08³ = 5.000.000 × 1,259712 = <b>Rp6.298.560</b>. Bunga majemuk lebih besar karena bunga tiap periode ikut dibungakan.']]},
 {id:'bi',n:'Pengantar Bahasa Inggris Bisnis',h:'Senin',d:'Titi, S.Pd., M.M.',l:'1RUo90FmzmEktaSDUoNjjQu-9EFkZLmzY',
-src:['1. Greetings, introductions & small talk','2. Telephoning','3. Business emails & letters','4. Meetings & presentations','5. Grammar & business vocabulary','6. Descriptive Text (Teks Deskripsi) & Tenses and Aspect – Titi'],
+src:['1. Greetings, introductions & small talk','2. Telephoning','3. Business emails & letters','4. Meetings & presentations','5. Grammar & business vocabulary','6. Descriptive Text (Teks Deskripsi) – Lengkap & Contoh','7. Tenses and Aspect (PPT Titi, S.Pd., M.M.)'],
 sum:[
 {h:'1. Greetings, Introductions & Small Talk',i:[
-'<b>Menyapa</b>: Good morning / afternoon / evening. How do you do? (formal, dijawab dengan frasa yang sama). Nice to meet you.',
-'<b>Memperkenalkan diri</b>: My name is… / I work for… / I am in charge of… (bagian atau departemen).',
-'<b>Memperkenalkan orang lain</b>: May I introduce Mr. Budi, our Marketing Manager?',
-'<b>Small talk</b> (topik aman): perjalanan, cuaca, kota, pekerjaan. Hindari politik, agama, dan gaji.',
-'<b>Berpamitan</b>: It was a pleasure meeting you. / I look forward to hearing from you.']},
-{h:'2. Telephoning',i:[
-'<b>Membuka</b>: Good morning, PT Maju Jaya. How can I help you?',
-'<b>Menanyakan identitas</b>: May I ask who is calling, please?',
-'<b>Meminta sambungan</b>: Could I speak to Ms. Rina, please? / I would like to speak to the Sales Manager.',
-'<b>Menyambungkan / meminta menunggu</b>: Hold the line, please. / Just a moment, I will put you through.',
-'<b>Orang yang dicari tidak ada</b>: I am afraid she is not available. Can I take a message?',
-'<b>Meminta pengulangan</b>: Could you repeat that, please? / Could you spell that for me?',
-'<b>Menutup</b>: Thank you for calling. / Have a nice day.']},
-{h:'3. Business Emails & Letters',i:[
-'<b>Bagian surat</b>: letterhead, tanggal, alamat penerima, salutation, isi (pembuka, inti, penutup), complimentary close, tanda tangan.',
-'<b>Salutation</b>: Dear Mr. Smith (kenal nama) / Dear Sir or Madam (tidak kenal).',
-'<b>Complimentary close</b> (gaya Inggris): Dear + nama → Yours sincerely; Dear Sir/Madam → Yours faithfully. Untuk email: Best regards / Kind regards.',
-'<b>Frasa umum</b>: I am writing to inquire about… / Please find attached… / I would appreciate it if you could… / We look forward to your reply.',
-'<b>Jenis surat bisnis</b>: inquiry (permintaan informasi), quotation (penawaran harga), order, complaint, reply.',
-'Gunakan bahasa sopan, ringkas, dan jelas. Hindari singkatan informal (thx, pls).']},
-{h:'4. Meetings & Presentations',i:[
-'<b>Membuka rapat</b>: Shall we get started? / The purpose of today’s meeting is to…',
-'<b>Menyampaikan pendapat</b>: In my opinion… / I think we should…',
-'<b>Setuju</b>: I totally agree. / That is a good point. <b>Tidak setuju (sopan)</b>: I see your point, but I am afraid I do not quite agree.',
-'<b>Menyela</b>: Sorry to interrupt, but… / Could I just add something?',
-'<b>Struktur presentasi</b>: <b>Introduction</b> (sapa, sebut topik, garis besar) → <b>Body</b> (poin utama dengan penghubung first, next, finally) → <b>Conclusion</b> (ringkasan, ajakan bertindak, Q&amp;A).',
-'<b>Frasa presentasi</b>: Today I would like to talk about… / Let me move on to… / To sum up… / Are there any questions?',
-'<b>Menjelaskan tren</b>: naik = rise, increase, go up; turun = fall, decrease, decline, drop; stabil = remain stable; adverbia = sharply, dramatically, steadily, slightly.']},
-{h:'5. Grammar & Business Vocabulary',i:[
-'<b>Present simple</b>: kebiasaan/fakta. We open at 8 a.m. <b>Present continuous</b>: sedang berlangsung. We are preparing the report.',
-'<b>Past simple</b>: kejadian selesai pada waktu lampau. The company launched a new product last month.',
-'<b>Present perfect</b>: have/has + V3, hasil terkait sekarang. We have signed the contract. <b>Present perfect continuous</b>: We have been working on this project since January.',
-'<b>Future</b>: will (keputusan spontan/prediksi), be going to (rencana), present continuous (jadwal pasti).',
-'<b>Modal</b>: must / have to (kewajiban), should (saran), can / could (kemampuan, permintaan), may / might (kemungkinan), would you mind… (permintaan sopan).',
-'<b>Kosakata</b>: invoice = faktur; quotation = penawaran harga; deadline = batas waktu; agenda = acara rapat; minutes = notulen; shareholder = pemegang saham; revenue = pendapatan; profit = laba; loss = rugi; budget = anggaran; supplier = pemasok; customer = pelanggan.']},
-{h:'6. Descriptive Text – Definition & Purpose (Pengertian & Tujuan)',i:[
-'<b>Descriptive text</b> is a text that describes a particular person, place, animal, thing, or event in detail so that the reader can imagine it clearly.<br><i>🇮🇩 Teks deskripsi adalah teks yang menggambarkan orang, tempat, hewan, benda, atau peristiwa tertentu secara rinci agar pembaca dapat membayangkannya dengan jelas.</i>',
-'<b>Social function / Purpose</b>: to describe and reveal a specific person, place, or thing.<br><i>🇮🇩 Fungsi sosial: menggambarkan dan menampilkan ciri-ciri orang, tempat, atau benda tertentu.</i>',
-'<b>Specific, not general</b>: “My cat, Mimi, has soft white fur” (descriptive) vs. “Cats have fur” (general/report text).<br><i>🇮🇩 Objek yang dideskripsikan bersifat khusus, bukan umum. Deskripsi berbeda dengan report text yang membahas sesuatu secara umum.</i>',
-'<b>In business</b>: used in product descriptions, company profiles, hotel/restaurant brochures, and job or office descriptions.<br><i>🇮🇩 Dalam bisnis: dipakai pada deskripsi produk, profil perusahaan, brosur hotel/restoran, dan gambaran pekerjaan atau kantor.</i>']},
-{h:'7. Generic Structure (Struktur Teks)',i:[
-'<b>1. Identification</b>: introduces the object to be described (who/what/where).<br><i>🇮🇩 Identifikasi: memperkenalkan objek yang dideskripsikan (siapa/apa/di mana).</i>',
-'<b>2. Description</b>: describes the object: parts, qualities, characteristics, size, color, function, or behavior.<br><i>🇮🇩 Deskripsi: menguraikan bagian, sifat, ciri, ukuran, warna, fungsi, atau perilaku objek.</i>',
-'<b>Example / Contoh</b>:<br><i>Identification</i>: “Bandung Paris van Java is a famous shopping and tourist destination in Bandung.”<br><i>Description</i>: “It has hundreds of stores, a spacious food court, and a beautiful open garden. The atmosphere is lively and comfortable.”<br><i>🇮🇩 Identifikasi: “Paris van Java adalah tujuan belanja dan wisata terkenal di Bandung.” Deskripsi: “Tempat ini memiliki ratusan toko, food court yang luas, dan taman terbuka yang indah. Suasananya ramai dan nyaman.”</i>']},
-{h:'8. Language Features (Ciri Kebahasaan)',i:[
-'<b>Simple present tense</b>: used to state facts and permanent characteristics. “It snows in Alaska.” “The hotel has 50 rooms.”<br><i>🇮🇩 Simple present: untuk fakta dan ciri yang tetap. “Salju turun di Alaska.” “Hotel itu memiliki 50 kamar.”</i>',
-'<b>Adjectives</b> (descriptive words): beautiful, spacious, modern, friendly, tall, soft, delicious. Order: opinion → size → age → shape → color → origin → material → noun (a <i>beautiful small old round red Italian leather</i> bag).<br><i>🇮🇩 Kata sifat (adjektiva) untuk menggambarkan objek. Urutan: opini → ukuran → usia → bentuk → warna → asal → bahan → benda.</i>',
-'<b>Linking / being verbs</b>: is, are, has, have, looks, seems, feels, smells, tastes.<br><i>🇮🇩 Kata kerja penghubung: is, are, has, have, looks (tampak), seems (terlihat), feels (terasa), smells (berbau), tastes (berasa).</i>',
-'<b>Noun phrases</b>: a modern office building; a friendly sales manager.<br><i>🇮🇩 Frasa nomina: gedung kantor modern; manajer penjualan yang ramah.</i>',
-'<b>Figurative language & adverbs</b>: “as bright as the sun,” “very comfortable,” “extremely popular.”<br><i>🇮🇩 Bahasa kiasan dan adverbia untuk memperkuat gambaran: “seterang matahari,” “sangat nyaman,” “sangat populer.”</i>']},
-{h:'9. Tenses & Aspect in Descriptive Text (Kala & Aspek)',i:[
-'<b>Tense</b> refers to the location of an event in time; <b>aspect</b> shows how an event is viewed with respect to time. Descriptive text mostly uses the simple present, but other forms appear too.<br><i>🇮🇩 Tense menunjukkan letak peristiwa dalam waktu; aspek menunjukkan cara pandang terhadap peristiwa. Teks deskripsi paling sering memakai simple present, tetapi bentuk lain juga muncul.</i>',
-'<b>Simple present</b> (facts, habits, permanent traits): “Tom watches television every day.” “The restaurant opens at 8 a.m.”<br><i>🇮🇩 Simple present: fakta, kebiasaan, ciri tetap. “Tom menonton televisi setiap hari.” “Restoran buka pukul 08.00.”</i>',
-'<b>Simple past</b> (describing a past person/place/event): “My grandfather was a tall man. He had a gentle smile.”<br><i>🇮🇩 Simple past: mendeskripsikan orang/tempat/peristiwa di masa lalu. “Kakek saya adalah pria tinggi. Ia memiliki senyum yang lembut.”</i>',
-'<b>Present progressive</b> (what is happening now): “The children are playing in the garden.” “She is wearing a blue dress.”<br><i>🇮🇩 Present progressive: yang sedang berlangsung. “Anak-anak sedang bermain di taman.” “Ia sedang memakai gaun biru.”</i>',
-'<b>Present perfect</b> (have/has + V3; result related to now): “The hotel has become very popular.”<br><i>🇮🇩 Present perfect (have/has + V3): hasil yang berkaitan dengan sekarang. “Hotel itu telah menjadi sangat populer.”</i>',
-'<b>Past perfect</b> (had + V3; before another past time): “The shop had already closed when we arrived.”<br><i>🇮🇩 Past perfect (had + V3): terjadi sebelum waktu lampau lain. “Toko itu sudah tutup ketika kami tiba.”</i>',
-'<b>Perfect progressive</b> (have/has/had + been + V-ing; duration): “The cafe has been serving customers since 7 a.m.” / “Tom had been studying for two hours before his friend came.”<br><i>🇮🇩 Perfect progressive: menekankan durasi suatu kegiatan sebelum/hingga waktu tertentu.</i>',
-'<b>Tip</b>: keep one main tense for the whole description (usually simple present, or simple past for a past subject). Do not switch without reason.<br><i>🇮🇩 Tips: pertahankan satu tense utama dalam seluruh deskripsi (biasanya simple present, atau simple past untuk objek masa lalu). Jangan berganti tanpa alasan.</i>']},
-{h:'10. Example Texts (Contoh Teks)',i:[
-'<b>Describing a person / Mendeskripsikan orang</b>:<br>“Rina is my colleague. She is 25 years old and works as a marketing officer. She is tall and slim with long black hair and bright eyes. She is friendly, hard-working, and always arrives on time.”<br><i>🇮🇩 “Rina adalah rekan kerja saya. Usianya 25 tahun dan bekerja sebagai staf pemasaran. Ia tinggi dan langsing, berambut hitam panjang dan bermata cerah. Ia ramah, pekerja keras, dan selalu datang tepat waktu.”</i>',
-'<b>Describing a place / Mendeskripsikan tempat</b>:<br>“Lembang is a cool mountain town north of Bandung. It has fresh air, green tea gardens, and many cafés with beautiful views. Visitors can ride horses, take photos, and enjoy hot corn at the roadside.”<br><i>🇮🇩 “Lembang adalah kota pegunungan yang sejuk di utara Bandung. Udaranya segar, ada kebun teh yang hijau, dan banyak kafe dengan pemandangan indah. Pengunjung dapat menunggang kuda, berfoto, dan menikmati jagung bakar di tepi jalan.”</i>',
-'<b>Describing a thing (product) / Mendeskripsikan benda (produk)</b>:<br>“The ZX laptop is light and elegant. It has a 14-inch screen, a silver metal body, and a fast processor. The battery lasts for ten hours, so it is perfect for students and business people.”<br><i>🇮🇩 “Laptop ZX ringan dan elegan. Layarnya 14 inci, bodinya logam berwarna perak, dan prosesornya cepat. Baterainya tahan sepuluh jam, sehingga cocok bagi mahasiswa dan pebisnis.”</i>']},
-{h:'11. Useful Vocabulary (Kosakata Penting)',i:[
-'<b>Appearance / Penampilan</b>: tall = tinggi; short = pendek; slim = langsing; curly hair = rambut keriting; straight hair = rambut lurus; handsome = tampan; beautiful = cantik.',
-'<b>Character / Sifat</b>: friendly = ramah; diligent = rajin; honest = jujur; polite = sopan; generous = dermawan; creative = kreatif.',
-'<b>Place / Tempat</b>: spacious = luas; crowded = ramai/padat; quiet = tenang; clean = bersih; comfortable = nyaman; scenic = indah pemandangannya.',
-'<b>Thing / Benda</b>: lightweight = ringan; durable = awet; smooth = halus; sturdy = kokoh; affordable = terjangkau; modern = modern.',
-'<b>Useful phrases</b>: “It is located in…” (terletak di…) · “It is made of…” (terbuat dari…) · “It is famous for…” (terkenal karena…) · “It looks like…” (tampak seperti…).']}
+'<b>Menyapa (Greetings)</b>: Good morning / afternoon / evening. How do you do? (formal, dijawab dengan frasa yang sama). Nice to meet you.<span class="bj-tr-text">🌐 Terjemahan: Selamat pagi / siang / malam. Apa kabar? (sangat formal). Senang bertemu dengan Anda.</span>',
+'<b>Memperkenalkan diri (Introducing Yourself)</b>: My name is… / I work for… / I am in charge of… (menyebut bagian atau departemen).<span class="bj-tr-text">🌐 Terjemahan: Nama saya… / Saya bekerja di… / Saya bertanggung jawab atas bagian…</span>',
+'<b>Memperkenalkan orang lain (Introducing Others)</b>: May I introduce Mr. Budi, our Marketing Manager?<span class="bj-tr-text">🌐 Terjemahan: Bolehkah saya memperkenalkan Pak Budi, Manajer Pemasaran kami?</span>',
+'<b>Small talk (Obrolan ringan)</b>: pilih topik aman seperti perjalanan, cuaca, kota, dan pekerjaan. Hindari topik sensitif seperti politik, agama, dan gaji.',
+'<b>Berpamitan (Leave-taking)</b>: It was a pleasure meeting you. / I look forward to hearing from you.<span class="bj-tr-text">🌐 Terjemahan: Senang sekali dapat bertemu Anda. / Saya menantikan kabar dari Anda.</span>']},
+{h:'2. Telephoning (Bertelepon Bisnis)',i:[
+'<b>Membuka telepon</b>: Good morning, PT Maju Jaya. How can I help you?<span class="bj-tr-text">🌐 Terjemahan: Selamat pagi, PT Maju Jaya. Ada yang bisa saya bantu?</span>',
+'<b>Menanyakan identitas penelepon</b>: May I ask who is calling, please?<span class="bj-tr-text">🌐 Terjemahan: Bolehkah saya tahu dengan siapa saya berbicara?</span>',
+'<b>Meminta sambungan</b>: Could I speak to Ms. Rina, please? / I would like to speak to the Sales Manager.<span class="bj-tr-text">🌐 Terjemahan: Bisakah saya berbicara dengan Ibu Rina? / Saya ingin berbicara dengan Manajer Penjualan.</span>',
+'<b>Menyambungkan / meminta menunggu</b>: Hold the line, please. / Just a moment, I will put you through.<span class="bj-tr-text">🌐 Terjemahan: Mohon tunggu sebentar di telepon. / Sebentar, saya sambungkan.</span>',
+'<b>Orang yang dicari tidak ada</b>: I am afraid she is not available. Can I take a message?<span class="bj-tr-text">🌐 Terjemahan: Mohon maaf beliau sedang tidak di tempat. Ada pesan yang ingin disampaikan?</span>',
+'<b>Meminta pengulangan / ejaan</b>: Could you repeat that, please? / Could you spell that for me?<span class="bj-tr-text">🌐 Terjemahan: Bisakah Anda mengulanginya? / Bisakah Anda mengejanya untuk saya?</span>']},
+{h:'3. Business Emails & Letters (Surat & Email Bisnis)',i:[
+'<b>Bagian surat bisnis</b>: letterhead (kop surat), date (tanggal), recipient address (alamat penerima), salutation (salam pembuka), body (pembuka, inti, penutup), complimentary close (salam penutup), dan signature (tanda tangan).',
+'<b>Salutation (Salam pembuka)</b>: Dear Mr. Smith (jika kenal nama) / Dear Sir or Madam (jika tidak kenal nama).<span class="bj-tr-text">🌐 Terjemahan: Yang terhormat Bapak Smith / Yang terhormat Bapak/Ibu.</span>',
+'<b>Complimentary close (Salam penutup)</b>: Dear + nama → <i>Yours sincerely</i>; Dear Sir/Madam → <i>Yours faithfully</i>. Untuk email modern: <i>Best regards</i> / <i>Kind regards</i>.<span class="bj-tr-text">🌐 Terjemahan: Hormat saya / Salam hangat.</span>',
+'<b>Frasa standar email bisnis</b>: I am writing to inquire about… / Please find attached… / I would appreciate it if you could… / We look forward to your reply.<span class="bj-tr-text">🌐 Terjemahan: Saya menulis untuk menanyakan tentang… / Terlampir… / Saya akan sangat menghargai jika Anda dapat… / Kami menantikan balasan Anda.</span>',
+'<b>Jenis surat bisnis</b>: inquiry (permintaan informasi), quotation (penawaran harga), order (pesanan), complaint (keluhan), reply (balasan).']},
+{h:'4. Meetings & Presentations (Rapat & Presentasi)',i:[
+'<b>Membuka rapat</b>: Shall we get started? / The purpose of today’s meeting is to…<span class="bj-tr-text">🌐 Terjemahan: Mari kita mulai? / Tujuan rapat hari ini adalah untuk…</span>',
+'<b>Menyampaikan pendapat</b>: In my opinion… / I think we should…<span class="bj-tr-text">🌐 Terjemahan: Menurut pendapat saya… / Saya pikir kita sebaiknya…</span>',
+'<b>Setuju & tidak setuju secara sopan</b>: I totally agree. / I see your point, but I am afraid I do not quite agree.<span class="bj-tr-text">🌐 Terjemahan: Saya sangat setuju. / Saya mengerti maksud Anda, namun mohon maaf saya kurang sependapat.</span>',
+'<b>Struktur presentasi</b>: <b>Introduction</b> (sapa, sebut topik, garis besar) → <b>Body</b> (poin utama dengan penghubung <i>first, next, finally</i>) → <b>Conclusion</b> (ringkasan, ajakan bertindak, sesi tanya jawab).',
+'<b>Menjelaskan grafik & tren</b>: naik = <i>rise, increase, go up</i>; turun = <i>fall, decrease, decline, drop</i>; stabil = <i>remain stable</i>; keterangan = <i>sharply</i> (tajam), <i>steadily</i> (stabil), <i>slightly</i> (sedikit).']},
+{h:'5. Descriptive Text – Pengertian, Fungsi & Ciri Utama (Lengkap)',i:[
+'<b>Definition (Pengertian)</b>: <i>Descriptive text is a text that describes a particular person, place, animal, thing, or event in detail so that the reader or listener can visualize and feel it clearly.</i><span class="bj-tr-text">🌐 Terjemahan: Teks deskripsi adalah teks yang menggambarkan orang, tempat, hewan, benda, atau peristiwa tertentu secara rinci sehingga pembaca atau pendengar dapat membayangkan dan merasakannya dengan jelas.</span>',
+'<b>Social Function / Purpose (Tujuan Sosial)</b>: <i>To describe and reveal the specific characteristics, qualities, parts, or appearance of a particular subject.</i><span class="bj-tr-text">🌐 Terjemahan: Menggambarkan dan mengungkapkan ciri-ciri khusus, sifat, bagian, atau penampilan dari suatu objek tertentu secara spesifik.</span>',
+'<b>Perbedaan Descriptive Text vs. Report Text</b>: <b>Descriptive Text</b> menggambarkan <i>satu objek spesifik/khusus</i> (contoh: “My cat, Mimi” / “Gedung Kampus STIE Pasundan”), sedangkan <b>Report Text</b> membahas <i>kategori secara umum/ilmiah</i> (contoh: “Cats in general” / “Higher education institutions”).',
+'<b>Manfaat dalam Dunia Bisnis</b>: Digunakan untuk menulis <i>product description</i> (deskripsi produk katalog/e-commerce), <i>company profile</i> (profil perusahaan), brosur wisata/hotel, serta deskripsi pekerjaan dan fasilitas kantor.']},
+{h:'6. Generic Structure & Language Features Descriptive Text',i:[
+'<b>Struktur Teks (Generic Structure)</b> hanya terdiri atas <b>2 bagian utama</b>:<br>1) <b>Identification (Identifikasi)</b>: Bagian pembuka yang memperkenalkan siapa, apa, atau di mana objek yang akan dideskripsikan.<br>2) <b>Description (Deskripsi)</b>: Bagian isi yang menjabarkan rincian objek secara mendalam (bagian-bagian fisik, ukuran, warna, sifat, fungsi, suasana, maupun keunggulannya).',
+'<b>Ciri Kebahasaan 1 — Simple Present Tense</b>: Karena menyatakan fakta dan ciri permanen (contoh: <i>“The building has four floors.”</i>). Jika objeknya sudah tiada/masa lalu, gunakan <b>Simple Past Tense</b> (contoh: <i>“My grandfather was a wise leader.”</i>).<span class="bj-tr-text">🌐 Terjemahan: “Gedung itu memiliki empat lantai.” / “Kakek saya adalah pemimpin yang bijaksana.”</span>',
+'<b>Ciri Kebahasaan 2 — Adjectives (Kata Sifat) & Urutannya (OSASCOMP)</b>: Urutan kata sifat sebelum kata benda: <b>O</b>pinion (opini) → <b>S</b>ize (ukuran) → <b>A</b>ge (usia) → <b>S</b>hape (bentuk) → <b>C</b>olor (warna) → <b>O</b>rigin (asal) → <b>M</b>aterial (bahan) → <b>P</b>urpose/Noun. Contoh: <i>a sleek small new black Japanese metal laptop</i>.<span class="bj-tr-text">🌐 Terjemahan: Sebuah laptop logam Jepang berwarna hitam baru yang kecil dan ramping.</span>',
+'<b>Ciri Kebahasaan 3 — Linking Verbs & Sensory Verbs</b>: Kata kerja penghubung dan indra seperti <i>is, am, are, has, have, looks</i> (tampak), <i>seems</i> (terlihat), <i>feels</i> (terasa), <i>smells</i> (berbau), <i>tastes</i> (terasa di lidah).',
+'<b>Ciri Kebahasaan 4 — Noun Phrases & Adverbs</b>: Frasa kata benda yang diperjelas kata keterangan (contoh: <i>an extremely comfortable workspace</i>, <i>very friendly customer service</i>).<span class="bj-tr-text">🌐 Terjemahan: Ruang kerja yang sangat nyaman; layanan pelanggan yang sangat ramah.</span>']},
+{h:'7. Contoh Lengkap Descriptive Text (Orang, Tempat, Benda/Produk)',i:[
+'<b>Contoh 1 — Describing a Person (Mendeskripsikan Orang)</b>:<div class="bj-exbox"><b>[Identification]</b> Mr. Hendra is our Operations Manager at PT Nusantara Logistik.<br><b>[Description]</b> He is 38 years old and has an athletic build with short neat black hair and warm brown eyes. He usually wears a crisp white shirt and a dark blue tie. Mr. Hendra is known as a disciplined, approachable, and decisive leader who always motivates his team to achieve targets on time.<span class="bj-tr-text">🌐 Terjemahan: <b>[Identifikasi]</b> Pak Hendra adalah Manajer Operasional kami di PT Nusantara Logistik. <b>[Deskripsi]</b> Ia berusia 38 tahun, bertubuh atletis dengan rambut hitam pendek rapi dan mata cokelat yang hangat. Ia biasanya mengenakan kemeja putih rapi dan dasi biru tua. Pak Hendra dikenal sebagai pemimpin yang disiplin, mudah didekati, dan tegas yang selalu memotivasi timnya mencapai target tepat waktu.</span></div>',
+'<b>Contoh 2 — Describing a Place (Mendeskripsikan Tempat)</b>:<div class="bj-exbox"><b>[Identification]</b> Kalaras Coffee is a popular minimalist café located in Bandung.<br><b>[Description]</b> The café has a spacious indoor area with warm wooden furniture and an airy outdoor garden surrounded by green plants. The aroma of freshly roasted Arabica coffee fills the room, accompanied by soft acoustic music. It is an ideal spot for students and remote workers to focus and discuss ideas.<span class="bj-tr-text">🌐 Terjemahan: <b>[Identifikasi]</b> Kalaras Coffee adalah kafe minimalis populer yang terletak di Bandung. <b>[Deskripsi]</b> Kafe ini memiliki area dalam ruangan yang luas dengan furnitur kayu hangat serta taman luar ruangan yang sejuk dikelilingi tanaman hijau. Aroma kopi Arabika yang baru disangrai memenuhi ruangan, diiringi musik akustik lembut. Tempat ini sangat ideal bagi mahasiswa dan pekerja remote untuk fokus dan berdiskusi.</span></div>',
+'<b>Contoh 3 — Describing a Thing / Product (Mendeskripsikan Produk Bisnis)</b>:<div class="bj-exbox"><b>[Identification]</b> The AeroBook Pro 14 is an ultra-thin business laptop designed for modern professionals.<br><b>[Description]</b> It features a lightweight silver aluminum body weighing only 1.2 kilograms and a sharp 14-inch anti-glare display. Powered by a high-speed processor and a 12-hour battery, this laptop handles heavy multitasking effortlessly while staying cool and quiet.<span class="bj-tr-text">🌐 Terjemahan: <b>[Identifikasi]</b> AeroBook Pro 14 adalah laptop bisnis ultra-tipis yang dirancang untuk profesional modern. <b>[Deskripsi]</b> Laptop ini memiliki bodi aluminium perak ringan dengan berat hanya 1,2 kilogram dan layar anti-silau 14 inci yang tajam. Ditenagai prosesor berkecepatan tinggi dan baterai 12 jam, laptop ini menangani multitasking berat dengan mudah sambil tetap dingin dan senyap.</span></div>']},
+{h:'8. Tenses and Aspect — Konsep Dasar & Simple Tenses (Materi PPT)',i:[
+'<b>Perbedaan Tenses vs. Aspect (Materi PPT)</b>:<br>• <b>Tenses</b>: <i>It refers to the absolute location of an event or action in time, marked by an inflection (verb change).</i><br>• <b>Aspect</b>: <i>It refers to how an event or action is to be viewed with respect to time rather than to its actual location in time</i> (apakah selesai, sedang berlangsung, atau berdurasi).<span class="bj-tr-text">🌐 Terjemahan: <b>Tense</b> merujuk pada letak waktu absolut suatu peristiwa/tindakan (ditandai perubahan bentuk kata kerja). <b>Aspect</b> merujuk pada cara pandang terhadap peristiwa tersebut dalam rentang waktu (berlangsung, selesai, atau berulang).</span>',
+'<b>1. Simple Present Tense</b>: <i>In general, the simple present expresses events or situations that exist (always, usually, habitually); they exist now, have existed in the past, and probably will exist in the future.</i><br><b>Contoh PPT</b>: <i>“It snows in Alaska.”</i> / <i>“Tom watches the television every day.”</i><span class="bj-tr-text">🌐 Terjemahan: Menyatakan kebiasaan, fakta umum, atau kebenaran tetap. Contoh: “Salju turun di Alaska.” / “Tom menonton televisi setiap hari.”</span>',
+'<b>2. Simple Past Tense</b>: <i>At one particular time in the past, this happened. It began and ended in the past.</i><br><b>Contoh PPT</b>: <i>“It snowed yesterday.”</i> / <i>“Tom watched television last night.”</i><span class="bj-tr-text">🌐 Terjemahan: Terjadi pada waktu tertentu di masa lampau; dimulai dan selesai di masa lalu. Contoh: “Kemarin turun salju.” / “Tom menonton televisi tadi malam.”</span>',
+'<b>3. Simple Future Tense</b>: <i>At one particular time in the future, this will happen</i> (menggunakan <i>will</i> atau <i>be going to</i>).<br><b>Contoh PPT</b>: <i>“It will snow tomorrow.”</i> / <i>“It is going to snow tomorrow.”</i><span class="bj-tr-text">🌐 Terjemahan: Akan terjadi pada waktu tertentu di masa depan. Contoh: “Besok akan turun salju.”</span>']},
+{h:'9. Progressive, Perfect & Perfect Progressive Tenses (Materi PPT)',i:[
+'<b>4. Present Progressive (Continuous)</b>: <i>It talks about the actual present moment, short-term present period, existing arrangements for future, past related as present, or long-term present period.</i><br><b>Contoh PPT</b>: <i>“It’s raining hard and the children are still playing in the garden.”</i> / <i>“What are you doing here? I am watching TV.”</i> / <i>“Henry is writing a book.”</i><span class="bj-tr-text">🌐 Terjemahan: Menyatakan kejadian yang sedang berlangsung saat ini. Contoh: “Hujan turun deras dan anak-anak masih bermain di taman.” / “Henry sedang menulis buku.”</span>',
+'<b>5. Past Progressive</b>: <i>Past progressive shares the past simple, plus the temporary aspect of present progressive (short-term or long-term past period).</i><br><b>Contoh PPT</b>: <i>“Tom was sleeping when I arrived.”</i> / <i>“I was always missing the train.”</i><span class="bj-tr-text">🌐 Terjemahan: Sedang berlangsung di masa lampau ketika kejadian lain terjadi. Contoh: “Tom sedang tidur ketika saya tiba.”</span>',
+'<b>6. Future Progressive</b>: <i>It talks about future, and it will be in progress at a particular time in the future.</i><br><b>Contoh PPT</b>: <i>“Tom will be sleeping when we arrive.”</i> (Tom tidur pukul 10.00 besok malam, kita tiba pukul 11.00).<span class="bj-tr-text">🌐 Terjemahan: Akan sedang berlangsung pada waktu tertentu di masa depan. Contoh: “Tom akan sedang tidur ketika kita tiba.”</span>',
+'<b>7. The Perfect Tenses (Have / Has / Had + Participle / V3)</b>: <i>All give the idea that one thing happens <b>before</b> another time or event.</i><br>• <b>Present Perfect</b>: <i>“Tom has already eaten.”</i> (Selesai sebelum sekarang, waktu pastinya tidak penting).<br>• <b>Past Perfect</b>: <i>“Tom had already eaten when his friend arrived.”</i> (Tom selesai makan lebih dulu sebelum temannya tiba di masa lalu).<br>• <b>Future Perfect</b>: <i>“Tom will already have eaten when his friend arrives.”</i> (Tom akan sudah selesai makan sebelum temannya tiba nanti).<span class="bj-tr-text">🌐 Terjemahan: Bentuk Perfect menyatakan peristiwa yang sudah selesai sebelum waktu/peristiwa lain: Present Perfect (sebelum sekarang), Past Perfect (sebelum kejadian lampau lain), Future Perfect (sebelum kejadian masa depan).</span>',
+'<b>8. The Perfect Progressive Tenses (Have / Has / Had + been + -ing)</b>: <i>Give the idea that one event is in progress immediately before, up to, until another time or event, expressing the <b>duration</b> of the first event.</i><br>• <b>Present Perfect Progressive</b>: <i>“Tom has been studying for two hours.”</i> (Belajar dimulai 2 jam lalu dan masih berlangsung sampai sekarang).<br>• <b>Past Perfect Progressive</b>: <i>“Tom had been studying for two hours before his friend came.”</i> (Sudah belajar selama 2 jam sebelum temannya datang).<br>• <b>Future Perfect Progressive</b>: <i>“Tom will have been studying for two hours by the time his friend arrives.”</i><span class="bj-tr-text">🌐 Terjemahan: Menekankan durasi kegiatan yang terus berlangsung hingga batas waktu/kejadian tertentu (selama 2 jam).</span>']}
 ],
 mcq:[
 ['Manakah cara paling formal untuk menanyakan nama penelepon?',['Who are you?','What is your name?','May I ask who is calling, please?','Say your name.'],2,'“May I ask who is calling, please?” sopan dan umum dipakai di telepon bisnis.'],
@@ -4844,25 +4866,16 @@ var KU=[
   a:['Urutan jawaban: Melayu Kuno → lingua franca → masa kolonial → Sumpah Pemuda 1928 → UUD 1945 → perkembangan ejaan.',
      'Kaitan dengan Sumpah Pemuda: tanpa bahasa Melayu yang sudah dipakai luas, ikrar “bahasa persatuan” sulit diterima semua suku. Sumpah Pemuda mengubah statusnya dari bahasa antarsuku menjadi bahasa nasional.',
      'Hafalkan tanggal (27–28 Oktober 1928), tiga butir ikrar, dan nama tokohnya.']},
- {t:'Analisis struktur kebahasaan (seperti tugas kelompok)',
-  p:['<b>Pengertian</b>: struktur kebahasaan adalah tatanan atau susunan unsur-unsur bahasa (kata, frasa, klausa, kalimat, paragraf) yang membentuk kesatuan makna logis dalam teks. Analisisnya memeriksa apakah kaidah bahasa sudah diterapkan dengan benar. Tugas kelompok menganalisis skripsi “Pengaruh Beban Kerja dan Lingkungan Kerja Fisik terhadap Kinerja Karyawan PT Simed Prakarsa Indonesia Kota Bandung” pada Bab I sampai Bab III.',
-     '<b>Rujukan kaidah</b>: Ejaan Bahasa Indonesia yang Disempurnakan (EYD) Edisi Kelima (Kepka BSKAP No. 0424/I/BS.00.00/2022) yang menggantikan PUEBI (Permendikbud No. 50 Tahun 2015), KBBI Daring, dan Tata Bahasa Baku Bahasa Indonesia.',
-     '<b>Delapan unsur yang dianalisis</b> (urutan sesuai laporan), lengkap dengan contoh temuan dari skripsi (Before → After):',
-     '<b>1. Penulisan huruf kapital</b>: dipakai di awal kalimat, nama orang, geografi, lembaga, bulan, dan hari; istilah umum di tengah kalimat ditulis huruf kecil. “Sumber Daya Manusia” → “sumber daya manusia”; “mengartikan Segala kegiatan” → “segala kegiatan”; judul “Terhadap” → “terhadap” (kata depan bukan kata utama).',
-     '<b>2. Penulisan huruf miring</b>: untuk istilah asing atau daerah yang belum diserap, judul buku/terbitan berkala yang dirujuk, dan penegasan. “heatpump” → <i>heat pump</i>; <i>job demands</i>, <i>job control</i>, <i>social support</i>; <i>HVAC</i>; <i>software</i>, <i>computer program</i>; “Crosbac’k Alpha” → <i>Cronbach’s Alpha</i>.',
-     '<b>3. Penulisan huruf tebal</b>: untuk judul, bab, dan subbab. Dalam teks isi tidak dipakai berlebihan dan keterangan seperti sumber tabel ditulis biasa. “<b>Sumber : Data 2023</b>” → “Sumber : Data 2023”; “Menurut <b>Sugiyono (2017:38)</b>” → huruf biasa.',
-     '<b>4. Jenis kata</b>: verba, adjektiva, adverbia, nomina, pronomina, numeralia, dan kata tugas; periksa bentuk baku, imbuhan, dan kata depan. “hakekat” → “hakikat”; “di pertimbangkan” → “dipertimbangkan”; “Tijauan” → “Tinjauan”; “Didalam” → “Di dalam”; “berpengaruh pegawai” → “berpengaruh terhadap pegawai” atau “memengaruhi pegawai”; “Sedangkan” di awal kalimat → “Sementara itu”.',
-     '<b>5. Tanda baca</b>: titik, koma, titik dua, tanda hubung, tanda petik. “dkk” → “dkk.”; “PT.” → “PT” (titik pada PT dihilangkan); “1982.Melalui” → “1982. Melalui” (spasi setelah titik); “diteliti tetapi” → “diteliti, tetapi”; tanda petik harus berpasangan.',
-     '<b>6. Diksi (pilihan kata)</b>: tepat, sesuai situasi, tidak boros, dan baku untuk ragam ilmiah. “bagus” → “baik”; “bisa” → “dapat”; “suara bising” → “kebisingan”; “beberapa para ahli” → “beberapa ahli”; “Accounting” → “Akuntansi”; “turnover” → “pergantian karyawan”; “dikarenakan” → “disebabkan”.',
-     '<b>7. Kata khusus</b>: kata yang acuannya sempit dan terperinci, lebih baik daripada kata umum (misalnya “menganalisis” daripada “melakukan sesuatu terhadap data”). “seorang ahli manajemen” → “tokoh manajemen klasik” atau “pakar manajemen”; “Intrument” → “instrumen”; “reabilitas” → “reliabilitas”; “di tarik” → “ditarik”, “kesimpulanya” → “kesimpulannya”.',
-     '<b>8. Kalimat efektif dan tidak efektif</b>: ciri kesatuan gagasan, kesejajaran bentuk, penekanan, kehematan, dan kelogisan. “jam kerja lembur atau jam kerja lebih” → “lembur atau melebihi jam kerja normal” (pemborosan dan pengulangan makna); “meningkatkan kesejahteraan karyawan dan meningkatkan produktivitas serta kepuasan kerja” → “meningkatkan kesejahteraan karyawan, produktivitas, dan kepuasan kerja”; “melakukan lokasi riset” → “melakukan riset”; “Setiawan (2008:83)” → “Menurut Setiawan (2008:83)” (kalimat belum punya subjek/keterangan).',
-     '<b>Hasil analisis laporan</b>: dari 48 butir pemeriksaan (8 unsur pada tiap bab), 42 butir ada temuan dan 6 butir tidak perlu dikoreksi. Kesimpulan: skripsi secara umum sudah memakai ragam tulis yang sesuai untuk karya ilmiah dan cukup baik, tetapi masih ada ketidaksesuaian pada huruf kapital, huruf miring, tanda baca, jenis kata, diksi, kata khusus, dan kalimat efektif.',
-     '<b>Saran</b>: lakukan penyuntingan (<i>proofreading</i>) sebelum naskah dikumpulkan dengan berpedoman pada EYD Edisi Kelima dan KBBI (terutama kapital, singkatan “PT” dan “dkk.”, kata depan “di”, dan istilah asing dicetak miring); biasakan membaca ulang, cek kebakuan lewat KBBI Daring, dan minta teman atau dosen menelaah naskah.'],
-  a:['<b>Langkah (sesuai tahapan di laporan)</b>: (1) membaca teks; (2) mengidentifikasi temuan kebahasaan; (3) mengelompokkan ke dalam 8 unsur; (4) memperbaiki dengan format Before–After–Ket; (5) menarik kesimpulan dan saran.',
-     '<b>Format jawaban</b>: <i>Before</i> (teks asli), <i>After</i> (teks perbaikan), <i>Ket</i> (alasan berdasarkan kaidah). Bisa juga dalam tabel: Unsur | Before | After | Ket.',
-     '<b>Contoh jawaban</b> — Unsur: kalimat efektif. Before: “Akibat dari kelebihan beban kerja maka karyawan sering bekerja dengan jam kerja lembur atau jam kerja lebih.” After: “Akibat beban kerja yang berlebihan, karyawan sering bekerja lembur atau melebihi jam kerja normal.” Ket: kalimat awal tidak efektif karena pemborosan kata dan pengulangan makna.',
-     '<b>Contoh jawaban</b> — Unsur: tanda baca. Before: “PT. Simed Prakarsa Indonesia”. After: “PT Simed Prakarsa Indonesia”. Ket: singkatan PT tidak memakai titik.',
-     'Hafalkan urutan 8 unsur: kapital, miring, tebal, jenis kata, tanda baca, diksi, kata khusus, kalimat efektif. Siapkan minimal satu contoh Before–After untuk tiap unsur, lalu tutup dengan kesimpulan dan saran.']}
+ {t:'Analisis struktur kebahasaan (Pengertian & Contoh)',
+  p:['<b>Pengertian Struktur Kebahasaan</b>: Struktur kebahasaan adalah tatanan atau susunan unsur-unsur bahasa—mulai dari ejaan (huruf &amp; tanda baca), kata, frasa, klausa, kalimat, hingga paragraf—yang saling terhubung untuk membentuk kesatuan makna yang logis, baku, dan efektif dalam sebuah teks.',
+     '<b>Pengertian Analisis Struktur Kebahasaan</b>: Kegiatan memeriksa, mengidentifikasi, dan memperbaiki ketepatan penerapan kaidah bahasa Indonesia (berpedoman pada <b>EYD Edisi Kelima</b> dan <b>KBBI</b>) dalam suatu naskah agar sesuai dengan ragam bahasa yang baik dan benar.',
+     '<b>Contoh 1 — Penulisan Huruf Kapital</b>:<br>• <i>Sebelum (Salah)</i>: “Penelitian ini membahas Sumber Daya Manusia Terhadap kinerja karyawan.”<br>• <i>Sesudah (Benar)</i>: “Penelitian ini membahas sumber daya manusia terhadap kinerja karyawan.”<br>• <i>Penjelasan</i>: Istilah umum di tengah kalimat dan kata depan (<i>terhadap</i>) ditulis dengan huruf kecil.',
+     '<b>Contoh 2 — Penulisan Huruf Miring (Istilah Asing)</b>:<br>• <i>Sebelum (Salah)</i>: “Perusahaan menggunakan software baru untuk mengukur job demands karyawan.”<br>• <i>Sesudah (Benar)</i>: “Perusahaan menggunakan <i>software</i> baru untuk mengukur <i>job demands</i> karyawan.”<br>• <i>Penjelasan</i>: Kata atau istilah bahasa asing yang belum diserap ke dalam bahasa Indonesia wajib dicetak miring.',
+     '<b>Contoh 3 — Kata Baku &amp; Kata Depan (Jenis Kata)</b>:<br>• <i>Sebelum (Salah)</i>: “Didalam penelitian ini, hakekat kinerja harus di pertimbangkan.”<br>• <i>Sesudah (Benar)</i>: “Di dalam penelitian ini, hakikat kinerja harus dipertimbangkan.”<br>• <i>Penjelasan</i>: Kata depan <i>di</i> (penunjuk tempat/posisi) ditulis terpisah (<i>di dalam</i>), imbuhan <i>di-</i> pada kata kerja ditulis serangkai (<i>dipertimbangkan</i>), dan bentuk baku menurut KBBI adalah <i>hakikat</i>.',
+     '<b>Contoh 4 — Tanda Baca &amp; Singkatan</b>:<br>• <i>Sebelum (Salah)</i>: “Menurut Sugiyono dkk, PT. Simed Prakarsa Indonesia memiliki 120 karyawan.”<br>• <i>Sesudah (Benar)</i>: “Menurut Sugiyono dkk., PT Simed Prakarsa Indonesia memiliki 120 karyawan.”<br>• <i>Penjelasan</i>: Singkatan <i>dkk.</i> diakhiri tanda titik, sedangkan singkatan nama badan hukum <i>PT</i> tidak memakai tanda titik.',
+     '<b>Contoh 5 — Diksi (Pilihan Kata) &amp; Kalimat Efektif</b>:<br>• <i>Sebelum (Tidak Efektif)</i>: “Dikarenakan jam kerja lembur atau jam kerja lebih, beberapa para ahli menyebut produktivitas bisa menurun.”<br>• <i>Sesudah (Efektif)</i>: “Oleh karena lembur yang melebihi jam kerja normal, beberapa ahli menyebut produktivitas dapat menurun.”<br>• <i>Penjelasan</i>: Menghilangkan pemborosan/pengulangan kata (<i>beberapa para ahli</i> → <i>beberapa ahli</i>) dan mengganti kata tidak baku (<i>dikarenakan</i> → <i>oleh karena</i>, <i>bisa</i> → <i>dapat</i>).'],
+  a:['<b>Struktur Jawaban UTS</b>: Mulai dengan menuliskan <b>pengertian struktur kebahasaan</b> dan <b>pengertian analisisnya</b> secara jelas, lalu sertakan <b>3–5 contoh perbaikan (Before → After)</b> beserta alasan kaidah EYD/KBBI-nya.',
+     'Gunakan format ringkas per contoh: <b>Unsur</b> → <b>Kalimat Awal</b> → <b>Perbaikan</b> → <b>Alasan Kaidah</b>.']}
  ]},
 {id:'bs',uts:'Rabu, 2 Des 2026 · 20.00 – 21.30 WIB',
  note:'Folder Drive Budaya Sunda masih kosong. Poin di bawah disusun dari catatan tugas di menu Tugas (Tugas 1, Tugas 2, film Paguyuban Pasundan) dan pengetahuan umum. Cocokkan nama, tahun, dan istilah dengan catatan kuliah serta tugas yang kamu tulis.',
@@ -4983,6 +4996,21 @@ function render(){
  document.querySelectorAll('#bjApp .bj-tabs button').forEach(function(b){b.onclick=function(){tab=b.dataset.t;render()}});
  document.querySelectorAll('#bjApp [data-j]').forEach(function(b){ b.onclick=function(){ var e=document.getElementById('bjs-'+b.dataset.j); if(e) e.scrollIntoView({behavior:'smooth',block:'start'}); }; });
  if(tab==='ks') ksBind();
+ /* v34: Tambahkan tombol ikon terjemahan 🌐 per poin pada Bahasa Inggris & ikat pencarian/huruf */
+ document.querySelectorAll('#bjApp .bj-tr-text').forEach(function(tr){
+  if(tr.previousElementSibling && tr.previousElementSibling.classList && tr.previousElementSibling.classList.contains('bj-tr-wrap')) return;
+  var wrap=document.createElement('span'); wrap.className='bj-tr-wrap';
+  var btn=document.createElement('button'); btn.type='button'; btn.className='bj-tr-btn active';
+  btn.innerHTML='🌐 Terjemahan';
+  btn.onclick=function(){
+    var hidden=tr.style.display==='none';
+    tr.style.display=hidden?'block':'none';
+    btn.classList.toggle('active',hidden);
+  };
+  wrap.appendChild(btn);
+  tr.parentNode.insertBefore(wrap,tr);
+ });
+ if(window.__bjApplySearch) window.__bjApplySearch();
  function upd(){ var a=answered[c.id]||{},n=0,ok=0; Object.keys(a).forEach(function(k){n++; if(a[k]===c.mcq[k][2])ok++;}); $('#bjSc').textContent='Terjawab '+n+'/'+c.mcq.length+' · Benar '+ok; }
  if(tab==='mcq'){
   var key=c.id; answered[key]=answered[key]||{};
@@ -4998,6 +5026,34 @@ function render(){
   upd();
  }
 }
+
+(function(){
+ var sec=$('#belajar'), sInp=$('#bjSearch'), fBtn=$('#bjFontBtn'), tBtn=$('#bjTrBtn');
+ if(fBtn){
+  fBtn.onclick=function(){
+   var on=sec.classList.toggle('bj-lg');
+   fBtn.classList.toggle('on',on);
+  };
+ }
+ if(tBtn){
+  tBtn.onclick=function(){
+   var hide=sec.classList.toggle('hide-tr');
+   tBtn.classList.toggle('on',!hide);
+   document.querySelectorAll('#bjApp .bj-tr-text').forEach(function(el){ el.style.display=hide?'none':'block'; });
+   document.querySelectorAll('#bjApp .bj-tr-btn').forEach(function(b){ b.classList.toggle('active',!hide); });
+  };
+ }
+ window.__bjApplySearch=function(){
+  if(!sInp) return;
+  var q=sInp.value.trim().toLowerCase();
+  document.querySelectorAll('#bjApp .bj-card').forEach(function(card,idx){
+   if(idx===0) return; // keep header card visible
+   var txt=card.textContent.toLowerCase();
+   card.style.display=(!q || txt.indexOf(q)>-1)?'':'none';
+  });
+ };
+ if(sInp){ sInp.addEventListener('input',window.__bjApplySearch); }
+})();
 render();
 })();
 </script>
