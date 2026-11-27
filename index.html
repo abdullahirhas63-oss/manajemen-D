@@ -737,6 +737,19 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 #jarvisPanel .jc input{flex:1;min-width:0;border:1px solid rgba(120,220,255,.35);border-radius:99px;padding:10px 14px;background:rgba(255,255,255,.08);color:#fff;font:inherit;outline:none}
 #jarvisPanel .jc button{border:0;border-radius:99px;padding:0 16px;font-weight:800;cursor:pointer;background:#1fb6e8;color:#04202c}#jarvisPanel .jc button:disabled{opacity:.5}
 @media(prefers-reduced-motion:reduce){#jarvisPanel *,#jarvisBtn *{animation:none!important}#jarvisPanel .boot div{width:100%}}
+/* v30: tur fitur J.A.R.V.I.S. */
+#jarvisPanel .tcard{border:1px solid rgba(127,227,255,.3);background:rgba(127,227,255,.1);border-radius:18px;padding:14px;margin-bottom:10px;animation:jvUp .45s both cubic-bezier(.32,1.25,.4,1)}
+#jarvisPanel .tcard .ti{font-size:2.1rem;line-height:1}
+#jarvisPanel .tcard b{display:block;font:800 1.05rem 'Sora',sans-serif;letter-spacing:.04em;color:#7fe3ff;margin:6px 0 4px}
+#jarvisPanel .tcard p{margin:0;line-height:1.5;font-size:.9rem}
+#jarvisPanel .tcard.talk{box-shadow:0 0 18px rgba(95,224,255,.55)}
+#jarvisPanel .tnav{display:flex;gap:8px;margin-bottom:8px}
+#jarvisPanel .tnav button{flex:1;border:0;border-radius:99px;padding:10px 6px;font-weight:800;cursor:pointer;background:#1fb6e8;color:#04202c}
+#jarvisPanel .tnav button.g{background:rgba(255,255,255,.14);color:#e8fbff}
+#jarvisPanel .tnav button:disabled{opacity:.4;cursor:default}
+#jarvisPanel .tbar{height:4px;border-radius:4px;background:rgba(255,255,255,.14);margin:0 0 10px;overflow:hidden}
+#jarvisPanel .tbar i{display:block;height:100%;background:#5fe0ff;box-shadow:0 0 8px #5fe0ff;transition:width .35s}
+
 
 /* ===== Rekap kas (tampilan baru) ===== */
 #kasRekap{position:fixed;inset:0;z-index:300;background:linear-gradient(180deg,var(--sky-50),#fff);display:flex;flex-direction:column;animation:rkIn .3s ease both}
@@ -1832,6 +1845,91 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
 .dt-acts button{background:rgba(255,255,255,.08);color:var(--ink)}
 .dt-box .imgs{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}.dt-box .imgs img{width:92px;height:92px;object-fit:cover;border-radius:12px;cursor:zoom-in}
 </style>
+<style>
+/* ===== Menu Belajar (ringkasan & latihan soal) ===== */
+#belajar .bj-nav{display:flex;gap:6px;overflow-x:auto;padding:4px 2px 10px;margin:0 0 6px}
+#belajar .bj-nav button{flex:none;border:1px solid rgba(127,127,127,.3);background:rgba(127,127,127,.08);color:inherit;padding:8px 13px;border-radius:99px;font:600 .82rem inherit;cursor:pointer;white-space:nowrap}
+#belajar .bj-nav button.on{background:#2f9fe6;color:#fff;border-color:#2f9fe6}
+#belajar .bj-nav button.em{opacity:.6}
+#belajar .bj-card{background:rgba(127,127,127,.08);border:1px solid rgba(127,127,127,.25);border-radius:18px;padding:16px;margin:0 0 12px}
+#belajar .bj-card h3{margin:0 0 8px;font-size:1.02rem}
+#belajar .bj-meta{opacity:.75;font-size:.86rem;margin:4px 0}
+#belajar .bj-meta a{color:inherit;text-decoration:underline}
+#belajar .bj-tabs{display:flex;gap:6px;margin:10px 0}
+#belajar .bj-tabs button{flex:1;border:1px solid rgba(127,127,127,.3);background:rgba(127,127,127,.08);color:inherit;padding:9px 4px;border-radius:12px;cursor:pointer;font:600 .85rem inherit}
+#belajar .bj-tabs button.on{background:rgba(47,159,230,.25);border-color:#2f9fe6}
+#belajar ul{margin:6px 0 0;padding-left:20px}#belajar li{margin:4px 0;line-height:1.5}
+#belajar .bj-q .t{font-weight:700;margin-bottom:8px}
+#belajar .bj-o{display:block;width:100%;text-align:left;border:1px solid rgba(127,127,127,.3);background:rgba(127,127,127,.06);color:inherit;padding:9px 12px;border-radius:12px;margin:6px 0;cursor:pointer;font:inherit;font-size:.92rem}
+#belajar .bj-o:hover:not(:disabled){background:rgba(47,159,230,.18)}
+#belajar .bj-o.ok{background:rgba(22,160,106,.25);border-color:#16a06a}
+#belajar .bj-o.no{background:rgba(214,69,93,.25);border-color:#d6455d}
+#belajar .bj-exp{display:none;margin-top:6px;padding:9px 12px;border-radius:12px;background:rgba(127,127,127,.12);font-size:.88rem}
+#belajar .bj-score{position:sticky;bottom:90px;display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:14px;background:#2f9fe6;color:#fff;font-weight:600}
+#belajar .bj-score button{background:#fff;color:#14425f;border:0;border-radius:9px;padding:6px 12px;cursor:pointer;font-weight:700}
+#belajar details{border:1px solid rgba(127,127,127,.3);border-radius:12px;padding:10px 12px;margin:8px 0}
+#belajar summary{cursor:pointer;font-weight:600}
+#belajar details>div{margin-top:8px;opacity:.9}
+#belajar .bj-note{background:rgba(241,196,15,.15);border:1px solid rgba(241,196,15,.4);border-radius:12px;padding:9px 12px;font-size:.86rem;margin:8px 0}
+#belajar table{border-collapse:collapse;width:100%;font-size:.84rem;margin-top:8px}
+#belajar td,#belajar th{border:1px solid rgba(127,127,127,.3);padding:5px 7px;text-align:left}
+#belajar .bj-empty{text-align:center;padding:24px 10px;opacity:.85}
+
+/* v31: kisi-kisi, chip pertemuan, filter soal */
+#belajar .bj-tabs{flex-wrap:wrap}
+#belajar .bj-tabs button{min-width:calc(50% - 6px)}
+@media(min-width:700px){#belajar .bj-tabs button{min-width:0}}
+#belajar .bj-chips{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 10px;margin:0 0 4px}
+#belajar .bj-chips button{flex:none;border:1px solid rgba(127,127,127,.3);background:rgba(127,127,127,.08);color:inherit;padding:6px 12px;border-radius:99px;font:600 .78rem inherit;cursor:pointer;white-space:nowrap}
+#belajar .bj-chips button.on{background:rgba(47,159,230,.25);border-color:#2f9fe6}
+#belajar .bj-tag{display:inline-block;font:700 .68rem inherit;padding:2px 8px;border-radius:99px;background:rgba(47,159,230,.22);border:1px solid rgba(47,159,230,.5);margin-right:6px;vertical-align:middle}
+#belajar .bj-prog{height:8px;border-radius:8px;background:rgba(127,127,127,.2);overflow:hidden;margin:10px 0 6px}
+#belajar .bj-prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#2f9fe6,#16a06a);transition:width .3s}
+#belajar .bj-ks{display:flex;align-items:flex-start;gap:10px;padding:10px 2px;border-top:1px solid rgba(127,127,127,.18);cursor:pointer;flex-wrap:wrap}
+#belajar .bj-ks:first-of-type{border-top:0}
+#belajar .bj-ks input{margin-top:2px;width:18px;height:18px;accent-color:#2f9fe6;flex:none}
+#belajar .bj-ks .tx{flex:1 1 220px;line-height:1.45;min-width:0}
+#belajar .bj-ks .bd{font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(127,127,127,.18);white-space:nowrap}
+#belajar .bj-ks input:checked+.tx{opacity:.55;text-decoration:line-through}
+#belajar .bj-btn{display:inline-block;margin-top:10px;background:#2f9fe6;color:#fff;padding:9px 14px;border-radius:12px;text-decoration:none;font-weight:600}
+/* ===== Belajar: tampilan per hari UTS ===== */
+#belajar .bj-days{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 10px}
+#belajar .bj-days button{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;border:1px solid rgba(127,127,127,.3);background:rgba(127,127,127,.08);color:inherit;padding:10px 12px;border-radius:16px;cursor:pointer;font:inherit;transition:transform .2s,background .2s,border-color .2s}
+#belajar .bj-days button b{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;opacity:.7}
+#belajar .bj-days button span{font-weight:700;font-size:1.05rem}
+#belajar .bj-days button small{font-size:.78rem;opacity:.75}
+#belajar .bj-days button:hover{transform:translateY(-2px)}
+#belajar .bj-days button.on{background:#2f9fe6;border-color:#2f9fe6;color:#fff}
+#belajar .bj-days button.on b,#belajar .bj-days button.on small{opacity:.9}
+#belajar .bj-slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0 0 12px}
+#belajar .bj-slots button{display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;border:1px solid rgba(127,127,127,.3);background:rgba(127,127,127,.06);color:inherit;padding:11px 13px;border-radius:16px;cursor:pointer;font:inherit;min-width:0;transition:transform .2s,background .2s,border-color .2s}
+#belajar .bj-slots button small{font-size:.74rem;font-weight:700;color:#2f9fe6}
+#belajar .bj-slots button b{font-size:.95rem;line-height:1.25}
+#belajar .bj-slots button span{font-size:.76rem;opacity:.7}
+#belajar .bj-slots button:hover{transform:translateY(-2px)}
+#belajar .bj-slots button.on{background:rgba(47,159,230,.22);border-color:#2f9fe6}
+@media(max-width:560px){#belajar .bj-days{grid-template-columns:repeat(2,minmax(0,1fr))}#belajar .bj-slots{grid-template-columns:1fr}}
+
+/* ===== Beranda: semua bisa diklik ===== */
+#beranda [data-link]{cursor:pointer;-webkit-tap-highlight-color:transparent}
+#beranda .dcard[data-link],#beranda .ann[data-link]{transition:transform .2s,box-shadow .2s}
+#beranda .dcard[data-link]:hover,#beranda .ann[data-link]:hover{transform:translateY(-3px)}
+#beranda [data-link]:focus-visible{outline:2px solid #2f9fe6;outline-offset:3px}
+#beranda .hlink{display:inline;border:0;background:none;padding:0;margin:0;font:inherit;color:inherit;font-weight:700;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;cursor:pointer}
+#beranda .hlink:hover{text-decoration-style:solid}
+#beranda .qmenu{margin:22px 0 6px}
+#beranda .qmenu h3{margin:0 0 10px;font-size:1.02rem}
+#beranda .qgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+#beranda .qgrid button{display:flex;align-items:center;gap:10px;text-align:left;border:1px solid rgba(127,127,127,.28);background:rgba(127,127,127,.09);color:inherit;padding:12px 14px;border-radius:18px;font:inherit;cursor:pointer;transition:transform .2s,background .2s,border-color .2s;min-width:0}
+#beranda .qgrid button:hover{transform:translateY(-3px);background:rgba(47,159,230,.16);border-color:#2f9fe6}
+#beranda .qgrid .qi{font-size:1.5rem;line-height:1;flex:none}
+#beranda .qgrid b{display:block;font-size:.92rem}
+#beranda .qgrid small{display:block;opacity:.7;font-size:.74rem;line-height:1.25}
+@media(max-width:820px){#beranda .qgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+#beranda>.qmenu{display:block;padding:0}
+#beranda .qgrid small{text-transform:none;letter-spacing:0;font-weight:500;font-size:.74rem;color:inherit;opacity:.7}
+#beranda .qgrid b{text-transform:none;letter-spacing:0;color:inherit}
+</style>
 </head>
 <body class="on-home">
 <div class="bgfx" aria-hidden="true"><i></i><b></b></div>
@@ -1860,7 +1958,7 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
   <div class="gtop" id="gtop">
     <div class="gbrand"><img src="img/logo.png" alt=""><span><b>Manajemen D</b><small>STIE PASUNDAN BANDUNG</small></span></div>
     <nav aria-label="Navigasi utama">
-      <button data-go="beranda" class="on">Beranda</button><button data-go="struktur">Struktur</button><button data-go="mahasiswa">Mahasiswa</button><button data-go="jadwal">Jadwal</button><button data-go="informasi">Informasi</button><button data-go="galeri">Galeri</button>
+      <button data-go="beranda" class="on">Beranda</button><button data-go="struktur">Struktur</button><button data-go="mahasiswa">Mahasiswa</button><button data-go="jadwal">Jadwal</button><button data-go="informasi">Informasi</button><button data-go="galeri">Galeri</button><button data-go="belajar">Belajar</button>
     </nav>
     <div class="gright">
       <span class="gpill hide-m" id="gtClock"><i class="dot"></i><span id="gtClockT">--:--</span></span>
@@ -1871,7 +1969,7 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
   </div>
   <div class="gm" id="gmSet" aria-hidden="false"></div><div class="gm" id="gmAcc"></div>
   <nav class="gdock" id="gdock" aria-label="Navigasi bawah">
-    <button data-go="beranda" class="on"><span>🏠</span>Beranda</button><button data-go="struktur"><span>👥</span>Struktur</button><button data-go="mahasiswa"><span>🎓</span>Mahasiswa</button><button data-go="jadwal"><span>🗓️</span>Jadwal</button><button data-go="informasi"><span>📣</span>Info</button><button data-go="galeri"><span>🖼️</span>Galeri</button>
+    <button data-go="beranda" class="on"><span>🏠</span>Beranda</button><button data-go="struktur"><span>👥</span>Struktur</button><button data-go="mahasiswa"><span>🎓</span>Mahasiswa</button><button data-go="jadwal"><span>🗓️</span>Jadwal</button><button data-go="informasi"><span>📣</span>Info</button><button data-go="galeri"><span>🖼️</span>Galeri</button><button data-go="belajar"><span>📚</span>Belajar</button>
   </nav>
   <header class="mtop"><button id="sideBtn" type="button" aria-label="Buka menu (klik logo STIE Pasundan)" aria-expanded="false"><img src="img/logo.png" alt="Logo STIE Pasundan"></button><span class="mt-t">Manajemen D<small>KLIK LOGO UNTUK MENU</small></span><span class="mt-r"><button class="mt-ic" id="mtSet" type="button" aria-label="Pengaturan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></button><button class="mt-ic" id="mtAcc" type="button" aria-label="Akun"></button></span></header>
   <button class="hidden" id="jarvisBtn" type="button" aria-label="Buka J.A.R.V.I.S."><span class="rg"></span><span class="rg"></span><span class="rg"></span><img src="img/jarvis.png" alt="J.A.R.V.I.S."><span class="bd ok" id="jvBd">✓</span></button><div id="jarvisPanel" role="dialog" aria-label="J.A.R.V.I.S."><div class="jh"><img src="img/jarvis.png" alt=""><div><b>J.A.R.V.I.S.</b><small>Asisten AI · Siswa &amp; Editor</small></div><button class="jx jb2" id="jvBack" type="button" aria-label="Kembali ke pilihan" style="display:none">←</button><button class="jx" id="jvX" type="button" aria-label="Tutup">✕</button></div><div class="jb" id="jvBody"></div><form class="jc" id="jvChat" style="display:none"><button id="jvMic" type="button" class="jv-ic" aria-label="Bicara" title="Bicara ke Jarvis">🎤</button><input id="jvIn" type="text" maxlength="1500" placeholder="Ketik atau tekan 🎤…" autocomplete="off"><button id="jvSpk" type="button" class="jv-ic on" aria-label="Suara Jarvis" title="Suara Jarvis aktif/mati">🔊</button><button id="jvSend" type="submit">Kirim</button></form><div class="jf" style="display:none"><button id="jvScan" type="button">🔄 Pindai ulang</button><button class="g" id="jvCopy" type="button">📋 Salin laporan</button></div></div>
@@ -1887,6 +1985,7 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
       <button data-go="jadwal">🗓️ Jadwal</button>
       <button data-go="informasi">📣 Informasi</button>
       <button data-go="galeri">🖼️ Galeri</button>
+      <button data-go="belajar">📚 Belajar</button>
       <button class="hidden" id="navAudit" type="button" data-admin>📋 Log Aktivitas</button>
       <button id="navRekap" type="button">📊 Rekapan Kas</button>
       <button id="navAcc" type="button"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg> Akun</button>
@@ -1898,7 +1997,7 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
 
   <main>
     <section id="beranda" class="hero view active">
-      <div class="ann" id="ann">
+      <div class="ann" id="ann" data-link="informasi" role="button" tabindex="0" aria-label="Buka informasi">
         <div class="spy" aria-hidden="true"><img src="img/spiderman.png" alt=""></div>
         <div class="bub">
           <div class="lbl">📢 PENGUMUMAN</div>
@@ -1910,22 +2009,35 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
       <div class="dash" id="dash">
         <div class="dgreet"><div><h2 id="dGreet">Selamat datang</h2><p id="dDate"></p></div></div>
         <div class="kpis">
-          <div class="dcard kpi"><div class="kh"><span data-t>MAHASISWA</span><span class="ki">🎓</span></div><div class="kv" id="kMhs">–<small data-t>orang</small></div><div class="ks" id="kMhsS">memuat…</div><div class="kb" id="kMhsB"></div></div>
-          <div class="dcard kpi"><div class="kh"><span data-t>MATA KULIAH</span><span class="ki">📚</span></div><div class="kv" id="kMk">–<small data-t>mata kuliah</small></div><div class="ks" data-t>Senin – Kamis · RG 401</div></div>
-          <div class="dcard kpi"><div class="kh"><span data-t>KULIAH HARI INI</span><span class="ki">🗓️</span></div><div class="kv" id="kToday">–<small data-t>sesi</small></div><div class="ks" id="kTodayS"></div></div>
-          <div class="dcard kpi"><div class="kh"><span data-t>MULAI KELAS</span><span class="ki">🕕</span></div><div class="kv">18.10<small>WIB</small></div><div class="ks" data-t>Sesi pertama, malam hari</div></div>
+          <div class="dcard kpi" data-link="mahasiswa" role="button" tabindex="0" aria-label="Buka daftar mahasiswa"><div class="kh"><span data-t>MAHASISWA</span><span class="ki">🎓</span></div><div class="kv" id="kMhs">–<small data-t>orang</small></div><div class="ks" id="kMhsS">memuat…</div><div class="kb" id="kMhsB"></div></div>
+          <div class="dcard kpi" data-link="jadwal" role="button" tabindex="0" aria-label="Buka jadwal"><div class="kh"><span data-t>MATA KULIAH</span><span class="ki">📚</span></div><div class="kv" id="kMk">–<small data-t>mata kuliah</small></div><div class="ks" data-t>Senin – Kamis · RG 401</div></div>
+          <div class="dcard kpi" data-link="jadwal" role="button" tabindex="0" aria-label="Buka jadwal"><div class="kh"><span data-t>KULIAH HARI INI</span><span class="ki">🗓️</span></div><div class="kv" id="kToday">–<small data-t>sesi</small></div><div class="ks" id="kTodayS"></div></div>
+          <div class="dcard kpi" data-link="jadwal" role="button" tabindex="0" aria-label="Buka jadwal"><div class="kh"><span data-t>MULAI KELAS</span><span class="ki">🕕</span></div><div class="kv">18.10<small>WIB</small></div><div class="ks" data-t>Sesi pertama, malam hari</div></div>
         </div>
         <div class="drow">
-          <div class="dcard"><h3><span data-t>Beban Kuliah Mingguan</span> <small data-t>jam / hari</small></h3><div class="dsub" data-t>Total jam tatap muka tiap hari kuliah</div><div class="bars" id="dBars"></div><div class="blabs" id="dLabs"></div></div>
-          <div class="dcard"><h3 id="dTlH">Hari Ini</h3><div class="dsub" id="dTlS"></div><ul class="tl" id="dTl"></ul></div>
+          <div class="dcard" data-link="jadwal" role="button" tabindex="0" aria-label="Buka jadwal"><h3><span data-t>Beban Kuliah Mingguan</span> <small data-t>jam / hari</small></h3><div class="dsub" data-t>Total jam tatap muka tiap hari kuliah</div><div class="bars" id="dBars"></div><div class="blabs" id="dLabs"></div></div>
+          <div class="dcard" data-link="jadwal" role="button" tabindex="0" aria-label="Buka jadwal"><h3 id="dTlH">Hari Ini</h3><div class="dsub" id="dTlS"></div><ul class="tl" id="dTl"></ul></div>
         </div>
       </div>
       <div>
         <img class="logo" src="img/logo.png" alt="Logo STIE Pasundan Bandung">
         <small>STIE Pasundan Bandung · Kelas Karyawan 2026</small>
         <h1>Halo, cees Manajemen D!</h1>
-        <p>Di sini ada struktur kelas, daftar teman sekelas, jadwal, informasi UTS/UAS dan tugas, foto-foto seru, dan uang kas.</p>
+        <p>Di sini ada <button type="button" class="hlink" data-link="struktur">struktur kelas</button>, daftar <button type="button" class="hlink" data-link="mahasiswa">teman sekelas</button>, <button type="button" class="hlink" data-link="jadwal">jadwal</button>, <button type="button" class="hlink" data-link="informasi">informasi UTS/UAS dan tugas</button>, <button type="button" class="hlink" data-link="galeri">foto-foto seru</button>, <button type="button" class="hlink" data-link="belajar">bahan belajar</button>, dan <button type="button" class="hlink" data-link="kas">uang kas</button>.</p>
         <div class="chips"><button type="button" class="chip go" data-chip="s1">📚 Manajemen S-1</button><button type="button" class="chip go" data-chip="malam">🌙 kelas malam</button><button type="button" class="chip go" data-chip="r401">🏫 Ruang kelas 401</button></div>
+      </div>
+      <div class="qmenu">
+        <h3>Menu cepat</h3>
+        <div class="qgrid">
+          <button type="button" data-link="belajar"><span class="qi">📚</span><span><b>Belajar</b><small>Ringkasan &amp; latihan soal per hari UTS</small></span></button>
+          <button type="button" data-link="informasi"><span class="qi">📣</span><span><b>Informasi</b><small>UTS, UAS &amp; deadline tugas</small></span></button>
+          <button type="button" data-link="jadwal"><span class="qi">🗓️</span><span><b>Jadwal</b><small>Jadwal kuliah Senin – Kamis</small></span></button>
+          <button type="button" data-link="mahasiswa"><span class="qi">🎓</span><span><b>Mahasiswa</b><small>Daftar teman sekelas</small></span></button>
+          <button type="button" data-link="struktur"><span class="qi">👥</span><span><b>Struktur</b><small>Pengurus kelas</small></span></button>
+          <button type="button" data-link="galeri"><span class="qi">🖼️</span><span><b>Galeri</b><small>Foto &amp; buku kenangan</small></span></button>
+          <button type="button" data-link="rekap"><span class="qi">📊</span><span><b>Rekapan Kas</b><small>Rekap uang kelas</small></span></button>
+          <button type="button" data-link="kas"><span class="qi">💸</span><span><b>Uang Kas</b><small>Rp5.000 per minggu</small></span></button>
+        </div>
       </div>
       <div class="polas">
         <figure class="pola a" data-src="img/foto1.jpg"><img src="img/foto1.jpg" alt="Foto bersama seluruh kelas Manajemen D"><span>satu kelas, satu frame</span></figure>
@@ -2013,6 +2125,13 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
           </div>
         </div>
       </div>
+    </section>
+
+    <section id="belajar" class="panel view">
+      <div class="sec-title"><h2>Belajar</h2><p>Ringkasan materi &amp; latihan soal, dibagi per hari UTS</p></div>
+      <div class="bj-days" id="bjDays"></div>
+      <div class="bj-slots" id="bjSlots"></div>
+      <div id="bjApp"></div>
     </section>
   </main>
 
@@ -3563,6 +3682,7 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
     function menu(){ clearTimeout(bt); var o=pan.querySelector('.scanline'); if(o) o.remove(); setMode('menu');
       body.innerHTML='<div class="say">Selamat datang kembali, '+sapa()+'. Apa yang ingin Anda lakukan?</div>'+
         '<button class="jopt" data-m="chat" type="button"><span>💬</span><div><b>Mengobrol</b><small>Ketik pesan, Jarvis langsung membawa Anda ke J.A.R.V.I.S. AI</small></div></button>'+
+        '<button class="jopt" data-m="tour" type="button"><span>🧭</span><div><b>Kenalan dengan fitur web</b><small>Jarvis memperkenalkan semua menu dan fitur satu per satu</small></div></button>'+
         '<button class="jopt" data-m="wa" type="button"><span>📲</span><div><b>Hubungi Boss Stark Abdullah</b><small>Chat langsung lewat WhatsApp</small></div></button>'+
         (canEdit()?'<button class="jopt" data-m="report" type="button"><span>🛠️</span><div><b>Pelaporan masalah</b><small>Pindai sistem website dan lihat masalahnya</small></div></button>':''); }
     function say(t,c){ var d=document.createElement('div'); d.className='cm '+c; d.textContent=t; body.appendChild(d); body.scrollTop=body.scrollHeight; return d; }
@@ -3599,7 +3719,46 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
       var steps=['MENGAKTIFKAN VOICE…','KALIBRASI SUARA…','MENYAMBUNGKAN AI…','J.A.R.V.I.S. ONLINE'],n=0,tt=$('#jvT'); inp.disabled=snd.disabled=true;
       (function nx(){ if(tt&&steps[n]) tt.textContent=steps[n]; n++; if(n<=steps.length){ cst=setTimeout(nx,520); } else { var st=body.querySelector('.jv-start'); if(st) st.classList.add('out');
         cst=setTimeout(function(){ body.innerHTML=''; inp.disabled=false; snd.disabled=false; var g=say('Siap, '+sapa()+'. Ketik pesan Anda, saya akan membawa Anda ke J.A.R.V.I.S. AI.','j'); talk(g.textContent,g); inp.focus(); },420); } })(); }
-    body.addEventListener('click',function(e){ var b=e.target.closest('[data-m]'); if(!b) return; if(b.dataset.m==='wa'){ openWa();  } else if(b.dataset.m==='report'){ if(!canEdit()) return; setMode('report'); boot(); } else chatStart(); });
+    /* v30: tur fitur - Jarvis memperkenalkan fitur-fitur website */
+    var TOUR=[
+      {i:'🏠',t:'Beranda',s:'beranda',d:'Halaman utama berisi pengumuman kelas, kartu info kecil (Manajemen S-1, kelas malam, Ruang kelas 401) yang bisa diketuk, dan Spiderman si penjaga kelas.'},
+      {i:'👥',t:'Struktur',s:'struktur',d:'Susunan pengurus kelas dan penasihat lengkap dengan foto. Kalau foto belum ada, otomatis tampil inisial nama. Editor bisa mengubah foto, nama, jabatan, dan kelompok.'},
+      {i:'🎓',t:'Mahasiswa',s:'mahasiswa',d:'Daftar teman sekelas Manajemen S-1 Kelas Karyawan 2026 D. Editor bisa menambah, mengubah, atau menghapus data.'},
+      {i:'🗓️',t:'Jadwal',s:'jadwal',d:'Jadwal kuliah Senin sampai Kamis di RG 401. Ketuk salah satu mata kuliah untuk melihat materinya langsung dari Google Drive.'},
+      {i:'📣',t:'Informasi',s:'informasi',d:'Jadwal UTS, UAS, dan deadline tugas dikumpulkan di satu tempat supaya tidak ada yang terlewat.'},
+      {i:'🖼️',t:'Galeri',s:'galeri',d:'Foto-foto kenangan kelas. Ketuk foto untuk memperbesar, dan ada Buku Kenangan yang halamannya bisa dibalik.'},
+      {i:'📚',t:'Belajar',s:'belajar',d:'Ringkasan materi per pertemuan, soal pilihan ganda dengan pembahasan dan filter pertemuan, soal esai, serta kisi-kisi dengan centang progres belajar untuk tiap mata kuliah.'},
+      {i:'💸',t:'Uang Kas',b:'#navKas',d:'Pantau iuran kas kelas: siapa yang sudah membayar dan kondisi saldonya.'},
+      {i:'📊',t:'Rekapan Kas',b:'#navRekap',d:'Rekap pemasukan dan pengeluaran kas dalam bentuk ringkas dan mudah dibaca.'},
+      {i:'👤',t:'Akun',b:'#navAcc',d:'Atur profil dan foto akunmu. Foto ini juga muncul di ikon akun pada bagian atas.'},
+      {i:'⚙️',t:'Pengaturan',b:'#navSet',d:'Sesuaikan tampilan dan pilihan website agar lebih nyaman dipakai.'},
+      {i:'📋',t:'Log Aktivitas',b:'#navAudit',ed:1,d:'Khusus editor: riwayat perubahan data di website, jadi mudah ditelusuri siapa mengubah apa.'},
+      {i:'🤖',t:'J.A.R.V.I.S. (saya)',d:'Saya bisa mengobrol dan menghubungkan Anda ke Gemini AI, menerima perintah suara lewat mikrofon, membacakan jawaban, membuka aplikasi (contoh: ketik buka TikTok), menghubungkan Anda ke Boss Stark Abdullah lewat WhatsApp, dan untuk editor, memindai masalah website.'}
+    ], ti=0;
+    function tourItems(){ return TOUR.filter(function(x){ return !x.ed||canEdit(); }); }
+    function tourGo(x){
+      if(x.s){ var nb=document.querySelector('nav [data-go="'+x.s+'"]'); if(nb) nb.click(); return; }
+      if(x.b){ var tb=document.querySelector(x.b); if(!tb) return; pan.classList.remove('show'); clearTimeout(cst); stopTalk(); setTimeout(function(){ tb.click(); },250); }
+    }
+    function tourList(){ clearTimeout(bt); clearTimeout(cst); stopTalk(); setMode('tour'); var L=tourItems();
+      body.innerHTML='<div class="say">Dengan senang hati, '+esc(sapa())+'. Website ini punya '+L.length+' fitur utama. Mau saya pandu satu per satu, atau pilih langsung yang ingin dilihat?</div>'+
+        '<button class="jopt" data-tn="start" type="button"><span>▶️</span><div><b>Mulai tur dipandu</b><small>Saya jelaskan tiap fitur dengan suara dan buka menunya</small></div></button>'+
+        L.map(function(x,k){ return '<button class="jopt" data-tg="'+k+'" type="button"><span>'+x.i+'</span><div><b>'+esc(x.t)+'</b><small>'+esc(x.d.length>70?x.d.slice(0,68)+'…':x.d)+'</small></div></button>'; }).join(''); }
+    function tourStep(k){ var L=tourItems(); if(k<0) k=0; if(k>=L.length){ tourDone(); return; } ti=k; var x=L[k];
+      var open=(x.s||x.b)?'<button type="button" data-tn="open">Buka menu</button>':'';
+      body.innerHTML='<div class="say">Fitur '+(k+1)+' dari '+L.length+'</div><div class="tbar"><i style="width:'+Math.round((k+1)/L.length*100)+'%"></i></div>'+
+        '<div class="tcard" id="tcard"><div class="ti">'+x.i+'</div><b>'+esc(x.t)+'</b><p>'+esc(x.d)+'</p></div>'+
+        '<div class="tnav"><button type="button" class="g" data-tn="prev"'+(k?'':' disabled')+'>← Kembali</button>'+open+'<button type="button" data-tn="next">'+(k===L.length-1?'Selesai ✓':'Lanjut →')+'</button></div>'+
+        '<div class="tnav"><button type="button" class="g" data-tn="list">Lihat semua fitur</button></div>';
+      var tc=body.querySelector('#tcard'); talk(x.t+'. '+x.d,tc); if(x.s) tourGo(x); }
+    function tourDone(){ stopTalk(); body.innerHTML='<div class="say">Itu semua fitur yang ada, '+esc(sapa())+'. Kalau ada yang ingin ditanyakan, pilih Mengobrol dan saya siap membantu.</div>'+
+        '<div class="tnav"><button type="button" class="g" data-tn="list">Lihat daftar fitur</button><button type="button" data-tn="chat">💬 Mengobrol</button></div>'; talk('Itu semua fitur yang ada. Kalau ada yang ingin ditanyakan, pilih Mengobrol dan saya siap membantu.'); }
+    body.addEventListener('click',function(e){
+      var g=e.target.closest('[data-tg]'); if(g){ tourStep(+g.dataset.tg); return; }
+      var n=e.target.closest('[data-tn]'); if(!n) return; var a=n.dataset.tn;
+      if(a==='start') tourStep(0); else if(a==='next') tourStep(ti+1); else if(a==='prev') tourStep(ti-1); else if(a==='list') tourList();
+      else if(a==='chat') chatStart(); else if(a==='open'){ var x=tourItems()[ti]; if(x) tourGo(x); } });
+    body.addEventListener('click',function(e){ var b=e.target.closest('[data-m]'); if(!b) return; if(b.dataset.m==='wa'){ openWa();  } else if(b.dataset.m==='tour'){ tourList(); } else if(b.dataset.m==='report'){ if(!canEdit()) return; setMode('report'); boot(); } else chatStart(); });
     back.addEventListener('click',function(){ clearTimeout(cst); stopTalk(); if(rec) rec.stop(); inp.disabled=snd.disabled=false; menu(); });
     var APPS={tiktok:['TikTok','https://www.tiktok.com/'],youtube:['YouTube','https://www.youtube.com/'],instagram:['Instagram','https://www.instagram.com/'],ig:['Instagram','https://www.instagram.com/'],facebook:['Facebook','https://www.facebook.com/'],fb:['Facebook','https://www.facebook.com/'],whatsapp:['WhatsApp','https://web.whatsapp.com/'],wa:['WhatsApp','https://web.whatsapp.com/'],telegram:['Telegram','https://web.telegram.org/'],twitter:['X','https://x.com/'],x:['X','https://x.com/'],spotify:['Spotify','https://open.spotify.com/'],google:['Google','https://www.google.com/'],gmail:['Gmail','https://mail.google.com/'],drive:['Google Drive','https://drive.google.com/'],maps:['Google Maps','https://maps.google.com/'],classroom:['Google Classroom','https://classroom.google.com/']};
     function openCmd(t){ var s=t.toLowerCase().replace(/[.!?]+$/,'').replace(/^\s*(?:halo|hai|hi|hey)?[\s,]*jarvis[\s,]*/,'');
@@ -3646,6 +3805,7 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
       if(ap){ try{ window.open(ap[1],'_blank','noopener,noreferrer'); }catch(x){}
         var g=say('Baik, '+sapa()+'. Membuka '+ap[0]+'. ','j'); var a=document.createElement('a'); a.href=ap[1]; a.target='_blank'; a.rel='noopener noreferrer'; a.textContent='Ketuk di sini bila belum terbuka.'; a.style.color='inherit'; a.style.textDecoration='underline'; g.appendChild(a);
         talk('Baik, '+sapa()+'. Membuka '+ap[0]+'.',g); body.scrollTop=body.scrollHeight; return; }
+      if(/(kenalkan|perkenalkan|kenalan|jelaskan|sebutkan|apa saja|ada apa|tur|tour|panduan).{0,30}(fitur|menu|web|website|situs)|(fitur|menu).{0,20}(web|website|situs|ini)|apa (yang )?bisa (kamu|jarvis|dilakukan)/i.test(t)){ var gt=say('Baik, '+sapa()+'. Saya akan memperkenalkan fitur-fitur website ini.','j'); talk('Baik, '+sapa()+'. Saya akan memperkenalkan fitur fitur website ini.',gt); setTimeout(tourList,900); return; }
       if(GEMINI){ var gg=say('Baik, '+sapa()+'. Menghubungkan ke J.A.R.V.I.S. AI…','j'); talk('Baik, '+sapa()+'. Menghubungkan ke J.A.R.V.I.S. AI.',gg); warp(t); return; }
       busy=true; snd.disabled=true; var w=say('Jarvis sedang berpikir…','j');
       var hd={'Content-Type':'application/json','X-Requested-With':'kelas'}; try{ var tk=sessionStorage.getItem(JVK); if(tk) hd['X-Jarvis-Token']=tk; }catch(x){}
@@ -3968,6 +4128,647 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
 
   applyPrefs(); applyLang(); refreshAcc(); setInterval(tick,30000);
   window.__kelasPref=function(){return P;};
+})();
+</script>
+<script>
+(function(){
+var D='https://drive.google.com/drive/folders/',S='?usp=sharing';
+var C=[
+/* ============ PENGANTAR BISNIS ============ */
+{id:'pb',n:'Pengantar Bisnis',h:'Rabu',d:'Adhie Fasha Nurhadian, S.E., M.M.',l:'1N52rp996Qh5LjU6OA0ouyb4gT-qd7ijm',
+src:['1. Memahami Sistem Bisnis','2. Menjalankan Bisnis Secara Etis & Bertanggung Jawab','3. Kewirausahaan & Kepemilikan Bisnis Baru','4. Memahami Konteks Bisnis Global','5. Memahami Lingkungan Bisnis'],
+sum:[
+{h:'1. Memahami Sistem Bisnis',i:[
+'<b>Bisnis</b>: organisasi yang menyediakan barang/jasa untuk dijual dengan tujuan laba (Griffin & Ebert); menciptakan nilai lewat barang/jasa untuk memenuhi kebutuhan masyarakat.',
+'<b>Revolusi</b>: Industri I (abad 18, mesin uap James Watt) → Industri II (konsep korporasi & manajemen Taylor) → Revolusi Informasi (komputer & internet, kekuatan di pemilik pengetahuan).',
+'<b>Fungsi bisnis</b>: Keuangan (cari dana), Produksi (ciptakan barang/jasa), Pemasaran (informasikan produk, kenali keinginan konsumen), Pengelolaan SDM (cari & kembangkan tenaga kerja).',
+'<b>5 sumber daya</b>: tenaga kerja, modal, wirausahawan (lihat peluang & tanggung risiko), sumber daya fisik, sumber daya informasi.',
+'<b>Sistem ekonomi</b>: terpimpin, pasar, pasar campuran (juga dibahas: sosialisme, privatisasi).',
+'<b>Hukum permintaan</b>: harga turun → pembeli membeli lebih banyak. <b>Hukum penawaran</b>: harga naik → produsen menawarkan lebih banyak.',
+'<b>Circular flow 3 sektor</b>: melibatkan RTP, RTK, RTN; pemerintah memperoleh pemasukan dari pajak dan membelanjakannya di pasar faktor produksi & pasar barang.',
+'<b>Jenis bisnis</b>: manufaktur, jasa, pengecer & distributor, pertanian/pertambangan, finansial, informasi, utilitas, real estate, transportasi.']},
+{h:'2. Etika Bisnis & Tanggung Jawab Sosial',i:[
+'<b>Etika bisnis</b>: prinsip yang harus diikuti saat menjalankan bisnis. <b>Tanggung jawab sosial</b>: pengakuan bahwa keputusan bisnis memengaruhi masyarakat dan lingkungan.',
+'<b>Kepada pelanggan</b>: tanggung jawab produksi (keselamatan, label peringatan) & penjualan (tidak agresif/iklan menyesatkan). Dijamin lewat kode etik, memantau keluhan, umpan balik pelanggan; didorong konsumerisme & aturan pemerintah (keamanan produk, periklanan, kompetisi industri).',
+'<b>Kepada karyawan</b>: rasa aman, perlakuan layak, kesempatan sama (tanpa diskriminasi SARA). Konflik PHK: solusi terbaik menyalurkan karyawan ke pekerjaan lain dalam perusahaan/grup.',
+'<b>Kepada pemegang saham</b>: manajer memonitor keputusan demi kepentingan pemilik; gaji dikaitkan dengan kinerja; isu kompensasi eksekutif berlebihan.',
+'Ada biaya untuk memenuhi tanggung jawab sosial (program keluhan, survei, regulasi lingkungan, risiko gugatan).']},
+{h:'3. Kewirausahaan & Kepemilikan Bisnis Baru',i:[
+'<b>Bisnis kecil</b>: dimiliki & dioperasikan independen, tidak mendominasi pasar. Kontribusi: lapangan kerja, inovasi, arti penting bagi bisnis besar.',
+'<b>Beda bisnis kecil vs kewirausahaan</b>: terletak pada tujuan pertumbuhan — wirausahawan mengejar pertumbuhan & ekspansi lewat inovasi.',
+'<b>Memulai</b>: susun business plan (tujuan, ramalan penjualan, rencana keuangan); beli bisnis yang ada atau mulai dari nol; pembiayaan (keluarga, tabungan, bank, investor, pemerintah, venture capital); <b>waralaba</b> (franchisee bayar fee & royalty ke franchisor).',
+'<b>Kegagalan</b>: manajer tidak kompeten, kurang perhatian, kontrol lemah, modal kurang. <b>Keberhasilan</b>: kerja keras, permintaan pasar, kompetensi manajerial, keberuntungan.',
+'<b>Korporasi</b>: pemegang saham (preferen & biasa) → dewan direksi → officer. <b>Merger</b> (dua perusahaan gabung jadi baru), <b>akuisisi</b> (satu beli penuh yang lain), <b>divestitur</b> (jual bisnis tidak inti), <b>spinoff</b> (unit dijadikan perusahaan terpisah).']},
+{h:'4. Konteks Bisnis Global',i:[
+'<b>Globalisasi</b>: ekonomi dunia menjadi sistem tunggal yang saling bergantung. <b>Bisnis global</b>: kegiatan bisnis lintas batas negara (Ball, 2005).',
+'<b>Kendala</b>: perbedaan budaya, daya beli, peraturan nasional, nilai tukar. Mata uang melemah → ekspor sulit & produk asing mudah masuk; menguat → neraca perdagangan membaik.',
+'<b>Keunggulan absolut</b>: negara bisa memproduksi lebih murah/berkualitas dibanding negara lain. <b>Keunggulan komparatif</b>: lebih efisien pada barang tertentu dibanding barang lainnya.',
+'<b>Strategi go international</b>: agen independen, lisensi, kantor cabang, aliansi strategis/joint venture, FDI.',
+'<b>Hambatan dagang</b>: kuota, embargo, tarif, subsidi, aturan kandungan lokal, proteksionisme, kartel, dumping (jual di luar negeri lebih murah dari harga negara asal).']},
+{h:'5. Lingkungan Bisnis',i:[
+'<b>Eksternal (makro)</b>: politik, ekonomi, sosial-budaya, teknologi, industri. <b>Internal</b>: aspek & kebijakan di dalam perusahaan.',
+'<b>Ekonomi</b>: tujuan = pertumbuhan & stabilitas. GDP (barang/jasa dalam negeri), GNP (oleh warga negara di mana pun), GDP per kapita = GDP ÷ populasi.',
+'Penghambat pertumbuhan: defisit neraca perdagangan & utang nasional. Ancaman stabilitas: inflasi (diukur CPI) & pengangguran. Resesi = output (GDP riil) turun; depresi = resesi parah & berlarut.',
+'<b>Kebijakan fiskal</b> (pajak & belanja pemerintah) vs <b>kebijakan moneter</b> (pasokan uang).',
+'<b>Teknologi</b>: teknologi produk/jasa & teknologi pengelolaan bisnis; ERP = sistem informasi besar yang mengintegrasikan proses perusahaan. <b>Hukum-politik</b>: regulasi & stabilitas politik. <b>Sosial-budaya</b>: kebiasaan, nilai, demografi.']}],
+mcq:[
+['Revolusi Industri I ditandai oleh…',['Penemuan komputer','Mesin uap James Watt','Konsep manajemen ilmiah Taylor','Internet'],1,'Abad 18: mesin uap James Watt mengubah pertanian menjadi manufaktur.'],
+['Menurut hukum permintaan, ketika harga produk naik maka…',['Pembeli membeli lebih banyak','Pembeli membeli lebih sedikit','Produsen menawarkan lebih sedikit','Permintaan tidak berubah'],1,'Harga naik → jumlah yang dibeli turun. Pilihan C adalah hukum penawaran yang terbalik.'],
+['Kegiatan menginformasikan barang/jasa dan mengidentifikasi keinginan konsumen termasuk fungsi…',['Keuangan','Produksi','Pemasaran','SDM'],2,'Itu definisi fungsi pemasaran.'],
+['Individu yang melihat peluang dan bersedia menanggung risiko membuat bisnis baru disebut…',['Tenaga kerja','Wirausahawan','Investor institusi','Distributor'],1,'Wirausahawan adalah salah satu dari 5 sumber daya bisnis.'],
+['Pada circular flow tiga sektor, pajak yang diterima pemerintah digunakan untuk…',['Membayar utang rumah tangga','Membeli barang & jasa dari pasar faktor produksi dan pasar barang','Menaikkan harga','Menghapus persaingan'],1,'Pajak dibelanjakan sebagai bentuk pelayanan kepada masyarakat.'],
+['Perbedaan utama bisnis kecil dan kewirausahaan terletak pada…',['Jumlah karyawan','Lokasi usaha','Tujuan pertumbuhan bisnis','Bentuk hukum'],2,'Wirausahawan mengejar pertumbuhan & ekspansi lewat inovasi.'],
+['Dua perusahaan bergabung untuk menciptakan perusahaan baru disebut…',['Akuisisi','Divestitur','Merger','Spinoff'],2,'Akuisisi = satu perusahaan membeli penuh perusahaan lain.'],
+['Perusahaan menjual bisnis yang tidak terkait/kurang bagus kinerjanya agar fokus pada bisnis inti disebut…',['Divestitur','Merger','Waralaba','Kartel'],0,'Itulah divestitur.'],
+['Solusi terbaik saat perusahaan harus mengurangi karyawan (PHK) menurut materi adalah…',['PHK massal','Menyalurkan ke pekerjaan lain dalam perusahaan/grup','Menurunkan gaji semua orang','Mengganti pemegang saham'],1,'Mengurangi biaya tanpa merugikan karyawan sepenuhnya.'],
+['Praktik menjual produk di luar negeri dengan harga lebih rendah dari harga di negara asal disebut…',['Embargo','Kuota','Dumping','Subsidi'],2,'Dumping.'],
+['Pajak yang dikenakan atas produk impor disebut…',['Tarif','Kuota','Embargo','Kartel'],0,'Tarif. Kuota = batas jumlah impor; embargo = larangan ekspor/impor.'],
+['Jika nilai mata uang suatu negara menguat, maka…',['Neraca perdagangan memburuk','Perusahaan domestik terdorong mengekspor sehingga neraca membaik','Impor dilarang','Inflasi pasti turun'],1,'Sesuai materi bisnis global (nilai tukar).'],
+['Total nilai barang & jasa yang diproduksi oleh warga negara suatu negara di mana pun faktor produksinya berada disebut…',['GDP','GNP','CPI','Neraca perdagangan'],1,'GNP; GDP dihitung berdasarkan faktor produksi dalam negeri.'],
+['Kebijakan pemerintah yang berfokus pada pengendalian pasokan uang adalah…',['Kebijakan fiskal','Kebijakan moneter','Kebijakan proteksi','Kebijakan kuota'],1,'Fiskal = pajak & pengeluaran pemerintah.']],
+es:[
+['Jelaskan lima sumber daya bisnis beserta contohnya.','Tenaga kerja (karyawan), modal (dana usaha), wirausahawan (pemilik yang menanggung risiko), sumber daya fisik (gedung, mesin, komputer), sumber daya informasi (data pasar, pesaing).'],
+['Bandingkan tanggung jawab sosial perusahaan kepada pelanggan, karyawan, dan pemegang saham.','Pelanggan: produk aman, iklan jujur, kode etik, tangani keluhan. Karyawan: tempat kerja aman, perlakuan layak, kesempatan sama, prosedur keluhan. Pemegang saham: manajer bertindak demi pemilik, informasi keuangan terbuka, gaji eksekutif terkait kinerja.'],
+['Jelaskan 3 hambatan perdagangan internasional dan dampaknya bagi bisnis.','Contoh: tarif (menaikkan harga impor), kuota (membatasi jumlah impor), embargo (larangan dagang), subsidi/proteksionisme (melindungi bisnis domestik), dumping. Dampak: biaya masuk pasar naik dan persaingan berubah.']]},
+
+/* ============ TIK ============ */
+{id:'tik',n:'Teknologi Informasi Komputer dalam Bisnis',h:'Rabu',d:'Djadjat Suswanto, S.E., M.M.',l:'1cO0Dvwpz7PW4EMpIArZ1o_y_Rm0VSuCE',
+src:['1.1 Pengantar Sistem Informasi dalam Bisnis Modern','2. Infrastruktur TI dalam Organisasi','3. Manajemen Basis Data & Pengolahan Informasi Bisnis','5. Etika Digital, Keamanan Sistem Informasi, dan Integritas Profesional','6. Platform E-Commerce dan Inovasi Kewirausahaan'],
+sum:[
+{h:'Pertemuan 1 – Sistem Informasi dalam Bisnis Modern',i:[
+'<b>Teknologi informasi</b>: penggunaan teknologi untuk memperoleh, mengolah, menyimpan, mengirim informasi, mendukung komunikasi & keputusan.',
+'<b>Data</b> = fakta mentah (120, 150, 200). <b>Informasi</b> = data yang diolah & bermakna. Alur: Data → Informasi → Pengetahuan → Keputusan → Aksi.',
+'<b>Sistem</b> = komponen saling berhubungan (input → proses → output). <b>Sistem informasi</b> = manusia + teknologi + data + prosedur + proses.',
+'<b>5 komponen SI</b>: Hardware, Software, Data, Network, People.',
+'<b>3 peran SI</b>: Operational excellence (efisiensi), Decision making (keputusan), Competitive advantage (keunggulan bersaing).',
+'<b>Transformasi digital</b>: manual/kertas/offline → digital/berbasis data/terhubung/real-time. Teknologi membantu entrepreneur menemukan peluang, membuat & menjual produk, serta mengembangkan bisnis.']},
+{h:'Pertemuan 2 – Infrastruktur TI',i:[
+'<b>Infrastruktur TI</b>: hardware, software, jaringan, storage, data, layanan TI — “fondasi bisnis digital”. Teknologi dipilih sesuai kebutuhan, bukan karena canggih/mahal.',
+'<b>Model sistem komputer</b>: Input (keyboard, scanner, touchscreen) → Processing (CPU, RAM) → Output (monitor, printer) → Storage (SSD, HDD, cloud).',
+'<b>CPU</b> = “otak” komputer: menghitung, memproses instruksi, mengendalikan aktivitas. <b>RAM</b> = penyimpanan sementara saat bekerja.',
+'<b>Software</b>: <i>system software</i> (sistem operasi Windows/Linux/macOS/Android/iOS, driver, utilitas) vs <i>application software</i> (Word, Excel, POS, CRM, ERP, akuntansi, kolaborasi).',
+'Faktor memilih teknologi: tujuan & kebutuhan bisnis, jumlah pengguna, proses bisnis, volume data, anggaran, keamanan, pertumbuhan.']},
+{h:'Pertemuan 3 – Basis Data & Pengolahan Informasi',i:[
+'<b>Database</b>: kumpulan data terorganisasi, saling terhubung, mudah dicari, diperbarui, dan dipakai ulang. Struktur: Database → Tabel → Record (baris) → Field (kolom).',
+'<b>Key</b>: field identitas unik (Primary Key, misal ID). <b>Relationship</b>: hubungan antar tabel (1 customer – banyak transaksi).',
+'<b>DBMS</b>: perangkat lunak pengelola database (MySQL, SQL Server, Oracle, PostgreSQL, SQLite, Access). <b>SQL</b>: SELECT, INSERT, UPDATE, DELETE.',
+'<b>Kualitas data</b>: akurat, lengkap, konsisten, relevan, tepat waktu. <b>Redundansi data</b> (data ganda) → boros, tidak konsisten, sulit diperbarui, rawan error.',
+'<b>Etika & privasi</b>: perlindungan data pribadi, izin, transparansi, tidak menyalahgunakan, patuh regulasi (UU PDP). Prinsip: collect, use, protect responsibly.']},
+{h:'Pertemuan 5A – Etika Digital & Privasi Data',i:[
+'<b>Etika digital</b>: prinsip yang mengatur bagaimana teknologi dan informasi digunakan secara benar, adil, transparan, menghormati orang lain, menghormati privasi, dan menjaga integritas.',
+'<b>Legal vs etis</b>: legal = sesuai aturan atau hukum; etis = sesuai prinsip moral, tanggung jawab, dan kepatutan. <b>Legal tidak selalu etis.</b> Contoh: perusahaan sah memiliki data pelanggan, tetapi memakainya untuk tujuan lain tanpa sepengetahuan pelanggan belum tentu etis.',
+'<b>Pesan dosen</b>: dalam bisnis digital kita tidak cukup bertanya “apakah ini bisa dilakukan?”, tetapi juga “apakah ini benar untuk dilakukan?”.',
+'<b>Enam alasan etika digital penting</b>: Trust (kepercayaan pelanggan), Reputation (reputasi perusahaan), Privacy (perlindungan data pribadi), Professionalism (integritas pegawai), Decision Making (kualitas keputusan), Business Sustainability (keberlangsungan bisnis). Kutipan: “Trust is difficult to build and easy to lose.”',
+'<b>Data pelanggan adalah tanggung jawab</b>: nama, email, histori transaksi, metode pembayaran, lokasi, dan preferensi. Punya data tidak otomatis boleh memakainya untuk semua tujuan; penggunaan harus sesuai tujuan, kewenangan, dan tanggung jawab.',
+'<b>Privasi data</b> menjawab lima pertanyaan: data apa yang dikumpulkan, siapa yang mengakses, untuk tujuan apa digunakan, berapa lama disimpan, dan kepada siapa dibagikan.',
+'<b>Tiga prinsip</b>: <i>Collect only what you need</i> (kumpulkan yang perlu saja), <i>Use only for the right purpose</i> (pakai untuk tujuan yang tepat), <i>Protect what you hold</i> (lindungi yang dipegang).']},
+{h:'Pertemuan 5B – Keamanan Sistem Informasi & Ancaman Digital',i:[
+'<b>Keamanan sistem informasi</b>: upaya melindungi data, sistem, perangkat, jaringan, aplikasi, dan pengguna dari akses, perubahan, kerusakan, atau penggunaan yang tidak sah.',
+'<b>Segitiga CIA</b>: <b>Confidentiality</b> (hanya pihak berwenang yang boleh mengakses; contoh data gaji tidak boleh dilihat semua pegawai), <b>Integrity</b> (akurat, lengkap, tidak diubah tanpa izin; contoh angka laporan penjualan tidak boleh dimanipulasi), <b>Availability</b> (tersedia saat dibutuhkan; contoh sistem kasir harus tetap beroperasi).',
+'<b>Sepuluh ancaman</b>: Phishing, Malware, Ransomware, Hacking, Password Theft, Social Engineering, Insider Threat, Data Leakage, Lost Device, Unauthorized Access. <b>Catatan dosen</b>: tidak semua ancaman berasal dari teknologi; banyak serangan memanfaatkan kelemahan manusia.',
+'<b>Phishing</b>: menipu pengguna agar memberikan informasi penting lewat pesan atau situs palsu. Target: username, password, OTP, kartu pembayaran, informasi pribadi. <b>Red flags</b>: bahasa mendesak atau mengancam, link mencurigakan (tidak resmi atau mirip yang asli), meminta password, meminta OTP, alamat pengirim tidak biasa.',
+'<b>Malware</b>: perangkat lunak berbahaya yang dirancang mengganggu atau merusak sistem. <b>Virus</b> menyebar ke file lain dan merusak data; <b>Worm</b> menyebar otomatis lewat jaringan; <b>Trojan</b> menyamar sebagai program sah; <b>Spyware</b> memata-matai aktivitas dan mencuri informasi.',
+'<b>Dampak malware</b>: data rusak, perangkat lambat, informasi dicuri, sistem terganggu. <b>Pencegahan</b>: update software, gunakan antivirus atau anti-malware, jangan instal file sembarangan, hindari link tidak terpercaya.',
+'<b>Ransomware</b>: malware yang mengunci atau mengenkripsi data lalu meminta pembayaran untuk memulihkannya. Dampak: operasional berhenti, data tidak bisa diakses, kehilangan pendapatan, reputasi dan kepercayaan pelanggan menurun. <i>Backup is not optional</i>: backup rutin dan simpan di lokasi terpisah (offline atau cloud).',
+'<b>Social engineering</b>: manipulasi terhadap seseorang agar memberikan akses atau informasi (“human can be the weakest link”). Bentuknya penyamaran (impersonation) sebagai bagian IT, atasan, bank, vendor, atau rekan kerja untuk meminta OTP, file rahasia, atau akses sistem. Berhasil karena manusia mudah percaya, panik, tergesa-gesa, dan kurang memeriksa.']},
+{h:'Pertemuan 5C – Perlindungan Data & Integritas Profesional',i:[
+'<b>Password kuat</b>: panjang, tidak mudah ditebak, berbeda untuk setiap akun penting. Hindari 123456, tanggal lahir (01012000), dan nama sendiri (andi, budi). <b>Password manager</b> membantu membuat, menyimpan, dan mengelola password yang unik.',
+'<b>Multi-Factor Authentication (MFA)</b> memakai lebih dari satu faktor: <i>Something You Know</i> (password), <i>Something You Have</i> (smartphone atau token), <i>Something You Are</i> (fingerprint atau face recognition). Manfaat: bila password dicuri, penyerang masih butuh faktor lain.',
+'<b>Access control</b>: hak akses mengikuti kebutuhan kerja. Contoh peran: Cashier (transaksi penjualan), Finance (laporan keuangan), Marketing (data pemasaran), HR (data pegawai), Owner (dashboard manajemen).',
+'<b>Dua prinsip akses</b>: <i>Need to Know</i> (hanya informasi yang dibutuhkan pekerjaan) dan <i>Least Privilege</i> (hak akses seminimal mungkin yang tetap memungkinkan tugas dijalankan). Memberi akses penuh kepada semua orang bukan kolaborasi.',
+'<b>Backup</b>: salinan data yang disimpan terpisah (cloud atau media eksternal) agar data bisa dipulihkan. Penyebab kehilangan data: perangkat rusak, ransomware, human error, file terhapus, perangkat hilang. Alur: Original Data → Backup Copy → Recovery (bisnis berjalan kembali).',
+'<b>Integritas profesional</b>: tidak memanipulasi data atau laporan, tidak menyalahgunakan hak akses, tidak membocorkan informasi pelanggan, tidak memakai software ilegal, menjaga kerahasiaan dan melaporkan kesalahan, bertanggung jawab atas penggunaan sistem. Integritas berarti melakukan hal benar, bahkan ketika tidak ada yang mengawasi.',
+'<b>Lima pelajaran penting</b>: (1) data pelanggan adalah tanggung jawab, bukan hak tanpa batas; (2) privasi harus dihormati dalam setiap keputusan bisnis; (3) keamanan informasi memerlukan teknologi dan manusia; (4) password, MFA, kontrol akses, dan backup mengurangi risiko; (5) integritas profesional membangun kepercayaan dan reputasi.',
+'<b>Refleksi dosen</b>: mana yang lebih berharga bagi bisnis digital, data atau kepercayaan pelanggan? Mengapa?']},
+{h:'Pertemuan 6A – Konsep E-Commerce & Model Transaksi',i:[
+'<b>Capaian pembelajaran</b>: menjelaskan e-commerce, membedakannya dari e-business, mengidentifikasi model transaksi digital dan peran platform, menjelaskan customer journey, memahami digital payment dan model pendapatan, menganalisis manfaat dan risiko, menghubungkan e-commerce dengan entrepreneurship, serta memberi rekomendasi inovasi model bisnis digital. <i>Key question</i>: bagaimana teknologi mengubah cara bisnis menciptakan dan menyampaikan nilai?',
+'<b>E-commerce</b>: jual beli barang atau jasa melalui jaringan elektronik, terutama internet. Aktivitasnya meliputi mencari produk, memesan, membayar, mengatur pengiriman, memberi review, dan pelayanan setelah pembelian.',
+'<b>E-commerce vs e-business</b>: e-commerce = transaksi, pembelian, penjualan, pembayaran. E-business = procurement, inventory, customer service, internal collaboration, supply chain, HR, business analytics. <b>E-commerce adalah bagian dari e-business.</b>',
+'<b>Toko tradisional vs e-commerce</b>: jam operasional terbatas vs 24/7; pasar lokal vs lebih luas; pembayaran langsung vs digital payment; promosi fisik vs digital marketing; tatap muka vs digital interaction; data terbatas vs data transaksi mudah direkam. E-commerce tidak selalu menggantikan bisnis konvensional; banyak perusahaan menggabungkan keduanya.',
+'<b>Manfaat bagi konsumen</b>: easy payment, wider choice, home delivery, price comparison, reviews, access anytime. <b>Manfaat bagi bisnis</b>: market reach, lower entry cost, customer data, automation, 24/7 availability, scalability.',
+'<b>B2C</b> (Business to Consumer): perusahaan atau brand menjual langsung ke konsumen akhir lewat platform online (fashion, makanan, elektronik, buku, travel). Faktor penting: customer experience, convenience, pricing, delivery, trust.',
+'<b>B2B</b> (Business to Business): transaksi antar perusahaan, misalnya pemasok menjual bahan ke perusahaan lain. Ciri: nilai transaksi lebih besar, hubungan jangka panjang, keputusan pembelian lebih formal, bisa melibatkan quotation dan kontrak. Contoh: restoran membeli bahan baku lewat supplier digital.',
+'<b>C2C</b> (Consumer to Consumer): individu dengan individu, misalnya jual beli barang bekas. <b>C2B</b> (Consumer to Business): individu menawarkan produk, jasa, atau karya kepada perusahaan, misalnya content creator atau freelancer.']},
+{h:'Pertemuan 6B – Platform, Customer Journey & Experience',i:[
+'<b>Marketplace</b>: banyak penjual dalam satu platform, traffic pelanggan sudah tersedia, sistem transaksi dan pembayaran siap. Tantangan: kompetisi dan biaya platform.',
+'<b>Online store</b>: toko digital milik brand sendiri, kontrol lebih besar atas tampilan dan merek, kendali data pelanggan lebih kuat. Tantangan: perlu membangun traffic sendiri. Marketplace memberi akses pasar; online store memberi kontrol.',
+'<b>Platform business model</b>: platform menghubungkan banyak pihak (seller dan buyer). Layanan: pencarian produk, transaksi, pembayaran, rating dan ulasan, komunikasi, integrasi pengiriman. Nilai platform tercipta ketika seller dan buyer saling terhubung.',
+'<b>Customer journey (7 tahap)</b>: Awareness (mengenal produk), Interest (mulai tertarik), Consideration (membandingkan pilihan), Purchase (membeli), Delivery (menerima produk), Experience (menggunakan produk), Review/Repeat (ulasan atau beli lagi).',
+'<b>Faktor customer experience</b>: pencarian produk mudah, foto dan informasi produk jelas, aplikasi cepat dan nyaman, metode pembayaran sesuai, pengiriman tepat waktu, respons seller baik, proses retur jelas, layanan setelah pembelian. Produk bagus tetap bisa kehilangan pelanggan bila pengalaman digital buruk.']},
+{h:'Pertemuan 6C – Payment, Fulfillment, Revenue, Data & Trust',i:[
+'<b>Digital payment</b>: transfer bank, virtual account, QR/QRIS, e-wallet, kartu debit/kredit, cash on delivery. Prinsip: mudah, aman, cepat, andal, sesuai pelanggan. Pilihan pembayaran yang terbatas bisa membuat pembeli batal checkout.',
+'<b>Logistik &amp; fulfillment</b>: Order → Picking → Packing → Shipping → Tracking → Delivery. Tantangan: stok habis, salah produk, pengiriman terlambat, barang rusak, biaya kirim tinggi. Menjual adalah awal; fulfillment menentukan kepuasan pelanggan.',
+'<b>Model pendapatan</b>: Sales Revenue (penjualan produk), Commission (komisi tiap transaksi), Subscription (biaya berlangganan), Advertising (iklan), Transaction Fee (biaya pemrosesan transaksi), Freemium (fitur premium berbayar). Satu marketplace bisa menggabungkan beberapa model.',
+'<b>Data e-commerce</b>: produk dilihat, pencarian, keranjang, pembelian, pembayaran, lokasi, review, beli ulang, abandoned cart. Dimanfaatkan untuk rekomendasi produk, promosi relevan, perencanaan stok, segmentasi pelanggan, dan penetapan harga, dengan tetap menjaga privasi, keamanan, dan etika (nyambung ke Pertemuan 5).',
+'<b>Membangun kepercayaan</b>: rating dan ulasan autentik, seller terverifikasi, pembayaran aman, kebijakan retur jelas, riwayat transaksi, customer service responsif, informasi produk transparan.',
+'<b>Rumus keputusan pembelian</b>: Trust + Convenience + Value → Purchase Decision. Kepercayaan adalah fondasi.']}],
+mcq:[
+['Pernyataan “Penjualan naik dari 120 ke 200 unit dalam empat bulan” adalah contoh…',['Data','Informasi','Hardware','Prosedur'],1,'Data yang sudah diolah dan bermakna = informasi.','P1'],
+['Lima komponen sistem informasi adalah…',['Hardware, Software, Data, Network, People','Input, Process, Output, Storage, Cloud','CPU, RAM, SSD, Monitor, Mouse','Data, Info, Knowledge, Decision, Action'],0,'Hardware, Software, Data, Network, People.','P1'],
+['Mengganti pencatatan manual dengan POS sehingga lebih cepat dan minim kesalahan merupakan peran SI sebagai…',['Operational excellence','Competitive advantage','Digital divide','Data redundancy'],0,'Peningkatan efisiensi operasional.','P1'],
+['Barcode scanner di kasir termasuk perangkat…',['Output','Processing','Input','Storage'],2,'Scanner memasukkan data produk ke sistem POS.','P2'],
+['Layar dapur (kitchen display) di restoran adalah contoh perangkat…',['Input','Output','Storage','Network'],1,'Output bukan hanya laporan cetak.','P2'],
+['Yang termasuk application software adalah…',['Windows','Device driver','Microsoft Excel','Linux'],2,'Windows/Linux = sistem operasi (system software).','P2'],
+['Dalam tabel Customer, field yang mengidentifikasi setiap record secara unik disebut…',['Foreign field','Primary key','Relationship','Redundancy'],1,'Primary key, misal CustomerID.','P3'],
+['Perintah SQL untuk memperbarui data adalah…',['SELECT','INSERT','UPDATE','DELETE'],2,'UPDATE ... SET ... WHERE ...','P3'],
+['Data pelanggan yang sama tersimpan di banyak database sehingga bisa berbeda-beda disebut…',['Data integrity','Data redundancy','Data privacy','Data mining'],1,'Redundansi → tidak konsisten dan sulit diperbarui.','P3'],
+['Jual beli barang bekas antar individu di marketplace termasuk model…',['B2B','B2C','C2C','C2B'],2,'Consumer to Consumer.','P6'],
+['Keunggulan utama online store dibanding marketplace adalah…',['Traffic otomatis tersedia','Kontrol merek & data pelanggan lebih besar','Tidak ada biaya sama sekali','Pembayaran sudah siap'],1,'Marketplace memberi akses pasar; online store memberi kontrol lebih.','P6'],
+['Hubungan e-commerce dan e-business yang benar adalah…',['E-business bagian dari e-commerce','E-commerce bagian dari e-business','Keduanya sama persis','Tidak berhubungan'],1,'E-commerce is part of e-business.','P6'],
+['Pendapatan platform dari persentase setiap transaksi disebut…',['Subscription','Commission','Freemium','Advertising'],1,'Commission (komisi).','P6'],
+['Urutan 7 tahap customer journey yang benar dimulai dari…',['Purchase','Awareness','Delivery','Review'],1,'Awareness → Interest → Consideration → Purchase → Delivery → Experience → Review/Repeat.','P6'],
+['Perusahaan sah memiliki data pelanggan, lalu memakainya untuk tujuan lain tanpa sepengetahuan pelanggan. Tindakan ini…',['Pasti etis karena legal','Mungkin legal, tetapi belum tentu etis','Selalu ilegal','Tidak ada masalah apa pun'],1,'Legal belum tentu etis. Penggunaan data harus sesuai tujuan, kewenangan, dan tanggung jawab.','P5'],
+['Selain bertanya “apakah ini bisa dilakukan?”, pesan dosen dalam bisnis digital adalah bertanya…',['Apakah ini murah?','Apakah ini benar untuk dilakukan?','Apakah ini cepat?','Apakah ini populer?'],1,'Etika menuntut pertanyaan tentang kebenaran tindakan, bukan hanya kemampuan teknis.','P5'],
+['Prinsip privasi “Collect only what you need” berarti…',['Kumpulkan data sebanyak mungkin','Kumpulkan hanya data yang dibutuhkan','Kumpulkan data lalu jual','Jangan kumpulkan data apa pun'],1,'Tiga prinsip: collect only what you need, use only for the right purpose, protect what you hold.','P5'],
+['Data gaji hanya boleh dilihat bagian HR. Prinsip keamanan yang dijaga adalah…',['Confidentiality','Integrity','Availability','Redundancy'],0,'Confidentiality: informasi hanya diakses pihak yang berwenang.','P5'],
+['Angka laporan penjualan diubah tanpa izin. Prinsip keamanan yang dilanggar adalah…',['Confidentiality','Integrity','Availability','Privacy'],1,'Integrity: informasi harus akurat, lengkap, dan tidak diubah tanpa izin.','P5'],
+['Sistem kasir toko mati sehingga transaksi terhenti. Prinsip keamanan yang terganggu adalah…',['Confidentiality','Integrity','Availability','Authentication'],2,'Availability: informasi dan sistem harus tersedia saat dibutuhkan.','P5'],
+['Pesan “Akun Anda akan diblokir. Klik link ini dalam 24 jam” adalah contoh…',['Malware','Phishing','Backup','MFA'],1,'Bahasa mendesak, batas waktu singkat, dan link mencurigakan adalah red flags phishing.','P5'],
+['Berikut ciri-ciri phishing, KECUALI…',['Bahasa mendesak atau mengancam','Link mencurigakan','Meminta kode OTP','Alamat pengirim resmi dan sesuai domain perusahaan'],3,'Alamat pengirim yang tidak biasa adalah red flag; alamat resmi dan sesuai domain bukan ciri phishing.','P5'],
+['Malware yang menyamar sebagai program sah disebut…',['Virus','Worm','Trojan','Spyware'],2,'Trojan menyamar sebagai program yang sah.','P5'],
+['Malware yang menyebar otomatis melalui jaringan adalah…',['Worm','Trojan','Spyware','Ransomware'],0,'Worm menyebar otomatis lewat jaringan; virus menyebar ke file lain.','P5'],
+['Langkah paling penting agar bisnis bisa pulih setelah terkena ransomware adalah…',['Backup data rutin di lokasi terpisah','Mematikan internet selamanya','Memakai password yang sama','Menunggu pelaku menghubungi'],0,'Backup rutin yang disimpan terpisah (offline atau cloud) memastikan bisnis dapat pulih.','P5'],
+['Social engineering terutama memanfaatkan…',['Kelemahan sistem operasi','Kelemahan manusia (mudah percaya, panik, tergesa-gesa)','Kerusakan hardware','Kecepatan internet'],1,'Manusia bisa menjadi mata rantai terlemah; penyerang memanipulasi agar korban memberi akses atau informasi.','P5'],
+['Password yang paling baik menurut materi adalah…',['andi123','01012000','Panjang, unik, dan berbeda untuk tiap akun penting','123456'],2,'Hindari nama sendiri, tanggal lahir, dan urutan angka sederhana.','P5'],
+['Dalam MFA, “Something You Have” contohnya…',['Password','Smartphone atau token','Fingerprint','Nama pengguna'],1,'Know = password; Have = smartphone/token; Are = fingerprint/face recognition.','P5'],
+['Prinsip Least Privilege berarti…',['Semua pegawai mendapat akses penuh','Hak akses seminimal mungkin yang tetap memungkinkan tugas dijalankan','Akses hanya untuk owner','Akses tanpa batas untuk bagian IT'],1,'Berikan hak akses sekecil mungkin yang masih cukup untuk bekerja.','P5'],
+['Perilaku yang BUKAN integritas profesional adalah…',['Melaporkan kesalahan sistem','Memakai software bajakan di kantor','Menjaga kerahasiaan data pelanggan','Tidak memanipulasi laporan'],1,'Tidak menggunakan software ilegal adalah bagian dari integritas profesional.','P5'],
+['Ciri transaksi B2B dibanding B2C adalah…',['Nilai kecil dan sekali beli','Nilai transaksi lebih besar, hubungan jangka panjang, keputusan lebih formal','Selalu antar individu','Tanpa kontrak'],1,'B2B bisa melibatkan quotation dan kontrak.','P6'],
+['Restoran membeli bahan baku melalui supplier digital. Model transaksinya…',['B2C','B2B','C2C','C2B'],1,'Antar perusahaan = Business to Business.','P6'],
+['Content creator atau freelancer menawarkan karya kepada perusahaan. Model transaksinya…',['B2B','B2C','C2C','C2B'],3,'Individu menawarkan produk, jasa, atau karya ke bisnis = Consumer to Business.','P6'],
+['Tahap customer journey saat pelanggan membandingkan pilihan adalah…',['Awareness','Interest','Consideration','Purchase'],2,'Consideration = membandingkan pilihan.','P6'],
+['Produk bagus tetap bisa kehilangan pelanggan jika…',['Harga naik sedikit','Pengalaman digital buruk','Stok banyak','Logo diganti'],1,'Customer experience digital menentukan kepuasan dan loyalitas.','P6'],
+['Yang termasuk metode digital payment adalah…',['QRIS','Cek kertas fisik','Barter','Kuitansi tulis tangan'],0,'Metode digital: transfer bank, virtual account, QR/QRIS, e-wallet, kartu, COD.','P6'],
+['Urutan alur pemenuhan pesanan (fulfillment) yang benar adalah…',['Order → Picking → Packing → Shipping → Tracking → Delivery','Shipping → Order → Packing → Delivery','Packing → Order → Delivery → Picking','Delivery → Order → Shipping → Tracking'],0,'Order → Picking → Packing → Shipping → Tracking → Delivery.','P6'],
+['Pendapatan dari biaya berlangganan disebut…',['Commission','Subscription','Advertising','Transaction fee'],1,'Subscription = biaya berlangganan.','P6'],
+['Rumus keputusan pembelian dalam materi adalah…',['Trust + Convenience + Value','Harga + Diskon + Iklan','Stok + Warna + Ukuran','Promo + Kurir + Brand'],0,'Trust + Convenience + Value → Purchase Decision.','P6'],
+['Pembeli memasukkan barang ke keranjang tetapi tidak membayar disebut…',['Review','Abandoned cart','Beli ulang','Lokasi'],1,'Abandoned cart termasuk data e-commerce yang dicatat.','P6'],
+['Tantangan utama menjual lewat marketplace adalah…',['Kompetisi dan biaya platform','Harus membangun traffic dari nol','Tidak ada sistem pembayaran','Tidak ada pembeli'],0,'Tantangan online store justru membangun traffic sendiri.','P6']
+],
+es:[
+['Jelaskan alur data hingga menjadi aksi bisnis dengan contoh penjualan kedai kopi.','Data penjualan (120→220) → informasi (permintaan naik) → pengetahuan (produk laris) → keputusan (tambah stok) → aksi (belanja bahan baku).','P1'],
+['Mengapa bisnis tidak boleh membeli teknologi hanya karena canggih? Sebutkan faktor pemilihannya.','Teknologi harus menjawab kebutuhan bisnis. Faktor: tujuan, jumlah pengguna, proses bisnis, volume data, anggaran, keamanan, pertumbuhan.','P2'],
+['Studi kasus: kedai kopi mengalami penurunan penjualan 2 bulan. Bagaimana database membantu mengambil keputusan?','Analisis penjualan per produk/periode → temukan pola (produk kurang laku/jam sepi) → keputusan (promo/menu) → evaluasi hasil. Data harus akurat, lengkap, konsisten, relevan, tepat waktu.','P3'],
+['Bedakan legal dan etis. Berikan contoh pada penggunaan data pelanggan.','<b>Legal</b> = sesuai aturan atau hukum. <b>Etis</b> = sesuai prinsip moral, tanggung jawab, dan kepatutan. Contoh: toko online sah memiliki nomor HP pelanggan, tetapi memberikannya ke pihak lain untuk iklan tanpa sepengetahuan pelanggan tidak etis walaupun datanya dimiliki secara sah. Pesan dosen: tanyakan juga “apakah ini benar untuk dilakukan?”.','P5'],
+['Jelaskan segitiga CIA (Confidentiality, Integrity, Availability) beserta contoh di bisnis.','<b>Confidentiality</b>: hanya pihak berwenang yang mengakses, contoh data gaji hanya dilihat HR. <b>Integrity</b>: data akurat dan tidak diubah tanpa izin, contoh angka laporan penjualan tidak dimanipulasi. <b>Availability</b>: sistem dan data tersedia saat dibutuhkan, contoh sistem kasir tetap beroperasi.','P5'],
+['Studi kasus: seorang karyawan menerima pesan dari “atasan” yang meminta kode OTP segera. Jenis serangan apa ini, dan bagaimana sebaiknya bereaksi?','Ini <b>social engineering</b> berbentuk impersonation (bisa juga phishing). Ciri: mendesak dan meminta OTP. Reaksi: jangan berikan OTP, verifikasi ke atasan lewat jalur resmi lain, laporkan ke bagian IT. Pencegahan: aktifkan MFA, kenali red flags, dan pahami bahwa manusia mudah percaya, panik, dan tergesa-gesa.','P5'],
+['Refleksi: mana yang lebih berharga bagi bisnis digital, data atau kepercayaan pelanggan? Jelaskan.','Contoh jawaban: kepercayaan pelanggan. Data hanya bernilai bila dikelola dengan etis dan aman; pelanggan yang tidak percaya akan pergi dan reputasi turun (“Trust is difficult to build and easy to lose”). Karena itu data pelanggan adalah tanggung jawab, bukan hak tanpa batas.','P5'],
+['Jelaskan perbedaan e-commerce dan e-business serta berikan contoh masing-masing.','E-commerce fokus pada transaksi (pembelian, penjualan, pembayaran), contoh toko di marketplace. E-business mencakup seluruh proses bisnis digital: procurement, inventory, customer service, kolaborasi internal, supply chain, HR, dan business analytics. E-commerce adalah bagian dari e-business.','P6'],
+['Bandingkan marketplace dan online store dari sisi kelebihan dan tantangan.','<b>Marketplace</b>: banyak penjual dalam satu platform, traffic dan sistem pembayaran tersedia; tantangan kompetisi dan biaya platform. <b>Online store</b>: kontrol penuh atas tampilan, merek, dan data pelanggan; tantangan membangun traffic sendiri. Banyak bisnis memakai keduanya.','P6'],
+['Jelaskan tujuh tahap customer journey dengan contoh pembelian sepatu online.','Awareness (melihat iklan sepatu), Interest (tertarik modelnya), Consideration (membandingkan harga dan ulasan), Purchase (checkout dan bayar), Delivery (sepatu dikirim), Experience (memakai sepatu), Review/Repeat (memberi ulasan atau membeli lagi).','P6'],
+['Sebutkan model pendapatan e-commerce dan cara membangun kepercayaan pelanggan.','<b>Model pendapatan</b>: sales revenue, commission, subscription, advertising, transaction fee, freemium. <b>Kepercayaan</b>: rating dan ulasan autentik, seller terverifikasi, pembayaran aman, kebijakan retur jelas, riwayat transaksi, customer service responsif, informasi produk transparan. Rumus: Trust + Convenience + Value → Purchase Decision.','P6']
+],
+ks:[
+{h:'Pertemuan 1 – Sistem Informasi dalam Bisnis Modern',r:[
+['Membedakan data dan informasi serta menjelaskan alur data hingga aksi','Paham','PG · Esai'],
+['Menyebutkan lima komponen sistem informasi','Ingat','PG'],
+['Menjelaskan tiga peran sistem informasi dalam bisnis','Paham','PG'],
+['Menjelaskan transformasi digital dan manfaatnya bagi entrepreneur','Paham','Esai']]},
+{h:'Pertemuan 2 – Infrastruktur TI',r:[
+['Menjelaskan infrastruktur TI sebagai fondasi bisnis digital','Paham','Esai'],
+['Mengelompokkan perangkat ke input, processing, output, storage','Terapkan','PG'],
+['Membedakan system software dan application software','Paham','PG'],
+['Menentukan faktor dalam memilih teknologi untuk bisnis','Terapkan','Esai · Kasus']]},
+{h:'Pertemuan 3 – Basis Data & Pengolahan Informasi',r:[
+['Menjelaskan database, tabel, record, dan field','Ingat','PG'],
+['Menjelaskan primary key dan relationship antar tabel','Paham','PG'],
+['Mengenal DBMS dan perintah SQL dasar (SELECT, INSERT, UPDATE, DELETE)','Ingat','PG'],
+['Menilai kualitas data dan dampak redundansi','Terapkan','Kasus'],
+['Menjelaskan etika dan privasi data pelanggan','Paham','Esai']]},
+{h:'Pertemuan 5 – Etika Digital, Keamanan SI & Integritas Profesional',r:[
+['Membedakan legal dan etis disertai contoh data pelanggan','Paham','PG · Esai'],
+['Menyebutkan enam alasan etika digital penting','Ingat','PG'],
+['Menerapkan tiga prinsip privasi data (collect, use, protect)','Terapkan','Kasus'],
+['Menjelaskan CIA (Confidentiality, Integrity, Availability) beserta contoh','Paham','PG · Esai'],
+['Mengenali phishing dan menyebutkan red flags-nya','Paham','PG · Kasus'],
+['Membedakan virus, worm, trojan, spyware, dan ransomware','Paham','PG'],
+['Menjelaskan social engineering dan alasan manusia menjadi titik lemah','Paham','Esai · Kasus'],
+['Menjelaskan password kuat dan tiga faktor MFA','Paham','PG'],
+['Menerapkan access control (Need to Know, Least Privilege)','Terapkan','Kasus'],
+['Menjelaskan backup dan recovery','Paham','PG'],
+['Menjelaskan integritas profesional dalam pekerjaan digital','Paham','PG · Esai']]},
+{h:'Pertemuan 6 – Platform E-Commerce & Inovasi Kewirausahaan',r:[
+['Membedakan e-commerce dan e-business','Paham','PG · Esai'],
+['Membandingkan toko tradisional dan e-commerce','Paham','Esai'],
+['Mengklasifikasikan model transaksi B2C, B2B, C2C, C2B','Terapkan','PG · Kasus'],
+['Membandingkan marketplace dan online store','Paham','PG · Esai'],
+['Menjelaskan tujuh tahap customer journey dan faktor customer experience','Paham','PG · Esai'],
+['Menyebutkan metode digital payment','Ingat','PG'],
+['Menjelaskan alur logistik dan fulfillment','Ingat','PG'],
+['Menyebutkan enam model pendapatan e-commerce','Ingat','PG'],
+['Menjelaskan pemanfaatan data e-commerce secara etis','Paham','Esai'],
+['Menjelaskan cara membangun kepercayaan pelanggan','Paham','PG · Esai']]}
+]},
+
+/* ============ PANCASILA ============ */
+{id:'pan',n:'Pendidikan Pancasila',h:'Kamis',d:'U. Wawan Sam Adinata, S.IP., M.M.',l:'1TyGXcukPbB-ujOxKwoe1XKUZCHfq7zqs',
+src:['Bahan Tayang Sosialisasi 4 Pilar (MPR RI, PDF)','Folder Materi Foto: 14 foto slide dosen'],
+sum:[
+{h:'Peta Materi (daftar isi)',i:[
+'<b>I. Kerangka mata kuliah &amp; payung hukum</b> – pengantar MKWK, hierarki peraturan.',
+'<b>II. Pancasila sebagai dasar negara, ideologi &amp; sistem etika</b> – sejarah perumusan, nilai tiap sila, etika, upaya mengganti dasar negara.',
+'<b>III. UUD NRI 1945 &amp; ketatanegaraan</b> – lembaga negara, pemilu, proses pemakzulan Presiden.',
+'<b>IV. NKRI &amp; Bhinneka Tunggal Ika</b>.',
+'<b>V. Tantangan era milenial</b> – membumikan Pancasila, ancaman nyata, cognitive warfare.',
+'<b>VI. Ekonomi Pancasila</b> – pengertian &amp; perbandingan, kebijakan ekonomi, oligarki.']},
+{h:'I-A. Pancasila di Perguruan Tinggi (Foto: Pengantar Mata Kuliah)',i:[
+'Pancasila adalah <b>Mata Kuliah Wajib Nasional (MKWK)</b> berdasarkan UU No. 12 Tahun 2012 dan SK Dirjen Dikti No. 84/E/KPT/2020.',
+'<b>Tujuan umum</b>: membentuk mahasiswa yang beriman, berkarakter Pancasila, demokratis, dan bertanggung jawab.',
+'<b>Materi pokok standar Dikti</b> (antara lain): Pancasila dalam kajian sejarah bangsa; sebagai dasar negara; sebagai ideologi negara; sebagai sistem filsafat; sebagai sistem etika; sebagai dasar nilai pengembangan ilmu; dalam paradigma kehidupan bermasyarakat, berbangsa, dan bernegara.',
+'<b>Versi 2020</b> disederhanakan menjadi 4 substansi: Pancasila sebagai ideologi, dasar negara, pandangan hidup, dan aktualisasi Pancasila di era global.',
+'<b>Bobot &amp; penilaian</b>: 2 SKS wajib lulus; partisipasi, tugas analisis kasus aktual, UTS, UAS, proyek bela negara.']},
+{h:'I-B. Pancasila sebagai Dasar Negara &amp; Payung Hukum (Foto)',i:[
+'<b>Hierarki peraturan</b>: UUD 1945 → UU → Peraturan Pemerintah → Peraturan Presiden → Peraturan Daerah. UUD 1945 adalah landasan hukum Pancasila.',
+'Lembaga pembuat/penjaga aturan yang disebut: MPR, DPR, DPD.',
+'<b>Tantangan era milenial</b>: digitalisasi, globalisasi, radikalisme, hoaks, perubahan sosial.',
+'<b>Peluang &amp; solusi</b>: pendidikan karakter, literasi digital, partisipasi aktif, penguatan nilai Pancasila.']},
+{h:'II-A. Pancasila sebagai Dasar & Ideologi Negara (PDF 4 Pilar MPR)',i:[
+'Sumber Pancasila: nilai keagamaan, adat istiadat, kebudayaan, nilai yang hidup di masyarakat, dan perkembangan ideologi dunia saat itu.',
+'Kedudukan: <i>Filosofische Grondslag</i> (Soekarno), pandangan hidup, pemersatu bangsa, norma dasar (Grundnorm – Kelsen / Staatsfundamentalnorm – Nawiasky). Pancasila = sumber dari segala sumber hukum (Pasal 2 UU 12/2011).',
+'<b>Proses perumusan</b>: 1 Juni 1945 (Soekarno di sidang BPUPKI) → 22 Juni 1945 Piagam Jakarta (Panitia Sembilan) → 18 Agustus 1945 sidang PPKI menetapkan Pancasila dalam Pembukaan UUD 1945.',
+'<b>Nilai tiap sila</b>: (1) Ketuhanan YME – bertuhan, saling menghormati agama; (2) Kemanusiaan yang adil dan beradab – adil, berbudi luhur; (3) Persatuan Indonesia – bersatu dalam keberagaman; (4) Kerakyatan yang dipimpin hikmat kebijaksanaan dalam permusyawaratan/perwakilan – kedaulatan rakyat, musyawarah; (5) Keadilan sosial bagi seluruh rakyat Indonesia.']},
+{h:'II-B. Pancasila sebagai Sistem Etika (Foto)',i:[
+'<b>Pengertian</b>: kumpulan nilai, norma, dan prinsip moral yang bersumber dari sila-sila Pancasila sebagai pedoman menentukan baik-buruk dan benar-salah serta menuntun perilaku individu, masyarakat, bangsa, dan negara. Pancasila bukan hanya dasar negara tetapi juga sumber nilai moral.',
+'<b>Pendapat ahli</b>: Notonagoro (filsafat hidup bangsa yang memuat sistem etika), A.D.G. Kartasasmita (arah moral bagi kehidupan perseorangan hingga bernegara), Emil Salim (etika politik bangsa untuk hidup bersama dalam keberagaman), Amien Rais (kompas moral bangsa).',
+'<b>Nilai etika per sila</b>: (1) spiritual, kejujuran, toleransi, moralitas; (2) martabat manusia, empati, solidaritas; (3) persatuan, toleransi, menghargai perbedaan; (4) demokrasi, musyawarah, keadilan; (5) adil, jujur, peduli sesama dan lingkungan.',
+'<b>Etika di era milenial</b>: jujur &amp; berintegritas (lawan korupsi, hoaks), menghargai perbedaan, peduli sosial &amp; lingkungan, etika digital (bijak bermedsos, hormati privasi, tidak sebar kebencian), berpikir kritis &amp; kreatif.',
+'<b>Tantangan ke depan</b>: globalisasi &amp; budaya asing, disrupsi teknologi &amp; AI (cybercrime), hoaks &amp; polarisasi, krisis moral &amp; karakter, ketimpangan sosial-ekonomi, radikalisme &amp; intoleransi, kerusakan lingkungan.']},
+{h:'II-C. Upaya Mengubah Dasar Negara (Foto)',i:[
+'<b>1. Ideologi komunis (PKI)</b>: pemberontakan Madiun 1948 bertujuan mengganti Pancasila dan mendirikan negara komunis.',
+'<b>2. Ideologi liberal</b>: kelompok awal kemerdekaan yang ingin demokrasi liberal (kebebasan individu &amp; ekonomi pasar).',
+'<b>3. Negara Islam Indonesia (NII)</b>, 1949: mengganti Pancasila dengan syariat Islam sebagai dasar negara; ditumpas pemerintah.',
+'<b>4. Gerakan Darul Islam/TII</b>: ingin mendirikan negara Islam; berlangsung lama, ditumpas akhir 1960-an; tidak didukung mayoritas rakyat.',
+'<b>5. Era reformasi</b>: kelompok yang menginginkan khilafah, komunisme, atau ideologi transnasional; tidak berhasil.',
+'<b>Kesimpulan slide</b>: Pancasila kuat, lahir dari perjuangan bangsa, dan tetap menjadi pemersatu.']},
+{h:'III-A. UUD NRI Tahun 1945 sebagai Konstitusi (PDF 4 Pilar MPR)',i:[
+'UUD = hukum dasar tertulis & tertinggi, puncak seluruh peraturan perundang-undangan. Diubah (amandemen) oleh MPR.',
+'<b>Negara</b>: Negara Kesatuan berbentuk Republik (Pasal 1 ayat 1); negara hukum (Pasal 1 ayat 3); kedaulatan di tangan rakyat.',
+'<b>Lembaga negara</b>: MPR, DPR (legislasi, anggaran, pengawasan; hak interpelasi, angket, menyatakan pendapat), DPD, Presiden & Wapres, MA, MK (putusan final; uji UU terhadap UUD), KY, BPK.',
+'<b>Pemilu</b> “luber jurdil” setiap lima tahun (Pasal 22E). Presiden terpilih: &gt;50% suara dengan minimal 20% di setiap provinsi yang tersebar di lebih dari ½ jumlah provinsi (Pasal 6A ayat 3).',
+'Anggaran pendidikan minimal 20% dari APBN & APBD (Pasal 31 ayat 4). Perekonomian disusun sebagai usaha bersama berdasar asas kekeluargaan (Pasal 33). Bahasa negara: Bahasa Indonesia; lambang: Garuda Pancasila (Pasal 36A).']},
+{h:'III-B. Proses Pemakzulan Presiden &amp; Wakil Presiden (Foto)',i:[
+'<b>Dasar hukum</b>: Pasal 7A (dapat diberhentikan MPR bila terbukti melakukan pengkhianatan terhadap negara, korupsi, penyuapan, tindak pidana berat lainnya, perbuatan tercela, atau tidak lagi memenuhi syarat); Pasal 7B (DPR lebih dulu meminta MK memeriksa, mengadili, dan memutus pendapat DPR); Pasal 24C ayat (2) (MK berwenang memutus pendapat DPR); Pasal 8 (pengganti Presiden/Wapres).',
+'<b>Tahap 1 – DPR</b> mengajukan usul lewat rapat paripurna: dihadiri minimal 2/3 anggota DPR dan disetujui minimal 2/3 anggota yang hadir.',
+'<b>Tahap 2 – MK</b> memeriksa, mengadili, memutus paling lama <b>90 hari</b>; bila terbukti, usul pemberhentian dilanjutkan.',
+'<b>Tahap 3 – DPR</b> meneruskan usul kepada MPR.',
+'<b>Tahap 4 – MPR</b> rapat paling lambat <b>30 hari</b> setelah menerima usul; Presiden/Wapres diberi kesempatan membela diri; kuorum 3/4 anggota, persetujuan 2/3 anggota yang hadir.',
+'<b>Penggantian</b>: (a) Presiden diberhentikan → Wapres menjadi Presiden hingga akhir masa jabatan; (b) Wapres berhalangan tetap → MPR memilih Wapres dari 2 calon usulan Presiden dalam <b>60 hari</b>; (c) keduanya berhalangan bersamaan → Menlu, Mendagri, dan Menhan menjalankan tugas Presiden bersama-sama, dan MPR memilih pasangan baru dalam <b>30 hari</b> dari 2 pasangan calon (usulan partai/koalisi peraih suara terbanyak pertama dan kedua pada pemilu sebelumnya).',
+'<b>Dampak yang mungkin</b>: kontinuitas pemerintahan &amp; transisi kepemimpinan; penyesuaian kebijakan &amp; koordinasi kabinet; ketidakpastian politik &amp; pasar; kepercayaan publik (naik bila transparan, turun bila dianggap politis).',
+'<b>Pesan</b>: pemakzulan bukan otomatis karena kritik atau ketidakpuasan politik; wajib mengikuti alasan dan prosedur konstitusional.']},
+{h:'IV. NKRI & Bhinneka Tunggal Ika (PDF 4 Pilar MPR)',i:[
+'<b>NKRI</b>: dipilih sebagai komitmen para pendiri bangsa (BPUPKI membahas unitarisme vs federalisme). Bentuk NKRI <b>tidak dapat diubah</b> (Pasal 37 ayat 5).',
+'Indonesia = negara kepulauan berciri Nusantara (Pasal 25A). <b>Deklarasi Juanda 13 Desember 1957</b>: laut teritorial menjadi 12 mil laut, laut antar pulau menjadi bagian wilayah.',
+'<b>Bhinneka Tunggal Ika</b>: ditulis Mpu Tantular dalam Kitab Sutasoma; semboyan negara pada lambang Garuda Pancasila.',
+'Keberagaman: ±240 juta jiwa, ±700 bahasa daerah, 1.128 suku bangsa, 6 agama.',
+'Landasan kebangsaan: Sumpah Palapa (Majapahit), Sumpah Pemuda 28 Oktober 1928.']},
+{h:'V-A. Membumikan Pancasila (Foto)',i:[
+'<b>Survei 2017 (CSIS)</b>: 9,5% milenial setuju Pancasila diganti sebagai ideologi negara, 90,5% tidak setuju.',
+'<b>Survei 2020 (Komunitas Pancasila Muda)</b>: 61% yakin nilai Pancasila sangat penting &amp; relevan, 19,5% netral, 19,5% tidak yakin relevan. Artinya ada pergeseran pandangan dan ketidakpedulian di kalangan milenial.',
+'<b>Mengapa nilai Pancasila tergerus</b>: (1) pola pikir milenial modern, kurang literasi kebangsaan; (2) ideologi dianggap tidak penting; (3) kurangnya penanaman &amp; kebanggaan ber-Pancasila; (4) sosialisasi masih seremonial &amp; kalah menarik dari ideologi lain di medsos; (5) realitas sosial-politik bertentangan dengan nilai Pancasila (korupsi, hedonisme, ketimpangan).',
+'<b>Yang harus dilakukan</b>: bangun semangat kebhinekaan, hargai perbedaan, perlakukan semua komunitas sama, junjung tinggi HAM, tanamkan rasa bangga ber-Pancasila; manfaatkan medsos &amp; platform digital secara kreatif.',
+'<b>Suara ahli</b>: Robikin Emhas (Ketua PBNU) – butuh strategi khusus yang mendengar aspirasi milenial; Abdul Mu\'ti (Sekum PP Muhammadiyah) – sosialisasi jangan seremonial; Adi Prayitno (pengamat UIN Jakarta) – Pancasila harus kembali di kurikulum.',
+'<b>Tujuan akhir</b>: Pancasila nyata dalam kehidupan – mengentaskan kemiskinan, membuka lapangan kerja, kekayaan merata tidak dimonopoli segelintir orang.']},
+{h:'V-B. Ancaman Nyata di Era Milenial (Foto)',i:[
+'<b>Ideologi &amp; paham radikal</b>: kebencian, intoleransi, mengganti ideologi negara (contoh: propaganda &amp; rekrutmen online).',
+'<b>Disinformasi &amp; hoaks</b>: memecah belah, merusak persatuan (contoh: berita palsu SARA/politik di WhatsApp/TikTok).',
+'<b>Pengaruh budaya asing</b>: menggerus nilai Pancasila (gaya hidup hedonis, individualis, konten negatif).',
+'<b>Korupsi &amp; penyalahgunaan kekuasaan</b>: merusak kepercayaan rakyat (korupsi dana publik, kolusi, nepotisme, politik uang).',
+'<b>Radikalisme digital &amp; cyber attack</b>: peretasan data, ujaran kebencian, fake account, cyber war.',
+'<b>Globalisasi &amp; ideologi baru</b>: menggerus jati diri dan kedaulatan ekonomi (ketergantungan teknologi asing, dominasi platform digital).',
+'Slide juga memuat ringkasan 4 Pilar (Pancasila = ideologi negara; UUD 1945 = konstitusi; NKRI = bentuk negara; Bhinneka Tunggal Ika = semboyan) dan kutipan para tokoh bangsa tentang menjaga NKRI.']},
+{h:'V-C. Cognitive Warfare (Foto)',i:[
+'<b>Pengertian</b>: perang modern yang menyerang pikiran, persepsi, emosi, dan cara berpikir manusia melalui informasi, bukan alutsista. Ruang pikiran menjadi domain baru selain darat, laut, udara, luar angkasa, siber, dan spektrum elektromagnetik.',
+'<b>Tujuan</b>: (1) destabilisasi sosial – polarisasi, kebingungan, menurunnya kepercayaan pada lembaga negara/media; (2) memengaruhi dan mengontrol pengambilan keputusan.',
+'<b>Cara kerja</b>: disinformasi &amp; hoaks; eksploitasi medsos &amp; algoritma (micro-targeting, deepfake); operasi psikologis (PsyOps) untuk melemahkan moral; pemanfaatan AI untuk personalisasi serangan dari data pribadi. Teknik lain: bot &amp; buzzer, emotional trigger, echo chamber.',
+'<b>Dampak</b>: polarisasi sosial, mudah terprovokasi, kebenaran bias, keputusan dimanipulasi.',
+'<b>Mengapa berbahaya</b>: tanpa benturan fisik (negara bisa hancur dari dalam) dan sulit dideteksi (garis fakta-opini-propaganda kabur).',
+'<b>Cara melawan</b>: verifikasi informasi, jangan mudah terpancing emosi, ikuti sumber kredibel, tingkatkan literasi digital — sadari bahwa tidak semua yang viral itu benar.']},
+{h:'VI-A. Ekonomi Pancasila (Foto)',i:[
+'<b>Pengertian</b>: sistem ekonomi berlandaskan nilai Pancasila untuk mewujudkan kesejahteraan rakyat yang adil dan merata (ketuhanan, kemanusiaan, persatuan, demokrasi, keadilan sosial).',
+'<b>Menurut ahli</b>: Mubyarto – berjiwa kekeluargaan &amp; gotong royong; Emil Salim – berorientasi pada kepentingan rakyat banyak, bukan segelintir orang; Didin S. Damanhuri – manusia sebagai tujuan utama, bukan sekadar alat produksi.',
+'<b>Ciri</b>: berlandaskan Pancasila, berorientasi kesejahteraan rakyat, adil &amp; merata, gotong royong, menjaga keseimbangan individu-masyarakat, berwawasan lingkungan.',
+'<b>Perbandingan</b>:<table><tr><th>Aspek</th><th>Ekonomi Pancasila</th><th>Komunisme</th><th>Kapitalisme</th></tr><tr><td>Dasar ideologi</td><td>Pancasila</td><td>Marxisme-Leninisme</td><td>Individualisme &amp; pasar bebas</td></tr><tr><td>Kepemilikan aset produksi</td><td>Negara, swasta, masyarakat (koperasi)</td><td>Negara</td><td>Swasta/individu</td></tr><tr><td>Tujuan utama</td><td>Kesejahteraan rakyat adil &amp; merata</td><td>Masyarakat tanpa kelas</td><td>Keuntungan maksimal pemilik modal</td></tr><tr><td>Peran negara</td><td>Mengatur &amp; membina, tidak otoriter</td><td>Sangat dominan</td><td>Minimal (jaga stabilitas pasar)</td></tr><tr><td>Prinsip pokok</td><td>Keadilan sosial, gotong royong, keseimbangan</td><td>Kolektivisme, kesetaraan total</td><td>Persaingan bebas, liberalisme</td></tr><tr><td>Dampak jika ekstrem</td><td>Ketimpangan berkurang</td><td>Kebebasan individu tertekan</td><td>Kesenjangan tinggi, eksploitasi</td></tr></table>',
+'<b>Kesimpulan</b>: jalan tengah yang berkeadilan; mengutamakan rakyat, menolak eksploitasi ala kapitalisme dan penindasan ala komunisme.']},
+{h:'VI-B. Kebijakan Ekonomi Era Presiden Prabowo 2024–2029 (Foto; sebagai dibahas di slide)',i:[
+'Kerangka: tetap berlandaskan <b>Pasal 33 UUD 1945</b> dan Ekonomi Pancasila. Perdebatannya bukan keluar dari Pancasila, tetapi tafsir sila ke-5: keadilan sosial diwujudkan lewat negara yang lebih aktif atau pasar yang lebih bebas.',
+'<b>Dinilai masih di jalur Pancasila</b>: hilirisasi (SDA diolah di dalam negeri, sesuai Pasal 33 ayat 3); ekonomi kerakyatan (Makan Bergizi Gratis, Koperasi Desa Merah Putih, penghapusan utang UMKM petani/nelayan, swasembada pangan); Danantara (sovereign wealth fund pengelola aset BUMN).',
+'<b>Diperdebatkan</b>: peran negara sangat besar vs swasta (kritik: negara terlalu dominan; pendukung: itu justru Ekonomi Pancasila); disiplin fiskal (defisit APBN melebar untuk MBG &amp; pertahanan, pemerintah: masih di bawah 3% PDB); proteksionisme (larangan ekspor mentah &amp; TKDN ketat: dipuji sebagai nasionalisme ekonomi, dikritik mengurangi investasi).',
+'<b>Kesimpulan slide</b>: tidak ada kebijakan yang dinyatakan keluar dari Pancasila oleh MK atau MPR; yang ada perdebatan tafsir.',
+'<b>Dua tafsir akademisi</b>: tafsir Mubyarto (kekeluargaan, koperasi; tidak murni kapitalis/sosialis) vs tafsir pasar (ekonomi campuran; negara jaga kegagalan pasar, swasta diberi ruang luas). Pemerintahan saat ini disebut cenderung ke tafsir pertama: negara sebagai nahkoda yang kuat, bukan hanya wasit.']},
+{h:'VI-C. Oligarki Ekonomi (Foto; sebagai dibahas di slide)',i:[
+'<b>Oligarki</b> (Jeffrey Winters, Vedi Hadiz): segelintir kelompok dengan konsentrasi modal sangat besar yang berpengaruh besar pada kebijakan.',
+'<b>Ciri di Indonesia (menurut slide)</b>: konsentrasi aset (1% rumah tangga terkaya menguasai sekitar 40–45% kekayaan nasional; sektor sawit, tambang, nikel, properti dikuasai beberapa grup); politik berbiaya tinggi (pengusaha jadi penyokong politik); regulasi/izin (tambang, HGU, proyek besar) butuh kedekatan dengan kekuasaan.',
+'<b>Apakah oligarki menguasai ekonomi?</b> Ya bila diukur dari konsentrasi kekayaan; tidak sepenuhnya bila diukur dari kendali kebijakan.',
+'<b>Sisi upaya memutus oligarki (pandangan pemerintah)</b>: Danantara &amp; konsolidasi BUMN, Kopdes Merah Putih &amp; penghapusan utang UMKM, hilirisasi, Satgas Penertiban Kawasan Hutan (kebun sawit ilegal).',
+'<b>Sisi yang dikritik</b>: banyak menteri/pejabat berasal dari pengusaha besar (konflik kepentingan); PSN masih banyak diberikan ke perusahaan besar; UMKM sulit dapat kredit besar.',
+'<b>Inti perdebatan</b>: apakah negara mampu memakai kekuatan oligarki untuk kepentingan nasional (model Korea Selatan/China) atau justru negara yang disetir.']}],
+mcq:[
+['Pidato Soekarno yang menawarkan 5 prinsip dasar negara bernama Pancasila terjadi pada…',['22 Juni 1945','1 Juni 1945','18 Agustus 1945','17 Agustus 1945'],1,'Sidang pertama BPUPKI, 1 Juni 1945.'],
+['Rumusan Pancasila dalam Piagam Jakarta ditetapkan pada…',['1 Juni 1945','22 Juni 1945','18 Agustus 1945','28 Oktober 1928'],1,'Panitia Sembilan, 22 Juni 1945.'],
+['Pancasila dalam Pembukaan UUD 1945 ditetapkan oleh…',['BPUPKI','Panitia Sembilan','Sidang PPKI','MPR'],2,'Sidang PPKI 18 Agustus 1945.'],
+['Pancasila sebagai “sumber dari segala sumber hukum” tercantum dalam…',['Pasal 2 UU No. 12 Tahun 2011','Pasal 1 UUD 1945','Pasal 29 UUD 1945','Pasal 37 UUD 1945'],0,'UU tentang Pembentukan Peraturan Perundang-undangan.'],
+['Nilai “saling menghormati antar pemeluk agama” terkandung dalam sila ke…',['1','2','3','5'],0,'Sila Ketuhanan Yang Maha Esa.'],
+['Bentuk negara Indonesia menurut Pasal 1 ayat (1) UUD 1945 adalah…',['Federal','Serikat','Kesatuan berbentuk republik','Kerajaan'],2,'Negara Kesatuan yang berbentuk Republik.'],
+['Pasal yang menyatakan bentuk NKRI tidak dapat diubah adalah…',['Pasal 25A','Pasal 37 ayat (5)','Pasal 33','Pasal 22E'],1,'Pasal 37 ayat (5).'],
+['Deklarasi Juanda dikeluarkan pada…',['13 Desember 1957','17 Agustus 1945','28 Oktober 1928','5 Juli 1959'],0,'Menegaskan Indonesia sebagai negara kepulauan.'],
+['Penulis istilah “Bhinneka Tunggal Ika” dalam Kitab Sutasoma adalah…',['Gajah Mada','Mpu Tantular','Mohammad Yamin','Soepomo'],1,'Mpu Tantular.'],
+['Pemilu di Indonesia dilaksanakan dengan asas…',['Langsung, umum, bebas, rahasia, jujur, adil','Terpimpin','Perwakilan tidak langsung','Terbuka'],0,'“Luber jurdil” setiap lima tahun (Pasal 22E).'],
+['Lembaga yang berwenang mengadili pada tingkat pertama dan terakhir dengan putusan final untuk menguji UU terhadap UUD adalah…',['MA','KY','MK','BPK'],2,'Mahkamah Konstitusi.'],
+['Anggaran pendidikan minimal dari APBN dan APBD sebesar…',['10%','15%','20%','25%'],2,'Pasal 31 ayat (4): 20%.'],
+['Pancasila di perguruan tinggi termasuk kelompok mata kuliah…',['Pilihan program studi','Mata Kuliah Wajib Nasional (MKWK)','Mata kuliah keahlian saja','Kegiatan ekstrakurikuler'],1,'Berdasarkan UU No. 12 Tahun 2012 dan SK Dirjen Dikti No. 84/E/KPT/2020.'],
+['Urutan hierarki peraturan yang benar adalah…',['UUD 1945 → UU → PP → Perpres → Perda','UU → UUD 1945 → Perda → PP','Perda → PP → UU → UUD 1945','UUD 1945 → Perda → UU → Perpres'],0,'UUD 1945 menjadi landasan hukum tertinggi.'],
+['Pancasila sebagai sistem etika berarti…',['Pancasila hanya dasar negara secara hukum','Nilai dan norma moral dari sila-sila Pancasila sebagai pedoman baik-buruk dan perilaku','Aturan pidana negara','Kumpulan pasal UUD 1945'],1,'Pancasila juga sumber nilai moral, bukan hanya dasar negara.'],
+['Pemberontakan PKI di Madiun yang ingin mengganti Pancasila terjadi pada tahun…',['1945','1948','1957','1965'],1,'Madiun 1948 (menurut slide).'],
+['Negara Islam Indonesia (NII) diproklamasikan dengan tujuan…',['Memperkuat Pancasila','Mengganti Pancasila dan menjadikan syariat Islam dasar negara','Mendirikan negara federal','Menggabungkan dua negara'],1,'Gerakan ini ditumpas pemerintah.'],
+['Survei CSIS 2017 menunjukkan milenial yang TIDAK setuju Pancasila diganti sebesar…',['9,5%','19,5%','61%','90,5%'],3,'9,5% setuju diganti, 90,5% tidak setuju.'],
+['Menurut Pasal 7B UUD 1945, sebelum usul pemberhentian Presiden ke MPR, DPR harus lebih dulu…',['Meminta pendapat Mahkamah Agung','Meminta MK memeriksa, mengadili, dan memutus pendapat DPR','Menggelar referendum','Meminta persetujuan DPD'],1,'MK memutus paling lama 90 hari.'],
+['Jika Wakil Presiden berhalangan tetap, MPR memilih Wapres baru dari 2 calon usulan Presiden dalam waktu…',['30 hari','45 hari','60 hari','90 hari'],2,'60 hari (Pasal 8).'],
+['Pada rapat MPR memutus pemberhentian Presiden, kuorum dan persetujuan yang diminta adalah…',['1/2 hadir, 1/2 setuju','2/3 hadir, 2/3 setuju','3/4 hadir, 2/3 dari yang hadir setuju','Semua anggota hadir'],2,'Kuorum 3/4 seluruh anggota; persetujuan 2/3 anggota yang hadir.'],
+['Perang yang menargetkan pikiran, persepsi, dan emosi manusia lewat informasi disebut…',['Cyber attack','Cognitive warfare','Perang konvensional','Embargo'],1,'Ruang pikiran menjadi domain baru pertempuran.'],
+['Teknik yang digunakan dalam cognitive warfare, KECUALI…',['Disinformasi &amp; hoaks','Micro-targeting dan deepfake','Operasi psikologis (PsyOps)','Verifikasi informasi'],3,'Verifikasi informasi adalah cara melawan, bukan teknik serangan.'],
+['Menurut ekonomi Pancasila, kepemilikan aset produksi berada pada…',['Negara saja','Swasta saja','Negara, swasta, dan masyarakat (koperasi)','Asing'],2,'Berbeda dengan komunisme (negara) dan kapitalisme (swasta).'],
+['Tafsir Mubyarto tentang Ekonomi Pancasila menekankan…',['Pasar bebas penuh','Kekeluargaan dan koperasi, tidak murni kapitalis maupun sosialis','Kontrol negara total','Ekonomi ekspor'],1,'Berjiwa kekeluargaan dan gotong royong.'],
+['Hilirisasi (SDA diolah di dalam negeri) dikaitkan dengan…',['Pasal 33 ayat 3 UUD 1945','Pasal 7A UUD 1945','Pasal 36A UUD 1945','Pasal 1 ayat 1 UUD 1945'],0,'Bumi, air, dan kekayaan alam dikuasai negara untuk kemakmuran rakyat.']],
+es:[
+['Uraikan proses perumusan Pancasila dari 1 Juni hingga 18 Agustus 1945.','1 Juni: Soekarno mengusulkan 5 prinsip di BPUPKI. 22 Juni: Panitia Sembilan merumuskan Piagam Jakarta. 18 Agustus: PPKI menetapkan Pancasila dalam Pembukaan UUD 1945 (sila pertama menjadi Ketuhanan Yang Maha Esa).'],
+['Jelaskan 4 pilar kebangsaan dan kedudukan masing-masing.','Pancasila = dasar & ideologi negara; UUD NRI 1945 = konstitusi/hukum dasar; NKRI = bentuk negara; Bhinneka Tunggal Ika = semboyan negara.'],
+['Mengapa keberagaman Indonesia perlu dikelola dengan nilai Bhinneka Tunggal Ika?','Karena ±1.128 suku, ±700 bahasa, 6 agama dan beragam budaya; semboyan ini menjaga persatuan dalam perbedaan sebagaimana sila ke-3.'],
+['Jelaskan Pancasila sebagai sistem etika dan berikan 3 contoh penerapannya di era digital.','Pancasila sumber nilai moral untuk menentukan baik-buruk perilaku. Contoh: tidak menyebar hoaks (jujur), menghormati privasi &amp; tidak menyebar kebencian (kemanusiaan, persatuan), bijak bermedsos dan menggunakan teknologi untuk kebaikan.'],
+['Uraikan tahapan pemakzulan Presiden menurut UUD 1945.','DPR mengajukan usul (paripurna, 2/3 hadir &amp; 2/3 setuju) → MK memutus paling lama 90 hari → DPR meneruskan ke MPR → MPR rapat paling lambat 30 hari (kuorum 3/4, setuju 2/3 yang hadir) setelah Presiden diberi kesempatan membela diri. Alasan: Pasal 7A.'],
+['Bandingkan ekonomi Pancasila, komunisme, dan kapitalisme.','Pancasila: kepemilikan negara-swasta-koperasi, tujuan kesejahteraan adil merata, negara mengatur &amp; membina. Komunisme: milik negara, masyarakat tanpa kelas, negara dominan. Kapitalisme: milik swasta, laba maksimal, negara minimal; risiko kesenjangan.'],
+['Mengapa nilai Pancasila dianggap tergerus di kalangan milenial dan apa solusinya?','Sebab: literasi kebangsaan rendah, ideologi dianggap tidak penting, sosialisasi seremonial, realitas sosial-politik tidak sejalan (korupsi, ketimpangan). Solusi: kebhinekaan, hargai perbedaan, junjung HAM, banggakan Pancasila, sosialisasi kreatif lewat media digital.'],
+['Apa itu cognitive warfare dan bagaimana melawannya?','Perang yang menyerang pikiran/persepsi lewat hoaks, algoritma, PsyOps, dan AI untuk memecah belah dan memengaruhi keputusan. Lawan dengan verifikasi informasi, tidak mudah terpancing emosi, ikut sumber kredibel, dan literasi digital.']]},
+
+/* ============ AKUNTANSI ============ */
+{id:'ak',n:'Pengantar Akuntansi 1',h:'Kamis',d:'Dr. Bulan Tati Fitria, S.E., M.M., MSEAC.',l:'1iLgtrz4Ukk6-UgejqqCMmGO-MMq09HmW',
+src:['Bab 1 Akuntansi dan Lingkungan','Struktur Dasar Akuntansi','Akun dan Siklus Akuntansi, Jurnal Umum'],
+sum:[
+{h:'Bab 1 – Akuntansi dan Lingkungannya',i:[
+'<b>Akuntansi</b>: proses pengumpulan, pencatatan, penganalisaan, peringkasan, pengklasifikasian & pelaporan transaksi keuangan suatu kesatuan ekonomi untuk menyediakan informasi bagi pengambilan keputusan.',
+'<b>Jenis perusahaan</b>: jasa (produk nonfisik), dagang (beli lalu jual), manufaktur (olah bahan baku jadi produk jadi).',
+'<b>Akuntansi keuangan</b> (pengguna eksternal: kreditor, investor, pemerintah) vs <b>akuntansi manajemen</b> (pengguna internal: manajer).',
+'<b>Pembukuan</b> = mencatat data usaha; akuntansi juga mendesain sistem pencatatan, menyusun & menginterpretasi laporan.',
+'<b>Profesi</b>: akuntan privat/intern, publik, pemerintah, pendidik. <b>Bidang</b>: keuangan, manajemen, biaya, pajak, anggaran, auditing, sistem akuntansi, internasional, sektor publik.',
+'<b>Bentuk legal usaha</b>: perseorangan; persekutuan (firma – semua sekutu aktif; CV – ada sekutu pasif yang hanya menanam modal); perseroan (kepemilikan dalam saham).']},
+{h:'Struktur Dasar Akuntansi',i:[
+'<b>Siklus akuntansi</b>: Transaksi → dokumen dasar → Jurnal → Posting ke Buku Besar → Neraca Saldo → Penyesuaian & Worksheet → Laporan Keuangan.',
+'<b>Cash basis</b>: pendapatan diakui saat kas diterima, biaya saat kas dibayar. <b>Accrual basis</b>: pendapatan diakui saat transaksi terjadi, biaya saat diperlukan untuk menghasilkan pendapatan.',
+'<b>Laporan keuangan</b>: Laba Rugi, Perubahan Modal, Posisi Keuangan (Neraca), Arus Kas, Catatan atas Laporan Keuangan.',
+'<b>Kualitas laporan</b>: dapat dipahami, relevan, materialitas, keandalan, substansi mengungguli bentuk, pertimbangan sehat, kelengkapan, komparabilitas, tepat waktu, keseimbangan biaya-manfaat.',
+'<b>Asumsi dasar</b>: kesatuan usaha khusus (economic entity), kontinuitas usaha (going concern), unit moneter, periode waktu.',
+'<b>Standar</b>: SAK-IFRS (adaptasi IFRS) dan SAK-ETAP (entitas tanpa akuntabilitas publik).']},
+{h:'Akun, Persamaan Akuntansi & Jurnal Umum',i:[
+'<b>Persamaan akuntansi</b>: Aset = Liabilitas + Ekuitas.',
+'<b>Akun riil (permanen)</b>: aset, liabilitas, modal — saldo dibawa ke tahun berikutnya. <b>Akun nominal (sementara)</b>: pendapatan & beban — ditutup ke modal.',
+'<b>Hukum debet-kredit</b>: Aset & Beban bertambah di <b>debet</b>; Liabilitas, Modal & Pendapatan bertambah di <b>kredit</b>.',
+'<b>Jurnal</b>: catatan kronologis transaksi dengan akun yang didebet/dikredit beserta jumlahnya. Fungsi: analisis, pencatatan, historis. Format: Tanggal | Akun & Keterangan | Ref | Debet | Kredit.',
+'Contoh: setoran modal Rp500 jt → Dr Kas / Cr Modal. Beli mobil tunai Rp150 jt → Dr Kendaraan / Cr Kas. Beli peralatan kredit → Dr Peralatan / Cr Utang Usaha. Jasa selesai belum dibayar → Dr Piutang Usaha / Cr Pendapatan.']}],
+mcq:[
+['Perusahaan yang produknya bersifat nonfisik disebut perusahaan…',['Dagang','Jasa','Manufaktur','Perseroan'],1,'Contoh: konsultan, salon, fotokopi.'],
+['Akuntansi yang penggunanya pihak eksternal (kreditor, investor, pemerintah) adalah akuntansi…',['Manajemen','Biaya','Keuangan','Anggaran'],2,'Akuntansi keuangan.'],
+['Sekutu pasif yang hanya menanamkan modal terdapat pada bentuk usaha…',['Firma','CV','Perorangan','Koperasi'],1,'CV (Commanditaire Vennootschap).'],
+['Pada akuntansi basis akrual, pendapatan diakui saat…',['Kas diterima','Transaksi terjadi','Akhir tahun','Laporan diaudit'],1,'Cash basis = saat kas diterima.'],
+['Persamaan akuntansi yang benar adalah…',['Aset = Liabilitas − Ekuitas','Aset = Liabilitas + Ekuitas','Ekuitas = Aset + Liabilitas','Liabilitas = Aset + Ekuitas'],1,'Aset = Liabilitas + Ekuitas.'],
+['Akun yang disebut akun sementara (nominal) adalah…',['Kas','Utang usaha','Modal','Pendapatan dan beban'],3,'Ditutup ke modal pada akhir periode.'],
+['Pembelian peralatan secara kredit dijurnal…',['Dr Kas / Cr Peralatan','Dr Peralatan / Cr Utang Usaha','Dr Utang Usaha / Cr Peralatan','Dr Beban / Cr Kas'],1,'Aset bertambah (debet), kewajiban bertambah (kredit).'],
+['Memindahkan catatan dari jurnal ke buku besar disebut…',['Menjurnal','Posting','Penyesuaian','Penutupan'],1,'Posting.'],
+['Asumsi bahwa perusahaan terpisah dari pemiliknya disebut…',['Going concern','Monetary unit','Economic entity','Time period'],2,'Kesatuan usaha khusus.'],
+['Standar akuntansi untuk entitas tanpa akuntabilitas publik adalah…',['SAK-IFRS','SAK-ETAP','PSAK-Syariah','GAAP'],1,'SAK-ETAP.']],
+es:[
+['Jelaskan perbedaan cash basis dan accrual basis dengan contoh.','Cash: pendapatan dicatat saat uang diterima. Accrual: dicatat saat jasa selesai/transaksi terjadi meski uang belum diterima (Dr Piutang / Cr Pendapatan).'],
+['Sebutkan tahapan siklus akuntansi dari transaksi sampai laporan keuangan.','Transaksi → dokumen dasar → jurnal → posting buku besar → neraca saldo → penyesuaian/worksheet → laporan keuangan (laba rugi, perubahan modal, neraca, arus kas).']],
+jur:true}
+,
+/* ============ KOSONG ============ */
+{id:'me',n:'Matematika Ekonomi',h:'Senin',d:'Dr. Aan Hardiyana, M.M. / Fitria Marfianti, S.Pd., M.M.',l:'1VzCVDk_rwMirvEjfuJJjhLXHpeVyJrOV',
+src:['1. Fungsi linier & aplikasinya','2. Permintaan, penawaran & keseimbangan pasar','3. Biaya, penerimaan, laba & BEP','4. Turunan & aplikasi ekonomi','5. Bunga, deret & nilai uang'],
+sum:[
+{h:'1. Fungsi Linier & Aplikasinya',i:[
+'<b>Fungsi</b>: aturan yang memasangkan setiap nilai x (variabel bebas) dengan tepat satu nilai y (variabel terikat). Dalam ekonomi: jumlah diminta bergantung pada harga, biaya bergantung pada jumlah produksi.',
+'<b>Fungsi linier</b>: y = a + bx, dengan b = gradien (kemiringan) dan a = konstanta (titik potong sumbu y).',
+'<b>Gradien</b> dari dua titik: m = (y2 − y1) / (x2 − x1).',
+'<b>Persamaan garis lewat dua titik</b>: (y − y1)/(y2 − y1) = (x − x1)/(x2 − x1). Atau lewat satu titik dan gradien: y − y1 = m(x − x1).',
+'<b>Titik potong dua garis</b> dicari dengan menyamakan kedua persamaan (substitusi atau eliminasi); dipakai untuk mencari titik keseimbangan dan BEP.']},
+{h:'2. Permintaan, Penawaran & Keseimbangan Pasar',i:[
+'<b>Fungsi permintaan</b> (Qd): hubungan harga (P) dan jumlah yang diminta; gradien negatif karena harga naik, jumlah diminta turun. Contoh: Qd = 100 − 2P.',
+'<b>Fungsi penawaran</b> (Qs): gradien positif karena harga naik, produsen menawarkan lebih banyak. Contoh: Qs = −20 + 4P.',
+'<b>Keseimbangan pasar</b>: Qd = Qs. Hasilnya harga keseimbangan (Pe) dan jumlah keseimbangan (Qe).',
+'<b>Pajak per unit (t)</b> pada produsen: Qs baru = Qs(P − t). Harga keseimbangan naik, jumlah keseimbangan turun. Pajak total = t × Qe baru; sebagian dibayar konsumen, sisanya ditanggung produsen.',
+'<b>Subsidi per unit (s)</b>: Qs baru = Qs(P + s). Harga turun, jumlah naik.',
+'<b>Surplus konsumen</b>: selisih harga tertinggi yang mau dibayar konsumen dengan harga pasar. <b>Surplus produsen</b>: selisih harga pasar dengan harga terendah yang mau diterima produsen.']},
+{h:'3. Biaya, Penerimaan, Laba & BEP',i:[
+'<b>Biaya total</b> TC = FC + VC. FC (biaya tetap) tidak berubah menurut jumlah produksi; VC (biaya variabel) = biaya per unit × Q.',
+'<b>Penerimaan total</b> TR = P × Q. <b>Laba</b> π = TR − TC.',
+'<b>Biaya rata-rata</b> AC = TC / Q. <b>Biaya marjinal</b> MC = ΔTC / ΔQ = turunan TC.',
+'<b>Break Even Point (BEP)</b>: kondisi TR = TC (laba nol). BEP unit = FC / (P − biaya variabel per unit). BEP rupiah = BEP unit × P.',
+'Bila Q di atas BEP perusahaan untung; di bawah BEP rugi.']},
+{h:'4. Turunan & Aplikasi Ekonomi',i:[
+'<b>Turunan</b> mengukur laju perubahan. Aturan dasar: f(x) = k → f′ = 0; f(x) = axⁿ → f′ = a·n·xⁿ⁻¹; turunan penjumlahan = jumlah turunan.',
+'<b>Biaya marjinal</b> MC = dTC/dQ; <b>penerimaan marjinal</b> MR = dTR/dQ.',
+'<b>Optimasi</b>: titik ekstrem di mana f′(x) = 0. Bila f″ negatif maka maksimum; bila f″ positif maka minimum.',
+'<b>Laba maksimum</b> tercapai saat MR = MC (atau dπ/dQ = 0 dengan π″ negatif).',
+'<b>Elastisitas harga permintaan</b> Ed = (dQ/dP)·(P/Q). Elastis bila |Ed| lebih dari 1, inelastis bila kurang dari 1, uniter bila sama dengan 1. Contoh Ed = −2: harga naik 1% membuat jumlah diminta turun 2%.']},
+{h:'5. Bunga, Deret & Nilai Uang',i:[
+'<b>Deret aritmetika</b> (selisih tetap b): Un = a + (n − 1)b; Sn = n/2 · (a + Un).',
+'<b>Deret geometri</b> (rasio tetap r): Un = a·rⁿ⁻¹; Sn = a(rⁿ − 1)/(r − 1) untuk r lebih dari 1.',
+'<b>Bunga sederhana</b>: bunga dihitung dari pokok saja. Fn = M(1 + i·n).',
+'<b>Bunga majemuk</b>: bunga ikut berbunga. Fn = M(1 + i)ⁿ. Nilai sekarang (present value): M = Fn / (1 + i)ⁿ.',
+'Penerapan: pertumbuhan penduduk dan produksi (geometri), tabungan, cicilan, dan investasi.']}
+],
+mcq:[
+['Fungsi permintaan Qd = 100 − 2P dan fungsi penawaran Qs = −20 + 4P. Harga keseimbangan pasarnya adalah…',['Rp10','Rp20','Rp30','Rp40'],1,'Qd = Qs → 100 − 2P = −20 + 4P → 120 = 6P → P = 20.'],
+['Dari soal sebelumnya, jumlah keseimbangannya adalah…',['40','50','60','80'],2,'Q = 100 − 2(20) = 60. Cek dengan Qs = −20 + 4(20) = 60.'],
+['Persamaan garis yang melalui titik (2, 5) dan (4, 11) adalah…',['y = 3x − 1','y = 2x + 1','y = 3x + 1','y = 6x − 7'],0,'Gradien m = (11 − 5)/(4 − 2) = 3. y − 5 = 3(x − 2) → y = 3x − 1.'],
+['Biaya tetap Rp200.000, biaya variabel Rp5.000 per unit, harga jual Rp15.000 per unit. BEP dalam unit adalah…',['10 unit','20 unit','25 unit','40 unit'],1,'BEP = FC / (P − VC per unit) = 200.000 / (15.000 − 5.000) = 20 unit.'],
+['Turunan pertama dari f(x) = 3x² + 5x − 7 adalah…',['6x + 5','3x + 5','6x² + 5','6x − 7'],0,'3x² → 6x; 5x → 5; konstanta −7 → 0. Jadi f′(x) = 6x + 5.'],
+['Fungsi biaya total TC = 2Q² + 10Q + 50. Biaya marjinal saat Q = 5 adalah…',['20','30','40','50'],1,'MC = dTC/dQ = 4Q + 10. Saat Q = 5: 4(5) + 10 = 30.'],
+['Penerimaan total TR = 100Q − 2Q². Penerimaan maksimum tercapai pada Q sebesar…',['10','20','25','50'],2,'TR′ = 100 − 4Q = 0 → Q = 25. TR″ = −4 (negatif) sehingga maksimum.'],
+['Elastisitas harga permintaan Ed = −2 berarti permintaan bersifat…',['Inelastis','Elastis: harga naik 1% membuat jumlah diminta turun 2%','Elastis uniter','Inelastis sempurna'],1,'|Ed| = 2 lebih dari 1, jadi elastis. Jumlah diminta berubah lebih besar daripada perubahan harga.'],
+['Uang Rp1.000.000 dibungakan majemuk 10% per tahun selama 2 tahun. Nilai akhirnya adalah…',['Rp1.200.000','Rp1.210.000','Rp1.100.000','Rp1.220.000'],1,'Fn = M(1 + i)ⁿ = 1.000.000 × 1,1² = 1.000.000 × 1,21 = Rp1.210.000.'],
+['Deret aritmetika dengan suku pertama 5 dan beda 3. Suku ke-10 adalah…',['30','32','35','38'],1,'Un = a + (n − 1)b = 5 + 9 × 3 = 32.'],
+['Pemerintah mengenakan pajak spesifik t per unit pada produsen. Kurva penawaran akan…',['Bergeser ke atas (ke kiri) sebesar t','Bergeser ke bawah sebesar t','Berputar menjadi lebih landai','Tidak berubah'],0,'Produsen meminta harga lebih tinggi sebesar t di setiap jumlah, sehingga Qs menjadi Qs(P − t) dan kurva bergeser naik.'],
+['Deret geometri dengan suku pertama 2 dan rasio 3. Jumlah 4 suku pertama adalah…',['40','54','80','160'],2,'Sn = a(rⁿ − 1)/(r − 1) = 2(81 − 1)/2 = 80. (Suku: 2 + 6 + 18 + 54 = 80.)']],
+es:[
+['Qd = 100 − 2P dan Qs = −20 + 4P. Pemerintah memberlakukan pajak Rp3 per unit pada produsen. Tentukan harga dan jumlah keseimbangan baru, serta pajak yang diterima pemerintah.','Qs baru = −20 + 4(P − 3) = −32 + 4P. Samakan dengan Qd: 100 − 2P = −32 + 4P → 6P = 132 → <b>P = 22</b>; <b>Q = 100 − 2(22) = 56</b>. Pajak pemerintah = 3 × 56 = <b>Rp168</b>. Harga naik dari 20 ke 22, jadi konsumen menanggung Rp2 dan produsen menanggung Rp1 dari pajak Rp3.'],
+['Perusahaan menjual produk Rp50 per unit. TC = Q² + 10Q + 100. Tentukan Q yang memaksimumkan laba dan besar laba maksimumnya.','TR = 50Q. π = TR − TC = 50Q − Q² − 10Q − 100 = 40Q − Q² − 100. π′ = 40 − 2Q = 0 → <b>Q = 20</b> (π″ = −2, maksimum). π = 40(20) − 400 − 100 = <b>Rp300</b>.'],
+['Jelaskan apa itu BEP dan hitung BEP rupiah bila FC = Rp6.000.000, harga Rp20.000 per unit, dan biaya variabel Rp8.000 per unit.','BEP adalah titik saat TR = TC (laba nol). BEP unit = 6.000.000 / (20.000 − 8.000) = <b>500 unit</b>. BEP rupiah = 500 × 20.000 = <b>Rp10.000.000</b>. Di atas 500 unit perusahaan untung, di bawahnya rugi.'],
+['Bandingkan bunga sederhana dan majemuk untuk modal Rp5.000.000, bunga 8% per tahun, selama 3 tahun.','Sederhana: Fn = 5.000.000 × (1 + 0,08 × 3) = <b>Rp6.200.000</b>. Majemuk: Fn = 5.000.000 × 1,08³ = 5.000.000 × 1,259712 = <b>Rp6.298.560</b>. Bunga majemuk lebih besar karena bunga tiap periode ikut dibungakan.']]},
+{id:'bi',n:'Pengantar Bahasa Inggris Bisnis',h:'Senin',d:'Titi, S.Pd., M.M.',l:'1RUo90FmzmEktaSDUoNjjQu-9EFkZLmzY',
+src:['1. Greetings, introductions & small talk','2. Telephoning','3. Business emails & letters','4. Meetings & presentations','5. Grammar & business vocabulary'],
+sum:[
+{h:'1. Greetings, Introductions & Small Talk',i:[
+'<b>Menyapa</b>: Good morning / afternoon / evening. How do you do? (formal, dijawab dengan frasa yang sama). Nice to meet you.',
+'<b>Memperkenalkan diri</b>: My name is… / I work for… / I am in charge of… (bagian atau departemen).',
+'<b>Memperkenalkan orang lain</b>: May I introduce Mr. Budi, our Marketing Manager?',
+'<b>Small talk</b> (topik aman): perjalanan, cuaca, kota, pekerjaan. Hindari politik, agama, dan gaji.',
+'<b>Berpamitan</b>: It was a pleasure meeting you. / I look forward to hearing from you.']},
+{h:'2. Telephoning',i:[
+'<b>Membuka</b>: Good morning, PT Maju Jaya. How can I help you?',
+'<b>Menanyakan identitas</b>: May I ask who is calling, please?',
+'<b>Meminta sambungan</b>: Could I speak to Ms. Rina, please? / I would like to speak to the Sales Manager.',
+'<b>Menyambungkan / meminta menunggu</b>: Hold the line, please. / Just a moment, I will put you through.',
+'<b>Orang yang dicari tidak ada</b>: I am afraid she is not available. Can I take a message?',
+'<b>Meminta pengulangan</b>: Could you repeat that, please? / Could you spell that for me?',
+'<b>Menutup</b>: Thank you for calling. / Have a nice day.']},
+{h:'3. Business Emails & Letters',i:[
+'<b>Bagian surat</b>: letterhead, tanggal, alamat penerima, salutation, isi (pembuka, inti, penutup), complimentary close, tanda tangan.',
+'<b>Salutation</b>: Dear Mr. Smith (kenal nama) / Dear Sir or Madam (tidak kenal).',
+'<b>Complimentary close</b> (gaya Inggris): Dear + nama → Yours sincerely; Dear Sir/Madam → Yours faithfully. Untuk email: Best regards / Kind regards.',
+'<b>Frasa umum</b>: I am writing to inquire about… / Please find attached… / I would appreciate it if you could… / We look forward to your reply.',
+'<b>Jenis surat bisnis</b>: inquiry (permintaan informasi), quotation (penawaran harga), order, complaint, reply.',
+'Gunakan bahasa sopan, ringkas, dan jelas. Hindari singkatan informal (thx, pls).']},
+{h:'4. Meetings & Presentations',i:[
+'<b>Membuka rapat</b>: Shall we get started? / The purpose of today’s meeting is to…',
+'<b>Menyampaikan pendapat</b>: In my opinion… / I think we should…',
+'<b>Setuju</b>: I totally agree. / That is a good point. <b>Tidak setuju (sopan)</b>: I see your point, but I am afraid I do not quite agree.',
+'<b>Menyela</b>: Sorry to interrupt, but… / Could I just add something?',
+'<b>Struktur presentasi</b>: <b>Introduction</b> (sapa, sebut topik, garis besar) → <b>Body</b> (poin utama dengan penghubung first, next, finally) → <b>Conclusion</b> (ringkasan, ajakan bertindak, Q&amp;A).',
+'<b>Frasa presentasi</b>: Today I would like to talk about… / Let me move on to… / To sum up… / Are there any questions?',
+'<b>Menjelaskan tren</b>: naik = rise, increase, go up; turun = fall, decrease, decline, drop; stabil = remain stable; adverbia = sharply, dramatically, steadily, slightly.']},
+{h:'5. Grammar & Business Vocabulary',i:[
+'<b>Present simple</b>: kebiasaan/fakta. We open at 8 a.m. <b>Present continuous</b>: sedang berlangsung. We are preparing the report.',
+'<b>Past simple</b>: kejadian selesai pada waktu lampau. The company launched a new product last month.',
+'<b>Present perfect</b>: have/has + V3, hasil terkait sekarang. We have signed the contract. <b>Present perfect continuous</b>: We have been working on this project since January.',
+'<b>Future</b>: will (keputusan spontan/prediksi), be going to (rencana), present continuous (jadwal pasti).',
+'<b>Modal</b>: must / have to (kewajiban), should (saran), can / could (kemampuan, permintaan), may / might (kemungkinan), would you mind… (permintaan sopan).',
+'<b>Kosakata</b>: invoice = faktur; quotation = penawaran harga; deadline = batas waktu; agenda = acara rapat; minutes = notulen; shareholder = pemegang saham; revenue = pendapatan; profit = laba; loss = rugi; budget = anggaran; supplier = pemasok; customer = pelanggan.']}
+],
+mcq:[
+['Manakah cara paling formal untuk menanyakan nama penelepon?',['Who are you?','What is your name?','May I ask who is calling, please?','Say your name.'],2,'“May I ask who is calling, please?” sopan dan umum dipakai di telepon bisnis.'],
+['Surat dibuka dengan “Dear Mr. Smith,”. Penutup yang tepat adalah…',['See you!','Yours sincerely,','Cheers,','Bye bye,'],1,'Salutation dengan nama → Yours sincerely. (Dear Sir/Madam → Yours faithfully.)'],
+['“Please find attached the invoice.” artinya…',['Tolong cari lampiran di kantor','Terlampir faktur (invoice) untuk Anda','Mohon bayar faktur sekarang','Faktur sudah dibatalkan'],1,'“Please find attached” = terlampir. Frasa standar saat mengirim lampiran email.'],
+['Lengkapi: The company ___ a new product last month.',['launch','launches','launched','has launch'],2,'“Last month” penanda past simple, sehingga launched.'],
+['Lengkapi: We ___ on this project since January.',['work','have been working','are worked','worked'],1,'“Since January” dengan kegiatan yang berlanjut sampai sekarang → present perfect continuous: have been working.'],
+['Permintaan yang paling sopan adalah…',['Send me the report now.','I want the report.','Would you mind sending me the report?','Report, please, quick.'],2,'“Would you mind + V-ing” adalah bentuk permintaan yang halus.'],
+['Cara sopan untuk tidak setuju dalam rapat adalah…',['That is stupid.','I see your point, but I am afraid I do not quite agree.','No way.','You are wrong.'],1,'Akui dulu pendapat lawan bicara (I see your point), lalu sampaikan ketidaksetujuan dengan halus.'],
+['“Sales rose sharply” memiliki arti yang sama dengan…',['Sales dropped slightly','Sales increased dramatically','Sales stayed the same','Sales were unknown'],1,'Rose = naik; sharply = tajam. Padanannya increased dramatically.'],
+['Arti “deadline” dalam bisnis adalah…',['Garis akhir kantor','Batas waktu','Jam kerja','Rapat tahunan'],1,'Deadline = batas waktu penyelesaian pekerjaan atau tugas.'],
+['“Quotation” dalam surat bisnis berarti…',['Kutipan ayat','Penawaran harga','Surat kuasa','Tanda terima'],1,'Quotation = penawaran harga dari penjual kepada calon pembeli.'],
+['Bagian pembuka (introduction) presentasi sebaiknya berisi…',['Langsung kesimpulan tanpa salam','Menyapa audiens, menyebut topik dan garis besar presentasi','Hanya pertanyaan untuk audiens','Slide terima kasih'],1,'Introduction: sapa, perkenalkan topik, dan beri gambaran isi presentasi.'],
+['Lengkapi (kewajiban): You ___ submit the form before Friday.',['might','must','would','can'],1,'Must menyatakan kewajiban atau keharusan.'],
+['“Could you hold the line, please?” artinya…',['Tolong tutup telepon','Tolong tunggu sebentar di telepon','Tolong ulangi pesan','Tolong telepon lagi besok'],1,'Hold the line = jangan menutup telepon, tunggu sebentar.']],
+es:[
+['Tulis email formal singkat untuk meminta penawaran harga (quotation) 100 unit laptop kepada pemasok.','Contoh jawaban:<br><i>Subject: Request for Quotation – 100 Laptops</i><br>Dear Sir or Madam,<br>I am writing to inquire about the price of 100 laptops (Model X, 14 inch). Could you please send us a quotation including the unit price, delivery cost, and payment terms? We would appreciate it if you could reply by 5 December.<br>We look forward to hearing from you.<br>Yours faithfully,<br>[Nama], Purchasing Department.'],
+['Jelaskan tiga bagian presentasi bisnis dan beri satu frasa untuk tiap bagian.','<b>Introduction</b>: menyapa dan menyebut topik, mis. “Today I would like to talk about…”. <b>Body</b>: menyampaikan poin utama secara berurutan, mis. “Let me move on to…”. <b>Conclusion</b>: meringkas dan membuka tanya jawab, mis. “To sum up… Are there any questions?”.'],
+['Ubah kalimat kasar “Give me the data now.” menjadi tiga bentuk permintaan yang sopan.','1) Could you please send me the data by 3 p.m.? 2) Would you mind sending me the data today? 3) I would appreciate it if you could send me the data as soon as possible.'],
+['Bedakan past simple dan present perfect dengan contoh dalam konteks bisnis.','<b>Past simple</b> untuk kejadian selesai pada waktu tertentu di masa lalu: “We signed the contract last week.” <b>Present perfect</b> untuk kejadian yang hasilnya masih terkait sekarang atau waktunya tidak disebut: “We have signed the contract, so we can start production.”']]},
+{id:'bs',n:'Budaya Sunda dan Kepasundanan',h:'Selasa',d:'H. Wawan Herdiwan, Drs., M.M.',l:'1NmNQWSVpvTPUWaEGj4Fe7Lk0nSJyk5eZ',empty:true,why:'Folder masih kosong.'},
+{id:'bd',n:'Bahasa Indonesia',h:'Selasa',d:'Saeful Hermansyah, Drs., M.M.',l:'1vipRwS2vxmowHPYnnnp_Y6vlscJ4TNcl',empty:true,why:'Hanya ada subfolder “Tugas Kelompok IV” tanpa file materi.'}
+];
+
+var cur=0,tab='sum',answered={},flt='';
+var $=function(s){return document.querySelector(s)};
+function jurnal(){
+ return '<h3>✏️ Latihan Jurnal Umum (CV. Rangga, Maret 2009)</h3><p>Buatlah jurnal untuk transaksi berikut:</p><ol><li>5 Mar: Tn. Rangga setor modal Rp50.000.000</li><li>7 Mar: beli perlengkapan tunai Rp2.000.000</li><li>15 Mar: beli mobil Rp90.000.000 kredit, uang muka Rp10.000.000</li><li>17 Mar: beli mesin fotokopi tunai Rp30.000.000</li><li>20 Mar: terima pendapatan Rp15.000.000</li><li>22 Mar: bayar beban telepon Rp500.000</li><li>25 Mar: bayar angsuran mobil Rp3.000.000</li><li>26 Mar: terima pendapatan Rp10.000.000</li><li>27 Mar: jual mesin fotokopi Rp25.000.000 kredit</li><li>30 Mar: bayar gaji pegawai Rp2.000.000</li></ol>'+
+ '<details><summary>Lihat kunci jawaban</summary><div><table><tr><th>Tgl</th><th>Debet</th><th>Kredit</th></tr>'+
+ '<tr><td>5</td><td>Kas 50.000.000</td><td>Modal Tn. Rangga 50.000.000</td></tr>'+
+ '<tr><td>7</td><td>Perlengkapan 2.000.000</td><td>Kas 2.000.000</td></tr>'+
+ '<tr><td>15</td><td>Kendaraan 90.000.000</td><td>Kas 10.000.000; Utang Usaha 80.000.000</td></tr>'+
+ '<tr><td>17</td><td>Peralatan 30.000.000</td><td>Kas 30.000.000</td></tr>'+
+ '<tr><td>20</td><td>Kas 15.000.000</td><td>Pendapatan 15.000.000</td></tr>'+
+ '<tr><td>22</td><td>Beban Telepon 500.000</td><td>Kas 500.000</td></tr>'+
+ '<tr><td>25</td><td>Utang Usaha 3.000.000</td><td>Kas 3.000.000</td></tr>'+
+ '<tr><td>26</td><td>Kas 10.000.000</td><td>Pendapatan 10.000.000</td></tr>'+
+ '<tr><td>27</td><td>Piutang Usaha 25.000.000</td><td>Peralatan 25.000.000</td></tr>'+
+ '<tr><td>30</td><td>Beban Gaji 2.000.000</td><td>Kas 2.000.000</td></tr></table>'+
+ '</div></details>';
+}
+
+function ksGet(){ try{ return JSON.parse(localStorage.getItem('bj-ks')||'{}')||{}; }catch(e){ return {}; } }
+function ksPut(o){ try{ localStorage.setItem('bj-ks',JSON.stringify(o)); }catch(e){} }
+function ksData(c){
+ if(c.ks) return c.ks;
+ return c.sum.map(function(sc){ return {h:sc.h, r:sc.i.map(function(x){
+  var m=x.match(/<b>(.*?)<\/b>/), t=m?m[1]:x.replace(/<[^>]+>/g,'').slice(0,70).replace(/&[a-z#0-9]*$/i,'');
+  return ['Pahami dan mampu menjelaskan: '+t,'Paham','PG · Esai']; })}; });
+}
+function ksHtml(c){
+ var G=ksData(c), st=ksGet(), h='';
+ h+='<div class="bj-card"><h3>🎯 Kisi-kisi '+c.n+'</h3><div class="bj-prog"><i id="bjPg"></i></div><div class="bj-meta" id="bjPt"></div><button type="button" class="bj-btn" id="bjKr" style="border:0;cursor:pointer">Reset centang</button></div>';
+ G.forEach(function(g,gi){ h+='<div class="bj-card"><h3>'+g.h+'</h3>'+g.r.map(function(r,ri){ var k=c.id+':'+gi+':'+ri; return '<label class="bj-ks"><input type="checkbox" data-k="'+k+'"'+(st[k]?' checked':'')+'><span class="tx">'+r[0]+'</span><span class="bd">'+r[1]+'</span><span class="bd">'+r[2]+'</span></label>'; }).join('')+'</div>'; });
+ return h;
+}
+function ksBind(){
+ var boxes=document.querySelectorAll('#bjApp input[data-k]');
+ function prog(){ var n=0; boxes.forEach(function(b){ if(b.checked) n++; }); var p=boxes.length?Math.round(n/boxes.length*100):0, pg=$('#bjPg'), pt=$('#bjPt'); if(pg) pg.style.width=p+'%'; if(pt) pt.textContent='Dikuasai '+n+' dari '+boxes.length+' topik ('+p+'%)'; }
+ boxes.forEach(function(b){ b.onchange=function(){ var st=ksGet(); if(b.checked) st[b.dataset.k]=1; else delete st[b.dataset.k]; ksPut(st); prog(); }; });
+ var kr=$('#bjKr'); if(kr) kr.onclick=function(){ var st=ksGet(); boxes.forEach(function(b){ delete st[b.dataset.k]; }); ksPut(st); render(); };
+ prog();
+}
+var DAYS=[
+ {n:'Senin',t:'30 Nov',iso:'2026-11-30',s:[['pan','18.30 – 20.00'],['ak','20.00 – 21.30']]},
+ {n:'Selasa',t:'1 Des',iso:'2026-12-01',s:[['bi','18.30 – 20.00'],['me','20.00 – 21.30']]},
+ {n:'Rabu',t:'2 Des',iso:'2026-12-02',s:[['bd','18.30 – 20.00'],['bs','20.00 – 21.30']]},
+ {n:'Kamis',t:'3 Des',iso:'2026-12-03',s:[['pb','18.30 – 20.00'],['tik','20.00 – 21.30']]}
+];
+var di=0, si=0;
+function cIdx(id){ for(var i=0;i<C.length;i++){ if(C[i].id===id) return i; } return 0; }
+(function(){ var d=new Date(), p=function(n){return ('0'+n).slice(-2)}, iso=d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate()); DAYS.forEach(function(x,i){ if(x.iso===iso) di=i; }); })();
+function nav(){
+ $('#bjDays').innerHTML=DAYS.map(function(d,i){ return '<button type="button" class="'+(i===di?'on':'')+'" data-d="'+i+'"><b>Hari '+(i+1)+'</b><span>'+d.n+'</span><small>'+d.t+' 2026</small></button>'; }).join('');
+ $('#bjSlots').innerHTML=DAYS[di].s.map(function(s,i){ var c=C[cIdx(s[0])]; return '<button type="button" class="'+(i===si?'on':'')+'" data-s="'+i+'"><small>'+s[1]+' WIB</small><b>'+c.n+'</b><span>'+c.d+'</span></button>'; }).join('');
+ document.querySelectorAll('#bjDays button').forEach(function(b){b.onclick=function(){di=+b.dataset.d;si=0;tab='sum';flt='';render();}});
+ document.querySelectorAll('#bjSlots button').forEach(function(b){b.onclick=function(){si=+b.dataset.s;tab='sum';flt='';render();}});
+}
+function render(){
+ nav(); cur=cIdx(DAYS[di].s[si][0]); var c=C[cur], h='';
+ h+='<div class="bj-card"><h3>'+c.n+'</h3><div class="bj-meta">UTS '+DAYS[di].n+', '+DAYS[di].t+' · '+DAYS[di].s[si][1]+' WIB · '+c.d+' · <a href="'+D+c.l+S+'" target="_blank" rel="noopener">📂 Buka folder Drive</a></div>';
+ if(c.empty){ $('#bjApp').innerHTML=h+'<div class="bj-empty"><div style="font-size:2rem">📭</div><p><b>Materi belum tersedia.</b></p><a class="bj-btn" href="'+D+c.l+S+'" target="_blank" rel="noopener">Buka folder Drive</a></div></div>'; return; }
+ h+='<div class="bj-tabs"><button data-t="sum" class="'+(tab==='sum'?'on':'')+'">📖 Ringkasan</button><button data-t="mcq" class="'+(tab==='mcq'?'on':'')+'">📝 Soal PG ('+c.mcq.length+')</button><button data-t="es" class="'+(tab==='es'?'on':'')+'">✍️ Esai ('+c.es.length+')</button><button data-t="ks" class="'+(tab==='ks'?'on':'')+'">🎯 Kisi-kisi</button></div></div>';
+ if(tab==='sum'){
+  if(c.sum.length>2) h+='<div class="bj-chips">'+c.sum.map(function(s,k){ var t=s.h.split(' – ')[0]; if(t.length>24) t=t.slice(0,22)+'…'; return '<button type="button" data-j="'+k+'">'+t+'</button>'; }).join('')+'</div>';
+  c.sum.forEach(function(s,k){ h+='<div class="bj-card" id="bjs-'+k+'"><h3>'+s.h+'</h3><ul>'+s.i.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></div>'; }); }
+ if(tab==='mcq'){
+  var gs=[]; c.mcq.forEach(function(q){ if(q[4]&&gs.indexOf(q[4])<0) gs.push(q[4]); });
+  gs.sort(); if(gs.length>1) h+='<div class="bj-chips" id="bjF"><button type="button" data-f="">Semua</button>'+gs.map(function(g){ return '<button type="button" data-f="'+g+'">Pertemuan '+g.replace('P','')+'</button>'; }).join('')+'</div>';
+  c.mcq.forEach(function(q,qi){ h+='<div class="bj-card bj-q" data-q="'+qi+'" data-g="'+(q[4]||'')+'"><div class="t">'+(q[4]?'<span class="bj-tag">'+q[4].replace('P','P-')+'</span>':'')+(qi+1)+'. '+q[0]+'</div>'+q[1].map(function(o,oi){return '<button class="bj-o" data-o="'+oi+'">'+String.fromCharCode(65+oi)+'. '+o+'</button>'}).join('')+'<div class="bj-exp"><b>Pembahasan:</b> '+q[3]+'</div></div>'; });
+  h+='<div class="bj-score"><span id="bjSc"></span><button id="bjRs" type="button">Ulangi</button></div>';
+ }
+ if(tab==='es'){
+  h+='<div class="bj-card"><h3>Soal Esai</h3>'+c.es.map(function(e,i){return '<details><summary>'+(e[2]?'<span class="bj-tag">'+e[2].replace('P','P-')+'</span>':'')+(i+1)+'. '+e[0]+'</summary><div><b>Jawaban singkat:</b> '+e[1]+'</div></details>'}).join('')+(c.jur?jurnal():'')+'</div>';
+ }
+ if(tab==='ks') h+=ksHtml(c);
+ $('#bjApp').innerHTML=h;
+ document.querySelectorAll('#bjApp .bj-tabs button').forEach(function(b){b.onclick=function(){tab=b.dataset.t;render()}});
+ document.querySelectorAll('#bjApp [data-j]').forEach(function(b){ b.onclick=function(){ var e=document.getElementById('bjs-'+b.dataset.j); if(e) e.scrollIntoView({behavior:'smooth',block:'start'}); }; });
+ if(tab==='ks') ksBind();
+ function upd(){ var a=answered[c.id]||{},n=0,ok=0; Object.keys(a).forEach(function(k){n++; if(a[k]===c.mcq[k][2])ok++;}); $('#bjSc').textContent='Terjawab '+n+'/'+c.mcq.length+' · Benar '+ok; }
+ if(tab==='mcq'){
+  var key=c.id; answered[key]=answered[key]||{};
+  document.querySelectorAll('#bjApp .bj-q').forEach(function(card){
+    var qi=+card.dataset.q, q=c.mcq[qi], opts=card.querySelectorAll('.bj-o'), done=answered[key][qi];
+    function mark(sel){ opts.forEach(function(b,i){b.disabled=true; if(i===q[2])b.classList.add('ok'); else if(i===sel)b.classList.add('no')}); card.querySelector('.bj-exp').style.display='block'; }
+    if(done!==undefined) mark(done);
+    opts.forEach(function(b){b.onclick=function(){ answered[key][qi]=+b.dataset.o; mark(+b.dataset.o); upd(); }});
+  });
+  function applyF(){ document.querySelectorAll('#bjApp .bj-q').forEach(function(cd){ cd.style.display=(!flt||cd.dataset.g===flt)?'':'none'; }); document.querySelectorAll('#bjF button').forEach(function(b){ b.classList.toggle('on',b.dataset.f===flt); }); }
+  document.querySelectorAll('#bjF button').forEach(function(b){ b.onclick=function(){ flt=b.dataset.f; applyF(); }; }); applyF();
+  $('#bjRs').onclick=function(){answered[key]={};render();};
+  upd();
+ }
+}
+render();
+})();
+</script>
+<script>
+(function(){
+ function click(sel){ var b=document.querySelector(sel); if(b){ b.click(); return true; } return false; }
+ function open(k){
+  if(k==='kas'){ if(!click('#gtKas')) click('#navKas'); return; }
+  if(k==='rekap'){ click('#navRekap'); return; }
+  click('nav [data-go="'+k+'"]');
+ }
+ document.addEventListener('click',function(e){
+  var el=e.target.closest?e.target.closest('#beranda [data-link]'):null; if(!el) return;
+  var inner=e.target.closest('button,a,input,select,textarea,label');
+  if(inner && inner!==el && el.contains(inner)) return;
+  open(el.getAttribute('data-link'));
+ });
+ document.addEventListener('keydown',function(e){
+  if(e.key!=='Enter' && e.key!==' ') return;
+  var el=e.target; if(!el || !el.matches || !el.matches('#beranda [data-link][role="button"]')) return;
+  e.preventDefault(); open(el.getAttribute('data-link'));
+ });
 })();
 </script>
 </body>
