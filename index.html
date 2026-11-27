@@ -1892,7 +1892,7 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
 #belajar .bj-ks .bd{font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(127,127,127,.18);white-space:nowrap}
 #belajar .bj-ks input:checked+.tx{opacity:.55;text-decoration:line-through}
 #belajar .bj-btn{display:inline-block;margin-top:10px;background:#2f9fe6;color:#fff;padding:9px 14px;border-radius:12px;text-decoration:none;font-weight:600}
-/* ===== Belajar: tampilan per hari UTS ===== */
+/* ===== Belajar: tampilan per hari kuliah + kisi-kisi UTS ===== */
 #belajar .bj-days{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 10px}
 #belajar .bj-days button{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;border:1px solid rgba(127,127,127,.3);background:rgba(127,127,127,.08);color:inherit;padding:10px 12px;border-radius:16px;cursor:pointer;font:inherit;transition:transform .2s,background .2s,border-color .2s}
 #belajar .bj-days button b{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;opacity:.7}
@@ -1909,6 +1909,11 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
 #belajar .bj-slots button:hover{transform:translateY(-2px)}
 #belajar .bj-slots button.on{background:rgba(47,159,230,.22);border-color:#2f9fe6}
 @media(max-width:560px){#belajar .bj-days{grid-template-columns:repeat(2,minmax(0,1fr))}#belajar .bj-slots{grid-template-columns:1fr}}
+#belajar .bj-mode{display:flex;gap:8px;margin:0 0 12px}
+#belajar .bj-mode button{flex:1;border:1px solid rgba(127,127,127,.3);background:rgba(127,127,127,.08);color:inherit;padding:11px 8px;border-radius:14px;cursor:pointer;font:700 .88rem inherit}
+#belajar .bj-mode button.on{background:#2f9fe6;color:#fff;border-color:#2f9fe6}
+#belajar .bj-sub{font-weight:700;font-size:.9rem;margin:12px 0 0}
+#belajar details>summary{line-height:1.4}
 
 /* ===== Beranda: semua bisa diklik ===== */
 #beranda [data-link]{cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -2029,7 +2034,7 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
       <div class="qmenu">
         <h3>Menu cepat</h3>
         <div class="qgrid">
-          <button type="button" data-link="belajar"><span class="qi">📚</span><span><b>Belajar</b><small>Ringkasan &amp; latihan soal per hari UTS</small></span></button>
+          <button type="button" data-link="belajar"><span class="qi">📚</span><span><b>Belajar</b><small>Materi sesuai jadwal kuliah &amp; kisi-kisi UTS</small></span></button>
           <button type="button" data-link="informasi"><span class="qi">📣</span><span><b>Informasi</b><small>UTS, UAS &amp; deadline tugas</small></span></button>
           <button type="button" data-link="jadwal"><span class="qi">🗓️</span><span><b>Jadwal</b><small>Jadwal kuliah Senin – Kamis</small></span></button>
           <button type="button" data-link="mahasiswa"><span class="qi">🎓</span><span><b>Mahasiswa</b><small>Daftar teman sekelas</small></span></button>
@@ -2128,7 +2133,8 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
     </section>
 
     <section id="belajar" class="panel view">
-      <div class="sec-title"><h2>Belajar</h2><p>Ringkasan materi &amp; latihan soal, dibagi per hari UTS</p></div>
+      <div class="sec-title"><h2>Belajar</h2><p>Ringkasan materi, latihan soal &amp; kisi-kisi UTS · disusun sesuai jadwal kuliah</p></div>
+      <div class="bj-mode" id="bjMode"></div>
       <div class="bj-days" id="bjDays"></div>
       <div class="bj-slots" id="bjSlots"></div>
       <div id="bjApp"></div>
@@ -3727,7 +3733,7 @@ html[data-theme=light] .kp-box{background:linear-gradient(155deg,rgba(255,255,25
       {i:'🗓️',t:'Jadwal',s:'jadwal',d:'Jadwal kuliah Senin sampai Kamis di RG 401. Ketuk salah satu mata kuliah untuk melihat materinya langsung dari Google Drive.'},
       {i:'📣',t:'Informasi',s:'informasi',d:'Jadwal UTS, UAS, dan deadline tugas dikumpulkan di satu tempat supaya tidak ada yang terlewat.'},
       {i:'🖼️',t:'Galeri',s:'galeri',d:'Foto-foto kenangan kelas. Ketuk foto untuk memperbesar, dan ada Buku Kenangan yang halamannya bisa dibalik.'},
-      {i:'📚',t:'Belajar',s:'belajar',d:'Ringkasan materi per pertemuan, soal pilihan ganda dengan pembahasan dan filter pertemuan, soal esai, serta kisi-kisi dengan centang progres belajar untuk tiap mata kuliah.'},
+      {i:'📚',t:'Belajar',s:'belajar',d:'Ringkasan materi per pertemuan, soal pilihan ganda dengan pembahasan, soal esai, dan checklist belajar yang disusun sesuai jadwal kuliah, plus kumpulan kisi-kisi UTS lengkap dengan penjelasannya.'},
       {i:'💸',t:'Uang Kas',b:'#navKas',d:'Pantau iuran kas kelas: siapa yang sudah membayar dan kondisi saldonya.'},
       {i:'📊',t:'Rekapan Kas',b:'#navRekap',d:'Rekap pemasukan dan pengeluaran kas dalam bentuk ringkas dan mudah dibaca.'},
       {i:'👤',t:'Akun',b:'#navAcc',d:'Atur profil dan foto akunmu. Foto ini juga muncul di ikon akun pada bagian atas.'},
@@ -4594,7 +4600,7 @@ es:[
 ['Jelaskan apa itu BEP dan hitung BEP rupiah bila FC = Rp6.000.000, harga Rp20.000 per unit, dan biaya variabel Rp8.000 per unit.','BEP adalah titik saat TR = TC (laba nol). BEP unit = 6.000.000 / (20.000 − 8.000) = <b>500 unit</b>. BEP rupiah = 500 × 20.000 = <b>Rp10.000.000</b>. Di atas 500 unit perusahaan untung, di bawahnya rugi.'],
 ['Bandingkan bunga sederhana dan majemuk untuk modal Rp5.000.000, bunga 8% per tahun, selama 3 tahun.','Sederhana: Fn = 5.000.000 × (1 + 0,08 × 3) = <b>Rp6.200.000</b>. Majemuk: Fn = 5.000.000 × 1,08³ = 5.000.000 × 1,259712 = <b>Rp6.298.560</b>. Bunga majemuk lebih besar karena bunga tiap periode ikut dibungakan.']]},
 {id:'bi',n:'Pengantar Bahasa Inggris Bisnis',h:'Senin',d:'Titi, S.Pd., M.M.',l:'1RUo90FmzmEktaSDUoNjjQu-9EFkZLmzY',
-src:['1. Greetings, introductions & small talk','2. Telephoning','3. Business emails & letters','4. Meetings & presentations','5. Grammar & business vocabulary'],
+src:['1. Greetings, introductions & small talk','2. Telephoning','3. Business emails & letters','4. Meetings & presentations','5. Grammar & business vocabulary','6. Descriptive Text (Teks Deskripsi) & Tenses and Aspect – Titi'],
 sum:[
 {h:'1. Greetings, Introductions & Small Talk',i:[
 '<b>Menyapa</b>: Good morning / afternoon / evening. How do you do? (formal, dijawab dengan frasa yang sama). Nice to meet you.',
@@ -4631,7 +4637,41 @@ sum:[
 '<b>Present perfect</b>: have/has + V3, hasil terkait sekarang. We have signed the contract. <b>Present perfect continuous</b>: We have been working on this project since January.',
 '<b>Future</b>: will (keputusan spontan/prediksi), be going to (rencana), present continuous (jadwal pasti).',
 '<b>Modal</b>: must / have to (kewajiban), should (saran), can / could (kemampuan, permintaan), may / might (kemungkinan), would you mind… (permintaan sopan).',
-'<b>Kosakata</b>: invoice = faktur; quotation = penawaran harga; deadline = batas waktu; agenda = acara rapat; minutes = notulen; shareholder = pemegang saham; revenue = pendapatan; profit = laba; loss = rugi; budget = anggaran; supplier = pemasok; customer = pelanggan.']}
+'<b>Kosakata</b>: invoice = faktur; quotation = penawaran harga; deadline = batas waktu; agenda = acara rapat; minutes = notulen; shareholder = pemegang saham; revenue = pendapatan; profit = laba; loss = rugi; budget = anggaran; supplier = pemasok; customer = pelanggan.']},
+{h:'6. Descriptive Text – Definition & Purpose (Pengertian & Tujuan)',i:[
+'<b>Descriptive text</b> is a text that describes a particular person, place, animal, thing, or event in detail so that the reader can imagine it clearly.<br><i>🇮🇩 Teks deskripsi adalah teks yang menggambarkan orang, tempat, hewan, benda, atau peristiwa tertentu secara rinci agar pembaca dapat membayangkannya dengan jelas.</i>',
+'<b>Social function / Purpose</b>: to describe and reveal a specific person, place, or thing.<br><i>🇮🇩 Fungsi sosial: menggambarkan dan menampilkan ciri-ciri orang, tempat, atau benda tertentu.</i>',
+'<b>Specific, not general</b>: “My cat, Mimi, has soft white fur” (descriptive) vs. “Cats have fur” (general/report text).<br><i>🇮🇩 Objek yang dideskripsikan bersifat khusus, bukan umum. Deskripsi berbeda dengan report text yang membahas sesuatu secara umum.</i>',
+'<b>In business</b>: used in product descriptions, company profiles, hotel/restaurant brochures, and job or office descriptions.<br><i>🇮🇩 Dalam bisnis: dipakai pada deskripsi produk, profil perusahaan, brosur hotel/restoran, dan gambaran pekerjaan atau kantor.</i>']},
+{h:'7. Generic Structure (Struktur Teks)',i:[
+'<b>1. Identification</b>: introduces the object to be described (who/what/where).<br><i>🇮🇩 Identifikasi: memperkenalkan objek yang dideskripsikan (siapa/apa/di mana).</i>',
+'<b>2. Description</b>: describes the object: parts, qualities, characteristics, size, color, function, or behavior.<br><i>🇮🇩 Deskripsi: menguraikan bagian, sifat, ciri, ukuran, warna, fungsi, atau perilaku objek.</i>',
+'<b>Example / Contoh</b>:<br><i>Identification</i>: “Bandung Paris van Java is a famous shopping and tourist destination in Bandung.”<br><i>Description</i>: “It has hundreds of stores, a spacious food court, and a beautiful open garden. The atmosphere is lively and comfortable.”<br><i>🇮🇩 Identifikasi: “Paris van Java adalah tujuan belanja dan wisata terkenal di Bandung.” Deskripsi: “Tempat ini memiliki ratusan toko, food court yang luas, dan taman terbuka yang indah. Suasananya ramai dan nyaman.”</i>']},
+{h:'8. Language Features (Ciri Kebahasaan)',i:[
+'<b>Simple present tense</b>: used to state facts and permanent characteristics. “It snows in Alaska.” “The hotel has 50 rooms.”<br><i>🇮🇩 Simple present: untuk fakta dan ciri yang tetap. “Salju turun di Alaska.” “Hotel itu memiliki 50 kamar.”</i>',
+'<b>Adjectives</b> (descriptive words): beautiful, spacious, modern, friendly, tall, soft, delicious. Order: opinion → size → age → shape → color → origin → material → noun (a <i>beautiful small old round red Italian leather</i> bag).<br><i>🇮🇩 Kata sifat (adjektiva) untuk menggambarkan objek. Urutan: opini → ukuran → usia → bentuk → warna → asal → bahan → benda.</i>',
+'<b>Linking / being verbs</b>: is, are, has, have, looks, seems, feels, smells, tastes.<br><i>🇮🇩 Kata kerja penghubung: is, are, has, have, looks (tampak), seems (terlihat), feels (terasa), smells (berbau), tastes (berasa).</i>',
+'<b>Noun phrases</b>: a modern office building; a friendly sales manager.<br><i>🇮🇩 Frasa nomina: gedung kantor modern; manajer penjualan yang ramah.</i>',
+'<b>Figurative language & adverbs</b>: “as bright as the sun,” “very comfortable,” “extremely popular.”<br><i>🇮🇩 Bahasa kiasan dan adverbia untuk memperkuat gambaran: “seterang matahari,” “sangat nyaman,” “sangat populer.”</i>']},
+{h:'9. Tenses & Aspect in Descriptive Text (Kala & Aspek)',i:[
+'<b>Tense</b> refers to the location of an event in time; <b>aspect</b> shows how an event is viewed with respect to time. Descriptive text mostly uses the simple present, but other forms appear too.<br><i>🇮🇩 Tense menunjukkan letak peristiwa dalam waktu; aspek menunjukkan cara pandang terhadap peristiwa. Teks deskripsi paling sering memakai simple present, tetapi bentuk lain juga muncul.</i>',
+'<b>Simple present</b> (facts, habits, permanent traits): “Tom watches television every day.” “The restaurant opens at 8 a.m.”<br><i>🇮🇩 Simple present: fakta, kebiasaan, ciri tetap. “Tom menonton televisi setiap hari.” “Restoran buka pukul 08.00.”</i>',
+'<b>Simple past</b> (describing a past person/place/event): “My grandfather was a tall man. He had a gentle smile.”<br><i>🇮🇩 Simple past: mendeskripsikan orang/tempat/peristiwa di masa lalu. “Kakek saya adalah pria tinggi. Ia memiliki senyum yang lembut.”</i>',
+'<b>Present progressive</b> (what is happening now): “The children are playing in the garden.” “She is wearing a blue dress.”<br><i>🇮🇩 Present progressive: yang sedang berlangsung. “Anak-anak sedang bermain di taman.” “Ia sedang memakai gaun biru.”</i>',
+'<b>Present perfect</b> (have/has + V3; result related to now): “The hotel has become very popular.”<br><i>🇮🇩 Present perfect (have/has + V3): hasil yang berkaitan dengan sekarang. “Hotel itu telah menjadi sangat populer.”</i>',
+'<b>Past perfect</b> (had + V3; before another past time): “The shop had already closed when we arrived.”<br><i>🇮🇩 Past perfect (had + V3): terjadi sebelum waktu lampau lain. “Toko itu sudah tutup ketika kami tiba.”</i>',
+'<b>Perfect progressive</b> (have/has/had + been + V-ing; duration): “The cafe has been serving customers since 7 a.m.” / “Tom had been studying for two hours before his friend came.”<br><i>🇮🇩 Perfect progressive: menekankan durasi suatu kegiatan sebelum/hingga waktu tertentu.</i>',
+'<b>Tip</b>: keep one main tense for the whole description (usually simple present, or simple past for a past subject). Do not switch without reason.<br><i>🇮🇩 Tips: pertahankan satu tense utama dalam seluruh deskripsi (biasanya simple present, atau simple past untuk objek masa lalu). Jangan berganti tanpa alasan.</i>']},
+{h:'10. Example Texts (Contoh Teks)',i:[
+'<b>Describing a person / Mendeskripsikan orang</b>:<br>“Rina is my colleague. She is 25 years old and works as a marketing officer. She is tall and slim with long black hair and bright eyes. She is friendly, hard-working, and always arrives on time.”<br><i>🇮🇩 “Rina adalah rekan kerja saya. Usianya 25 tahun dan bekerja sebagai staf pemasaran. Ia tinggi dan langsing, berambut hitam panjang dan bermata cerah. Ia ramah, pekerja keras, dan selalu datang tepat waktu.”</i>',
+'<b>Describing a place / Mendeskripsikan tempat</b>:<br>“Lembang is a cool mountain town north of Bandung. It has fresh air, green tea gardens, and many cafés with beautiful views. Visitors can ride horses, take photos, and enjoy hot corn at the roadside.”<br><i>🇮🇩 “Lembang adalah kota pegunungan yang sejuk di utara Bandung. Udaranya segar, ada kebun teh yang hijau, dan banyak kafe dengan pemandangan indah. Pengunjung dapat menunggang kuda, berfoto, dan menikmati jagung bakar di tepi jalan.”</i>',
+'<b>Describing a thing (product) / Mendeskripsikan benda (produk)</b>:<br>“The ZX laptop is light and elegant. It has a 14-inch screen, a silver metal body, and a fast processor. The battery lasts for ten hours, so it is perfect for students and business people.”<br><i>🇮🇩 “Laptop ZX ringan dan elegan. Layarnya 14 inci, bodinya logam berwarna perak, dan prosesornya cepat. Baterainya tahan sepuluh jam, sehingga cocok bagi mahasiswa dan pebisnis.”</i>']},
+{h:'11. Useful Vocabulary (Kosakata Penting)',i:[
+'<b>Appearance / Penampilan</b>: tall = tinggi; short = pendek; slim = langsing; curly hair = rambut keriting; straight hair = rambut lurus; handsome = tampan; beautiful = cantik.',
+'<b>Character / Sifat</b>: friendly = ramah; diligent = rajin; honest = jujur; polite = sopan; generous = dermawan; creative = kreatif.',
+'<b>Place / Tempat</b>: spacious = luas; crowded = ramai/padat; quiet = tenang; clean = bersih; comfortable = nyaman; scenic = indah pemandangannya.',
+'<b>Thing / Benda</b>: lightweight = ringan; durable = awet; smooth = halus; sturdy = kokoh; affordable = terjangkau; modern = modern.',
+'<b>Useful phrases</b>: “It is located in…” (terletak di…) · “It is made of…” (terbuat dari…) · “It is famous for…” (terkenal karena…) · “It looks like…” (tampak seperti…).']}
 ],
 mcq:[
 ['Manakah cara paling formal untuk menanyakan nama penelepon?',['Who are you?','What is your name?','May I ask who is calling, please?','Say your name.'],2,'“May I ask who is calling, please?” sopan dan umum dipakai di telepon bisnis.'],
@@ -4646,12 +4686,31 @@ mcq:[
 ['“Quotation” dalam surat bisnis berarti…',['Kutipan ayat','Penawaran harga','Surat kuasa','Tanda terima'],1,'Quotation = penawaran harga dari penjual kepada calon pembeli.'],
 ['Bagian pembuka (introduction) presentasi sebaiknya berisi…',['Langsung kesimpulan tanpa salam','Menyapa audiens, menyebut topik dan garis besar presentasi','Hanya pertanyaan untuk audiens','Slide terima kasih'],1,'Introduction: sapa, perkenalkan topik, dan beri gambaran isi presentasi.'],
 ['Lengkapi (kewajiban): You ___ submit the form before Friday.',['might','must','would','can'],1,'Must menyatakan kewajiban atau keharusan.'],
-['“Could you hold the line, please?” artinya…',['Tolong tutup telepon','Tolong tunggu sebentar di telepon','Tolong ulangi pesan','Tolong telepon lagi besok'],1,'Hold the line = jangan menutup telepon, tunggu sebentar.']],
+['“Could you hold the line, please?” artinya…',['Tolong tutup telepon','Tolong tunggu sebentar di telepon','Tolong ulangi pesan','Tolong telepon lagi besok'],1,'Hold the line = jangan menutup telepon, tunggu sebentar.'],
+['What is the purpose of a descriptive text? <br><small>(Apa tujuan teks deskripsi?)</small>',['To tell a past event in order','To describe a specific person, place, or thing','To persuade readers to buy','To give instructions step by step'],1,'Teks deskripsi bertujuan menggambarkan orang, tempat, atau benda tertentu secara rinci. (A descriptive text describes a specific object in detail.)'],
+['The generic structure of a descriptive text is… <br><small>(Struktur teks deskripsi adalah…)</small>',['Orientation – Events – Reorientation','Identification – Description','Thesis – Arguments – Reiteration','Goal – Materials – Steps'],1,'Struktur teks deskripsi: Identification (memperkenalkan objek) lalu Description (menguraikan ciri/bagian objek).'],
+['Which tense is mostly used in a descriptive text? <br><small>(Tense apa yang paling sering dipakai dalam teks deskripsi?)</small>',['Simple present','Past perfect','Future perfect','Present perfect progressive'],0,'Simple present dipakai untuk fakta dan ciri tetap, misalnya “It has a beautiful garden.”'],
+['“Lembang is a cool mountain town north of Bandung.” This sentence is part of the… <br><small>(Kalimat ini termasuk bagian…)</small>',['Identification','Description','Conclusion','Reorientation'],0,'Kalimat itu memperkenalkan objek (Lembang): siapa/apa dan di mana, jadi bagian Identification.'],
+['Choose the correct sentence. <br><small>(Pilih kalimat yang benar.)</small>',['The hotel have fifty rooms.','The hotel has fifty rooms.','The hotel having fifty rooms.','The hotel are fifty rooms.'],1,'Subjek tunggal (the hotel) memakai has pada simple present.'],
+['Which is the correct adjective order? <br><small>(Urutan kata sifat mana yang benar?)</small>',['a red small round ball','a small round red ball','a round red small ball','a small red round ball'],1,'Urutan: ukuran (small) → bentuk (round) → warna (red) → benda.'],
+['“She ___ a blue dress right now.” <br><small>(Ia sedang memakai gaun biru sekarang.)</small>',['wears','is wearing','has worn','wore'],1,'“Right now” menunjukkan kegiatan yang sedang berlangsung: present progressive (is wearing).'],
+['“My grandfather ___ a tall man with a gentle smile.” (He is no longer alive.) <br><small>(Kakek saya sudah meninggal.)</small>',['is','has been','was','will be'],2,'Objek yang dideskripsikan ada di masa lalu, jadi memakai simple past: was.'],
+['What does “spacious” mean? <br><small>(Apa arti “spacious”?)</small>',['Sempit','Luas','Gelap','Kotor'],1,'Spacious = luas/lega, misalnya “a spacious meeting room”.'],
+['“The shop ___ already closed when we arrived.” <br><small>(Toko sudah tutup ketika kami tiba.)</small>',['has','had','is','was having'],1,'Past perfect (had + V3) untuk kejadian yang selesai sebelum waktu lampau lain (kami tiba).'],
+['Which sentence is a descriptive sentence about a product? <br><small>(Kalimat mana yang mendeskripsikan produk?)</small>',['Add two spoons of sugar and stir.','The bag is light, durable, and made of leather.','First, switch on the computer.','I visited Bali last year.'],1,'Kalimat itu menyebut ciri benda (light, durable, made of leather). Pilihan lain adalah prosedur atau recount.'],
+['“It is famous for its cool weather.” The phrase “is famous for” means… <br><small>(Frasa “is famous for” berarti…)</small>',['terbuat dari','terkenal karena','terletak di','mirip dengan'],1,'Is famous for = terkenal karena. Sering dipakai pada deskripsi tempat atau produk.'],
+['The present perfect tense is formed with… <br><small>(Present perfect dibentuk dengan…)</small>',['have/has + past participle','had + past participle','be + V-ing','will + V1'],0,'Present perfect: have/has + participle (V3), mis. “The hotel has become popular.”'],
+['“Tom had been studying for two hours before his friend came.” This is… <br><small>(Kalimat ini adalah…)</small>',['Past perfect progressive','Present perfect progressive','Past progressive','Simple past'],0,'had + been + V-ing = past perfect progressive: kegiatan berlangsung selama durasi tertentu sebelum waktu lampau lain.']],
 es:[
 ['Tulis email formal singkat untuk meminta penawaran harga (quotation) 100 unit laptop kepada pemasok.','Contoh jawaban:<br><i>Subject: Request for Quotation – 100 Laptops</i><br>Dear Sir or Madam,<br>I am writing to inquire about the price of 100 laptops (Model X, 14 inch). Could you please send us a quotation including the unit price, delivery cost, and payment terms? We would appreciate it if you could reply by 5 December.<br>We look forward to hearing from you.<br>Yours faithfully,<br>[Nama], Purchasing Department.'],
 ['Jelaskan tiga bagian presentasi bisnis dan beri satu frasa untuk tiap bagian.','<b>Introduction</b>: menyapa dan menyebut topik, mis. “Today I would like to talk about…”. <b>Body</b>: menyampaikan poin utama secara berurutan, mis. “Let me move on to…”. <b>Conclusion</b>: meringkas dan membuka tanya jawab, mis. “To sum up… Are there any questions?”.'],
 ['Ubah kalimat kasar “Give me the data now.” menjadi tiga bentuk permintaan yang sopan.','1) Could you please send me the data by 3 p.m.? 2) Would you mind sending me the data today? 3) I would appreciate it if you could send me the data as soon as possible.'],
-['Bedakan past simple dan present perfect dengan contoh dalam konteks bisnis.','<b>Past simple</b> untuk kejadian selesai pada waktu tertentu di masa lalu: “We signed the contract last week.” <b>Present perfect</b> untuk kejadian yang hasilnya masih terkait sekarang atau waktunya tidak disebut: “We have signed the contract, so we can start production.”']]},
+['Bedakan past simple dan present perfect dengan contoh dalam konteks bisnis.','<b>Past simple</b> untuk kejadian selesai pada waktu tertentu di masa lalu: “We signed the contract last week.” <b>Present perfect</b> untuk kejadian yang hasilnya masih terkait sekarang atau waktunya tidak disebut: “We have signed the contract, so we can start production.”'],
+['Define descriptive text and explain its generic structure in English and Indonesian.','<b>EN</b>: A descriptive text describes a specific person, place, or thing in detail. Its structure: <i>Identification</i> (introduces the object) and <i>Description</i> (details of parts, qualities, characteristics).<br><b>ID</b>: Teks deskripsi menggambarkan orang, tempat, atau benda tertentu secara rinci. Strukturnya: <i>Identifikasi</i> (memperkenalkan objek) dan <i>Deskripsi</i> (rincian bagian, sifat, ciri).'],
+['Write a short descriptive text (4–5 sentences) about your favorite place. Then translate it into Indonesian.','Contoh jawaban:<br><i>My favorite place is Dago Pakar. It is a cool hilltop area in Bandung. It has fresh air, pine trees, and a beautiful view of the city. There are many cozy cafés with wooden tables and warm lights. It is always lively on weekends.</i><br><b>Terjemahan</b>: Tempat favorit saya adalah Dago Pakar. Kawasan perbukitan yang sejuk di Bandung. Udaranya segar, ada pohon pinus, dan pemandangan kota yang indah. Banyak kafe nyaman dengan meja kayu dan lampu hangat. Tempat ini selalu ramai pada akhir pekan.'],
+['Rewrite this into one descriptive sentence using adjectives: “I have a bag. It is big. It is black. It is made of leather.”','<i>I have a big black leather bag.</i> (Urutan: ukuran → warna → bahan → benda.) Terjemahan: Saya punya tas kulit hitam yang besar.'],
+['Explain why simple present is dominant in descriptive text, and give one example of simple past and one of present progressive in a description (English + Indonesian).','Simple present dipakai karena teks deskripsi menyatakan fakta dan ciri yang tetap (the simple present expresses situations that exist now, existed in the past, and probably will exist in the future).<br>Simple past: <i>My grandfather was a tall man.</i> (Kakek saya adalah pria tinggi, sudah tiada.)<br>Present progressive: <i>The children are playing in the garden.</i> (Anak-anak sedang bermain di taman.)'],
+['Describe a product (a phone, bag, or café menu) for a business brochure in 3 sentences, using the pattern: identification → features → benefit.','Contoh jawaban:<br><i>The Aroma Café is a cozy coffee shop in central Bandung. It serves fresh local coffee, homemade cakes, and offers free Wi-Fi. It is perfect for students and business people who need a quiet place to work.</i><br>Terjemahan: Aroma Café adalah kedai kopi yang nyaman di pusat Bandung. Menyajikan kopi lokal segar, kue buatan sendiri, dan menyediakan Wi-Fi gratis. Cocok bagi mahasiswa dan pebisnis yang butuh tempat tenang untuk bekerja.']]},
 {id:'bs',n:'Budaya Sunda dan Kepasundanan',h:'Selasa',d:'H. Wawan Herdiwan, Drs., M.M.',l:'1NmNQWSVpvTPUWaEGj4Fe7Lk0nSJyk5eZ',empty:true,why:'Folder masih kosong.'},
 {id:'bd',n:'Bahasa Indonesia',h:'Selasa',d:'Saeful Hermansyah, Drs., M.M.',l:'1vipRwS2vxmowHPYnnnp_Y6vlscJ4TNcl',empty:true,why:'Hanya ada subfolder “Tugas Kelompok IV” tanpa file materi.'}
 ];
@@ -4684,7 +4743,7 @@ function ksData(c){
 }
 function ksHtml(c){
  var G=ksData(c), st=ksGet(), h='';
- h+='<div class="bj-card"><h3>🎯 Kisi-kisi '+c.n+'</h3><div class="bj-prog"><i id="bjPg"></i></div><div class="bj-meta" id="bjPt"></div><button type="button" class="bj-btn" id="bjKr" style="border:0;cursor:pointer">Reset centang</button></div>';
+ h+='<div class="bj-card"><h3>✅ Checklist belajar '+c.n+'</h3><div class="bj-prog"><i id="bjPg"></i></div><div class="bj-meta" id="bjPt"></div><button type="button" class="bj-btn" id="bjKr" style="border:0;cursor:pointer">Reset centang</button></div>';
  G.forEach(function(g,gi){ h+='<div class="bj-card"><h3>'+g.h+'</h3>'+g.r.map(function(r,ri){ var k=c.id+':'+gi+':'+ri; return '<label class="bj-ks"><input type="checkbox" data-k="'+k+'"'+(st[k]?' checked':'')+'><span class="tx">'+r[0]+'</span><span class="bd">'+r[1]+'</span><span class="bd">'+r[2]+'</span></label>'; }).join('')+'</div>'; });
  return h;
 }
@@ -4695,26 +4754,198 @@ function ksBind(){
  var kr=$('#bjKr'); if(kr) kr.onclick=function(){ var st=ksGet(); boxes.forEach(function(b){ delete st[b.dataset.k]; }); ksPut(st); render(); };
  prog();
 }
+/* Menu Belajar disusun mengikuti JADWAL KULIAH (Senin–Kamis), bukan jadwal UTS */
 var DAYS=[
- {n:'Senin',t:'30 Nov',iso:'2026-11-30',s:[['pan','18.30 – 20.00'],['ak','20.00 – 21.30']]},
- {n:'Selasa',t:'1 Des',iso:'2026-12-01',s:[['bi','18.30 – 20.00'],['me','20.00 – 21.30']]},
- {n:'Rabu',t:'2 Des',iso:'2026-12-02',s:[['bd','18.30 – 20.00'],['bs','20.00 – 21.30']]},
- {n:'Kamis',t:'3 Des',iso:'2026-12-03',s:[['pb','18.30 – 20.00'],['tik','20.00 – 21.30']]}
+ {n:'Senin',s:[['me','18.10 – 19.30'],['bi','20.10 – 21.30']]},
+ {n:'Selasa',s:[['bs','18.10 – 19.30'],['bd','19.30 – 20.50']]},
+ {n:'Rabu',s:[['pb','18.10 – 20.10'],['tik','20.10 – 21.30']]},
+ {n:'Kamis',s:[['pan','18.10 – 19.30'],['ak','20.10 – 22.10']]}
 ];
-var di=0, si=0;
+var di=0, si=0, mode='kuliah', todayIdx=-1;
 function cIdx(id){ for(var i=0;i<C.length;i++){ if(C[i].id===id) return i; } return 0; }
-(function(){ var d=new Date(), p=function(n){return ('0'+n).slice(-2)}, iso=d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate()); DAYS.forEach(function(x,i){ if(x.iso===iso) di=i; }); })();
+(function(){ var w=new Date().getDay(); if(w>=1&&w<=4){ di=w-1; todayIdx=w-1; } })();
+
+/* ============ KUMPULAN KISI-KISI UTS ============ */
+var KU=[
+{id:'ak',uts:'Senin, 30 Nov 2026 · 20.00 – 21.30 WIB',
+ note:'Kisi-kisi dari dosen: membuat jurnal umum, buku besar, dan neraca. Contoh di bawah memakai satu set transaksi yang sama dari awal sampai akhir, jadi angkanya bisa kamu cek dari jurnal sampai neraca. Bentuk soal di UTS bisa berbeda, yang dipelajari adalah alurnya.',
+ k:[
+ {t:'Membuat jurnal umum',
+  p:['<b>Jurnal umum</b> adalah catatan pertama transaksi, ditulis berurutan menurut tanggal, memuat akun yang didebit dan dikredit beserta jumlahnya. Setiap transaksi harus seimbang: total debit = total kredit.',
+     '<b>Hukum debit-kredit</b>: Aset dan Beban bertambah di sisi <i>debit</i>, berkurang di <i>kredit</i>. Kewajiban, Modal, dan Pendapatan bertambah di sisi <i>kredit</i>, berkurang di <i>debit</i>.',
+     '<b>Contoh transaksi (usaha jasa, Januari)</b>:<br>1 Jan: pemilik menyetor modal tunai Rp10.000.000<br>3 Jan: membeli perlengkapan tunai Rp1.000.000<br>5 Jan: membeli peralatan secara kredit Rp3.000.000<br>10 Jan: menerima pendapatan jasa tunai Rp4.000.000<br>15 Jan: membayar beban gaji Rp1.500.000<br>20 Jan: membayar sebagian utang Rp1.000.000',
+     '<b>Jurnal umum</b> (Dr = debit, Kr = kredit):<br>1 Jan · Kas Dr 10.000.000 / Modal Kr 10.000.000<br>3 Jan · Perlengkapan Dr 1.000.000 / Kas Kr 1.000.000<br>5 Jan · Peralatan Dr 3.000.000 / Utang Usaha Kr 3.000.000<br>10 Jan · Kas Dr 4.000.000 / Pendapatan Jasa Kr 4.000.000<br>15 Jan · Beban Gaji Dr 1.500.000 / Kas Kr 1.500.000<br>20 Jan · Utang Usaha Dr 1.000.000 / Kas Kr 1.000.000'],
+  a:['Langkah tiap transaksi: (1) tentukan akun yang terpengaruh; (2) tentukan jenisnya (aset, kewajiban, modal, pendapatan, beban); (3) tambah atau kurang; (4) tulis debit dulu baru kredit; (5) cek debit = kredit.',
+     'Format jurnal: Tanggal | Keterangan (akun debit di atas, akun kredit menjorok) | Ref | Debit | Kredit.']},
+ {t:'Membuat buku besar',
+  p:['<b>Buku besar</b> mengelompokkan semua catatan jurnal per akun. Setiap akun punya sisi debit dan kredit; saldo akhir dihitung dari selisihnya. Proses memindahkan jurnal ke buku besar disebut <i>posting</i>.',
+     '<b>Contoh buku besar</b> (dari jurnal di atas):<br><b>Kas</b>: Dr 10.000.000 (1 Jan), Dr 4.000.000 (10 Jan); Kr 1.000.000 (3 Jan), Kr 1.500.000 (15 Jan), Kr 1.000.000 (20 Jan). Saldo debit = 14.000.000 − 3.500.000 = <b>10.500.000</b><br><b>Perlengkapan</b>: Dr 1.000.000. Saldo debit <b>1.000.000</b><br><b>Peralatan</b>: Dr 3.000.000. Saldo debit <b>3.000.000</b><br><b>Utang Usaha</b>: Kr 3.000.000 (5 Jan); Dr 1.000.000 (20 Jan). Saldo kredit <b>2.000.000</b><br><b>Modal</b>: Kr 10.000.000. Saldo kredit <b>10.000.000</b><br><b>Pendapatan Jasa</b>: Kr 4.000.000. Saldo kredit <b>4.000.000</b><br><b>Beban Gaji</b>: Dr 1.500.000. Saldo debit <b>1.500.000</b>',
+     '<b>Bentuk akun</b>: bisa berbentuk T (kiri debit, kanan kredit) atau bentuk skontro/kolom: Tanggal | Keterangan | Ref | Debit | Kredit | Saldo.'],
+  a:['Langkah: (1) buat satu akun untuk tiap nama akun di jurnal; (2) pindahkan angka sesuai sisi debit atau kredit; (3) jumlahkan tiap sisi; (4) hitung saldo akhir dan tulis sisi saldonya.',
+     'Saldo normal: aset dan beban di debit; kewajiban, modal, dan pendapatan di kredit. Bila saldo di sisi berlawanan, periksa lagi postingnya.']},
+ {t:'Membuat neraca (neraca saldo dan laporan posisi keuangan)',
+  p:['Kata “neraca” di kisi-kisi bisa berarti <b>neraca saldo</b> (daftar saldo semua akun untuk mengecek keseimbangan) atau <b>neraca/laporan posisi keuangan</b> (aset = kewajiban + ekuitas). Contoh keduanya dari data di atas, supaya aman.',
+     '<b>Neraca saldo</b> (31 Januari):<br>Kas — Dr 10.500.000<br>Perlengkapan — Dr 1.000.000<br>Peralatan — Dr 3.000.000<br>Beban Gaji — Dr 1.500.000<br>Utang Usaha — Kr 2.000.000<br>Modal — Kr 10.000.000<br>Pendapatan Jasa — Kr 4.000.000<br><b>Total: debit 16.000.000 = kredit 16.000.000</b> (seimbang).',
+     '<b>Laba</b> = pendapatan − beban = 4.000.000 − 1.500.000 = <b>2.500.000</b>.',
+     '<b>Neraca / laporan posisi keuangan</b> (31 Januari):<br><b>Aset</b>: Kas 10.500.000; Perlengkapan 1.000.000; Peralatan 3.000.000. Total aset <b>14.500.000</b><br><b>Kewajiban</b>: Utang Usaha 2.000.000<br><b>Ekuitas</b>: Modal 10.000.000 + Laba 2.500.000 = 12.500.000<br>Total kewajiban + ekuitas = <b>14.500.000</b> (sama dengan total aset).'],
+  a:['Urutan alur: transaksi → jurnal umum → buku besar → neraca saldo → laporan keuangan → neraca.',
+     'Neraca saldo hanya memuat saldo akun; akun pendapatan dan beban tidak masuk neraca akhir, tetapi selisihnya (laba) menambah ekuitas.',
+     'Selalu cek akhir: debit = kredit pada neraca saldo, dan aset = kewajiban + ekuitas pada neraca.']}
+ ]},
+{id:'me',uts:'Selasa, 1 Des 2026 · 20.00 – 21.30 WIB',
+ note:'Dosen hanya menyebut satu kisi-kisi: pelajari tugas quiz yang kemarin. Soalnya kemungkinan muncul di UTS, meski hitungan dan kasusnya tidak sama. Jadi pelajari caranya, bukan angkanya.',
+ k:[
+ {t:'Pelajari tugas quiz yang kemarin',
+  p:['<b>Maksud kisi-kisi</b>: tipe soal pada quiz kemarin kemungkinan muncul lagi di UTS, tetapi angka dan kasusnya berbeda. Yang diuji adalah langkah pengerjaan.',
+     '<b>Cakupan materi</b> (lihat tab Ringkasan Matematika Ekonomi): (1) fungsi linier dan aplikasinya; (2) permintaan, penawaran, dan keseimbangan pasar; (3) biaya, penerimaan, laba, dan BEP; (4) turunan dan aplikasi ekonomi; (5) bunga, deret, dan nilai uang.',
+     '<b>Rumus kunci</b>: fungsi linier y = a + bx; gradien m = (y2 − y1) / (x2 − x1); keseimbangan pasar saat Qd = Qs; BEP saat total penerimaan = total biaya.'],
+  a:['Buka lagi soal quiz kemarin, kerjakan ulang tanpa melihat jawaban, lalu bandingkan langkahnya.',
+     'Ganti angka pada soal quiz dengan angka lain dan hitung ulang agar terbiasa dengan variasi soal.',
+     'Latihan tambahan: kerjakan Soal PG dan Esai Matematika Ekonomi di menu Belajar.']}
+ ]},
+{id:'bd',uts:'Rabu, 2 Des 2026 · 18.30 – 20.00 WIB',
+ note:'Poin 1 dirangkum menjadi 3 bentuk bahasa (lisan, tulisan, isyarat) dan poin 3 disusun dari Laporan Tugas Kelompok IV (analisis struktur kebahasaan skripsi). Poin 2 dari konsep umum karena folder Drive belum berisi materinya. Cocokkan dengan catatan kuliah kamu.',
+ k:[
+ {t:'Bentuk bahasa (lisan, tulisan, isyarat)',
+  p:['<b>Bentuk bahasa</b> adalah wujud atau cara bahasa disampaikan dan diterima. Tiga bentuk yang universal, dipakai di semua bahasa di dunia:',
+     '<b>1. Bahasa lisan</b>: disampaikan dengan ucapan dan diterima lewat pendengaran. Bergantung pada situasi, intonasi, dan gestur sehingga strukturnya cenderung longgar; lawan bicara hadir dan bisa langsung bertanya. Contoh: percakapan, diskusi kelas, pidato, presentasi.',
+     '<b>2. Bahasa tulisan</b>: disampaikan dengan lambang tulis (huruf) dan diterima lewat penglihatan. Harus lengkap, eksplisit, dan taat ejaan karena pembaca tidak dapat bertanya langsung kepada penulis. Contoh: surat, laporan, makalah, skripsi, pesan teks.',
+     '<b>3. Bahasa isyarat</b>: disampaikan dengan gerak tangan, ekspresi wajah, dan gerak tubuh, diterima lewat penglihatan. Dipakai terutama oleh penyandang tuli. Contoh: SIBI (Sistem Isyarat Bahasa Indonesia) dan BISINDO (Bahasa Isyarat Indonesia). Gerakan pendukung seperti anggukan, lambaian tangan, dan acungan jempol juga termasuk isyarat.',
+     '<b>Hubungan dan catatan</b>: ketiganya sama-sama sarana menyampaikan pesan, tetapi mediumnya berbeda: suara, tulisan, dan gerak. Bahasa lisan dan tulisan masih bisa dibagi lagi menjadi ragam baku dan tidak baku; karya ilmiah seperti skripsi memakai bahasa tulisan ragam baku dan ilmiah (formal, lugas, objektif, logis, efisien).'],
+  a:['Awali dengan definisi bentuk bahasa, lalu sebut tiga bentuknya: lisan, tulisan, dan isyarat. Setiap bentuk diberi pengertian singkat dan satu contoh.',
+     'Bandingkan dari sisi medium (suara, huruf, gerak), cara diterima (telinga, mata), dan kekuatan masing-masing: lisan cepat dan bisa direspons langsung, tulisan awet dan bisa dibaca ulang, isyarat menjangkau penyandang tuli.',
+     'Tutup dengan kesimpulan: pilih bentuk bahasa sesuai situasi, lawan bicara, dan tujuan; untuk karya ilmiah pakai bahasa tulisan yang baku.']},
+ {t:'Sejarah bahasa dan kaitannya dengan Sumpah Pemuda',
+  p:['<b>Akar</b>: bahasa Indonesia berasal dari bahasa Melayu. Bukti tertua adalah prasasti berbahasa Melayu Kuno dari masa Sriwijaya abad ke-7 (Kedukan Bukit 683 M, Talang Tuo, Kota Kapur, Karang Brahi).',
+     '<b>Lingua franca</b>: Melayu dipakai pedagang di seluruh nusantara karena mudah dipelajari dan tidak mengenal tingkatan tutur yang ketat.',
+     '<b>Masa kolonial</b>: Ejaan Van Ophuijsen (1901); Balai Pustaka (berdiri 1908 sebagai Commissie voor de Volkslectuur, bernama Balai Pustaka sejak 1917) menerbitkan bacaan berbahasa Melayu; 1908 Budi Utomo memulai kebangkitan nasional.',
+     '<b>Kongres Pemuda II, 27–28 Oktober 1928 (Batavia)</b> melahirkan <b>Sumpah Pemuda</b>: bertumpah darah satu, berbangsa satu, dan menjunjung bahasa persatuan, bahasa Indonesia. Sejak saat itu bahasa Melayu diikrarkan menjadi bahasa Indonesia.',
+     '<b>Tokoh</b>: Mohammad Tabrani (mengusulkan nama “bahasa Indonesia” sejak Kongres Pemuda I, 1926), Muhammad Yamin (merumuskan teks ikrar), Soegondo Djojopoespito (ketua Kongres Pemuda II), W.R. Supratman (Indonesia Raya).',
+     '<b>Sesudahnya</b>: Kongres Bahasa Indonesia I di Solo (1938); 18 Agustus 1945 UUD 1945 Pasal 36 menetapkan bahasa Indonesia sebagai bahasa negara; Ejaan Soewandi (1947), EYD (1972), PUEBI (2015), dan kini EYD Edisi Kelima (2022).',
+     '<b>Kedudukan</b>: <i>bahasa nasional</i> (sejak 1928): lambang kebanggaan dan identitas, alat pemersatu, alat perhubungan antardaerah dan antarbudaya. <i>Bahasa negara</i> (sejak 1945): bahasa resmi kenegaraan, pengantar pendidikan, penghubung tingkat nasional, serta pengembangan kebudayaan dan IPTEK.'],
+  a:['Urutan jawaban: Melayu Kuno → lingua franca → masa kolonial → Sumpah Pemuda 1928 → UUD 1945 → perkembangan ejaan.',
+     'Kaitan dengan Sumpah Pemuda: tanpa bahasa Melayu yang sudah dipakai luas, ikrar “bahasa persatuan” sulit diterima semua suku. Sumpah Pemuda mengubah statusnya dari bahasa antarsuku menjadi bahasa nasional.',
+     'Hafalkan tanggal (27–28 Oktober 1928), tiga butir ikrar, dan nama tokohnya.']},
+ {t:'Analisis struktur kebahasaan (seperti tugas kelompok)',
+  p:['<b>Pengertian</b>: struktur kebahasaan adalah tatanan atau susunan unsur-unsur bahasa (kata, frasa, klausa, kalimat, paragraf) yang membentuk kesatuan makna logis dalam teks. Analisisnya memeriksa apakah kaidah bahasa sudah diterapkan dengan benar. Tugas kelompok menganalisis skripsi “Pengaruh Beban Kerja dan Lingkungan Kerja Fisik terhadap Kinerja Karyawan PT Simed Prakarsa Indonesia Kota Bandung” pada Bab I sampai Bab III.',
+     '<b>Rujukan kaidah</b>: Ejaan Bahasa Indonesia yang Disempurnakan (EYD) Edisi Kelima (Kepka BSKAP No. 0424/I/BS.00.00/2022) yang menggantikan PUEBI (Permendikbud No. 50 Tahun 2015), KBBI Daring, dan Tata Bahasa Baku Bahasa Indonesia.',
+     '<b>Delapan unsur yang dianalisis</b> (urutan sesuai laporan), lengkap dengan contoh temuan dari skripsi (Before → After):',
+     '<b>1. Penulisan huruf kapital</b>: dipakai di awal kalimat, nama orang, geografi, lembaga, bulan, dan hari; istilah umum di tengah kalimat ditulis huruf kecil. “Sumber Daya Manusia” → “sumber daya manusia”; “mengartikan Segala kegiatan” → “segala kegiatan”; judul “Terhadap” → “terhadap” (kata depan bukan kata utama).',
+     '<b>2. Penulisan huruf miring</b>: untuk istilah asing atau daerah yang belum diserap, judul buku/terbitan berkala yang dirujuk, dan penegasan. “heatpump” → <i>heat pump</i>; <i>job demands</i>, <i>job control</i>, <i>social support</i>; <i>HVAC</i>; <i>software</i>, <i>computer program</i>; “Crosbac’k Alpha” → <i>Cronbach’s Alpha</i>.',
+     '<b>3. Penulisan huruf tebal</b>: untuk judul, bab, dan subbab. Dalam teks isi tidak dipakai berlebihan dan keterangan seperti sumber tabel ditulis biasa. “<b>Sumber : Data 2023</b>” → “Sumber : Data 2023”; “Menurut <b>Sugiyono (2017:38)</b>” → huruf biasa.',
+     '<b>4. Jenis kata</b>: verba, adjektiva, adverbia, nomina, pronomina, numeralia, dan kata tugas; periksa bentuk baku, imbuhan, dan kata depan. “hakekat” → “hakikat”; “di pertimbangkan” → “dipertimbangkan”; “Tijauan” → “Tinjauan”; “Didalam” → “Di dalam”; “berpengaruh pegawai” → “berpengaruh terhadap pegawai” atau “memengaruhi pegawai”; “Sedangkan” di awal kalimat → “Sementara itu”.',
+     '<b>5. Tanda baca</b>: titik, koma, titik dua, tanda hubung, tanda petik. “dkk” → “dkk.”; “PT.” → “PT” (titik pada PT dihilangkan); “1982.Melalui” → “1982. Melalui” (spasi setelah titik); “diteliti tetapi” → “diteliti, tetapi”; tanda petik harus berpasangan.',
+     '<b>6. Diksi (pilihan kata)</b>: tepat, sesuai situasi, tidak boros, dan baku untuk ragam ilmiah. “bagus” → “baik”; “bisa” → “dapat”; “suara bising” → “kebisingan”; “beberapa para ahli” → “beberapa ahli”; “Accounting” → “Akuntansi”; “turnover” → “pergantian karyawan”; “dikarenakan” → “disebabkan”.',
+     '<b>7. Kata khusus</b>: kata yang acuannya sempit dan terperinci, lebih baik daripada kata umum (misalnya “menganalisis” daripada “melakukan sesuatu terhadap data”). “seorang ahli manajemen” → “tokoh manajemen klasik” atau “pakar manajemen”; “Intrument” → “instrumen”; “reabilitas” → “reliabilitas”; “di tarik” → “ditarik”, “kesimpulanya” → “kesimpulannya”.',
+     '<b>8. Kalimat efektif dan tidak efektif</b>: ciri kesatuan gagasan, kesejajaran bentuk, penekanan, kehematan, dan kelogisan. “jam kerja lembur atau jam kerja lebih” → “lembur atau melebihi jam kerja normal” (pemborosan dan pengulangan makna); “meningkatkan kesejahteraan karyawan dan meningkatkan produktivitas serta kepuasan kerja” → “meningkatkan kesejahteraan karyawan, produktivitas, dan kepuasan kerja”; “melakukan lokasi riset” → “melakukan riset”; “Setiawan (2008:83)” → “Menurut Setiawan (2008:83)” (kalimat belum punya subjek/keterangan).',
+     '<b>Hasil analisis laporan</b>: dari 48 butir pemeriksaan (8 unsur pada tiap bab), 42 butir ada temuan dan 6 butir tidak perlu dikoreksi. Kesimpulan: skripsi secara umum sudah memakai ragam tulis yang sesuai untuk karya ilmiah dan cukup baik, tetapi masih ada ketidaksesuaian pada huruf kapital, huruf miring, tanda baca, jenis kata, diksi, kata khusus, dan kalimat efektif.',
+     '<b>Saran</b>: lakukan penyuntingan (<i>proofreading</i>) sebelum naskah dikumpulkan dengan berpedoman pada EYD Edisi Kelima dan KBBI (terutama kapital, singkatan “PT” dan “dkk.”, kata depan “di”, dan istilah asing dicetak miring); biasakan membaca ulang, cek kebakuan lewat KBBI Daring, dan minta teman atau dosen menelaah naskah.'],
+  a:['<b>Langkah (sesuai tahapan di laporan)</b>: (1) membaca teks; (2) mengidentifikasi temuan kebahasaan; (3) mengelompokkan ke dalam 8 unsur; (4) memperbaiki dengan format Before–After–Ket; (5) menarik kesimpulan dan saran.',
+     '<b>Format jawaban</b>: <i>Before</i> (teks asli), <i>After</i> (teks perbaikan), <i>Ket</i> (alasan berdasarkan kaidah). Bisa juga dalam tabel: Unsur | Before | After | Ket.',
+     '<b>Contoh jawaban</b> — Unsur: kalimat efektif. Before: “Akibat dari kelebihan beban kerja maka karyawan sering bekerja dengan jam kerja lembur atau jam kerja lebih.” After: “Akibat beban kerja yang berlebihan, karyawan sering bekerja lembur atau melebihi jam kerja normal.” Ket: kalimat awal tidak efektif karena pemborosan kata dan pengulangan makna.',
+     '<b>Contoh jawaban</b> — Unsur: tanda baca. Before: “PT. Simed Prakarsa Indonesia”. After: “PT Simed Prakarsa Indonesia”. Ket: singkatan PT tidak memakai titik.',
+     'Hafalkan urutan 8 unsur: kapital, miring, tebal, jenis kata, tanda baca, diksi, kata khusus, kalimat efektif. Siapkan minimal satu contoh Before–After untuk tiap unsur, lalu tutup dengan kesimpulan dan saran.']}
+ ]},
+{id:'bs',uts:'Rabu, 2 Des 2026 · 20.00 – 21.30 WIB',
+ note:'Folder Drive Budaya Sunda masih kosong. Poin di bawah disusun dari catatan tugas di menu Tugas (Tugas 1, Tugas 2, film Paguyuban Pasundan) dan pengetahuan umum. Cocokkan nama, tahun, dan istilah dengan catatan kuliah serta tugas yang kamu tulis.',
+ k:[
+ {t:'Film Paguyuban Pasundan dan Tugas 2: sejarah Paguyuban Pasundan serta misi sekolah',
+  p:['<b>Sejarah</b>: Paguyuban Pasundan berdiri pada tahun 1913, sebelum kemerdekaan, sebagai organisasi orang Sunda.',
+     '<b>Tujuan dan bidang gerak</b>: memberantas kebodohan dan kemiskinan; bergerak di bidang pendidikan dan sosial.',
+     '<b>Misi sekolah</b>: Nyunda, Nyantri, Nyakola, Nyantika. Garis besar maknanya: <i>Nyunda</i> = berbudaya dan berbahasa Sunda; <i>Nyantri</i> = beriman dan berakhlak; <i>Nyakola</i> = berilmu dan rajin belajar; <i>Nyantika</i> = berpenampilan dan bersikap baik serta santun. Pakai rumusan dari catatan atau tugasmu bila berbeda.',
+     '<b>Film yang ditonton</b>: ringkas alur film Paguyuban Pasundan, yaitu latar zaman, tokoh, perjuangan di bidang pendidikan dan sosial, serta pesan yang kamu tangkap.'],
+  a:['Kerangka: (1) tahun berdiri dan latar belakang; (2) tujuan: melawan kebodohan dan kemiskinan; (3) bidang: pendidikan dan sosial; (4) empat misi sekolah beserta arti singkatnya; (5) pesan film dan relevansinya bagi mahasiswa Pasundan.',
+     'Hafalkan empat misi berurutan: Nyunda, Nyantri, Nyakola, Nyantika.',
+     'Bila soal meminta pendapat tentang film, tulis satu adegan yang paling kamu ingat dan pelajaran yang diambil.']},
+ {t:'Tugas 1: sejarah, arti, dan budaya Sunda',
+  p:['<b>Arti Sunda</b>: kata “Sunda” berasal dari bahasa Sanskerta yang berarti terang, bersih, atau putih. Sunda juga dipakai sebagai nama suku dan wilayah (Tatar Sunda atau Pasundan, kini terutama Jawa Barat dan Banten).',
+     '<b>Sejarah ringkas</b>: Tarumanagara (abad ke-4 sampai ke-7, Raja Purnawarman, dengan prasasti seperti Ciaruteun) → Kerajaan Sunda dan Galuh → Pajajaran (Sri Baduga Maharaja, dikenal juga sebagai Prabu Siliwangi; ibu kota Pakuan, kini Bogor), yang berakhir sekitar 1579.',
+     '<b>Karakteristik orang Sunda</b>: nilai <i>cageur, bageur, bener, pinter, singer</i> (sehat, baik hati, benar, pintar, terampil/cerdik); semboyan <i>silih asih, silih asah, silih asuh</i> (saling menyayangi, mengasah, dan mengasuh); ramah (<i>someah</i>), halus tutur kata, dan hormat pada orang yang lebih tua.',
+     '<b>Tempat peninggalan budaya</b>: Candi Cangkuang (Garut), Situs Gunung Padang (Cianjur), Prasasti Ciaruteun dan Batutulis (Bogor), Astana Gede Kawali dan Karangkamulyan (Ciamis), Kampung Naga (Tasikmalaya), serta permukiman adat Baduy (Banten).',
+     '<b>Kesenian populer</b>: angklung, kecapi suling, degung, jaipongan, wayang golek, sisingaan, dan tembang Sunda Cianjuran.'],
+  a:['Susun jawaban mengikuti lima nomor tugas: sejarah, arti, karakteristik, tempat peninggalan, kesenian.',
+     'Untuk tiap nomor tulis minimal tiga contoh konkret dengan nama tempat atau kesenian dan daerahnya.',
+     'Pakai bahasa sendiri dan sesuaikan dengan isi tugas yang sudah kamu kumpulkan.']}
+ ]},
+{id:'pb',uts:'Kamis, 3 Des 2026 · 18.30 – 20.00 WIB',
+ note:'Soal bersifat pendapat, jadi tulis dengan pengalaman dan contoh kamu sendiri. Contoh jawaban hanya panduan, jangan disalin mentah. Poin materi diambil dari ringkasan Pengantar Bisnis di menu ini.',
+ k:[
+ {t:'Bisnis global yang diketahui dan cara kamu melakukan bisnis global',
+  p:['<b>Bisnis global</b> adalah kegiatan bisnis lintas batas negara (Ball, 2005), didorong globalisasi: ekonomi dunia menjadi satu sistem yang saling bergantung.',
+     '<b>Contoh yang bisa disebut</b>: McDonald’s dan KFC, Starbucks, Unilever, Toyota, Apple, IKEA. Dari Indonesia: Indomie (Indofood) yang dijual di banyak negara.',
+     '<b>Cara masuk pasar global (go international)</b>: agen independen, lisensi, kantor cabang, aliansi strategis/joint venture, dan investasi langsung (FDI).',
+     '<b>Yang harus dipertimbangkan</b>: perbedaan budaya, daya beli, peraturan negara tujuan, dan nilai tukar.',
+     '<b>Dasar pemilihan produk</b>: keunggulan absolut (lebih murah/berkualitas) dan keunggulan komparatif (lebih efisien pada produk tertentu). Pilih produk yang menjadi keunggulan kita.',
+     '<b>Hambatan dagang</b>: kuota, embargo, tarif, subsidi, aturan kandungan lokal, proteksionisme, kartel, dan dumping.'],
+  a:['Kerangka: (1) definisi singkat; (2) satu contoh bisnis global dan alasan suksesnya; (3) rencana kamu: produk, negara tujuan, strategi masuk, alasan; (4) risiko dan solusinya; (5) kesimpulan.',
+     '<b>Contoh jawaban</b> (ganti dengan idemu): “Saya akan mengekspor kopi khas Jawa Barat. Tahap awal lewat agen atau distributor independen di Malaysia agar risikonya kecil dan modalnya tidak besar. Jika permintaan naik, saya buka kantor cabang atau joint venture dengan mitra lokal. Risikonya perbedaan selera, nilai tukar, dan tarif; solusinya riset pasar dan kontrak dengan harga dalam mata uang yang stabil.”']},
+ {t:'Bisnis itu apa dan harus seperti apa',
+  p:['<b>Pengertian</b>: organisasi yang menyediakan barang atau jasa untuk dijual dengan tujuan memperoleh laba (Griffin &amp; Ebert); menciptakan nilai untuk memenuhi kebutuhan masyarakat.',
+     '<b>Fungsi bisnis</b>: keuangan, produksi, pemasaran, pengelolaan SDM.',
+     '<b>Lima sumber daya</b>: tenaga kerja, modal, wirausahawan, sumber daya fisik, sumber daya informasi.',
+     '<b>Bisnis harus seperti apa</b>: (1) <i>menguntungkan</i> agar bertahan; (2) <i>etis dan bertanggung jawab sosial</i> kepada pelanggan (produk aman, iklan jujur), karyawan (perlakuan layak, tanpa diskriminasi), dan pemegang saham; (3) <i>inovatif dan berjiwa wirausaha</i>; (4) <i>adaptif</i> terhadap lingkungan bisnis (politik, ekonomi, sosial-budaya, teknologi, industri); (5) <i>dikelola kompeten</i>, karena kegagalan bisnis umumnya akibat manajer tidak kompeten, kontrol lemah, dan modal kurang.'],
+  a:['Kerangka: definisi → fungsi dan sumber daya → ciri bisnis yang baik (laba + etika + inovasi + adaptif) → contoh → kesimpulan.',
+     'Kalimat penutup yang kuat: “Bisnis yang baik tidak hanya mengejar laba, tetapi juga menciptakan nilai bagi pelanggan, karyawan, pemilik, dan masyarakat.”']},
+ {t:'Bisnis digital: fenomena yang kamu alami dan rasakan',
+  p:['<b>Bisnis digital</b> adalah bisnis yang memanfaatkan teknologi digital dan internet untuk menciptakan, menawarkan, dan menyampaikan produk atau jasa (e-commerce, marketplace, fintech, transportasi online, streaming, media sosial).',
+     '<b>Fenomena yang bisa diceritakan</b>: belanja di marketplace dan live shopping; dompet digital dan QRIS; ojek online serta pesan antar makanan; promo, flash sale, dan gratis ongkir; jualan lewat media sosial; kuliah dan kerja daring.',
+     '<b>Dampak positif</b>: praktis 24 jam, pilihan luas, harga mudah dibandingkan, UMKM menjangkau pasar luas dengan modal kecil, pembayaran cepat.',
+     '<b>Dampak negatif/risiko</b>: penipuan online, kebocoran data pribadi, perilaku konsumtif karena promo, barang tidak sesuai, toko offline tertekan, ketergantungan pada platform (komisi, perubahan algoritma).'],
+  a:['Kerangka berbasis pengalaman: (1) definisi bisnis digital; (2) fenomena yang kamu alami (kapan, platform apa, apa yang terjadi); (3) yang dirasakan: manfaat dan masalah; (4) pendapat atau saran untuk konsumen dan pelaku bisnis.',
+     '<b>Contoh</b> (ganti dengan pengalamanmu): “Saya sering memesan makanan lewat aplikasi karena ada promo dan ongkir murah. Sangat praktis, tetapi saya jadi lebih boros dan pernah menerima pesanan yang tidak sesuai. Menurut saya bisnis digital memudahkan UMKM berjualan, namun konsumen perlu bijak dan platform harus melindungi pembeli.”']}
+ ]}
+];
+function kuOf(id){ for(var i=0;i<KU.length;i++){ if(KU[i].id===id) return KU[i]; } return null; }
+function kisiHtml(){
+ var st=ksGet(), h='';
+ h+='<div class="bj-card"><h3>🎯 Kumpulan Kisi-kisi UTS</h3><div class="bj-meta">Kisi-kisi yang sudah dibagikan dosen, lengkap dengan penjelasan dan kerangka jawaban. Ketuk satu poin untuk membukanya, lalu centang kalau sudah paham.</div><div class="bj-prog"><i id="bjUg"></i></div><div class="bj-meta" id="bjUt"></div><button type="button" class="bj-btn" id="bjUr" style="border:0;cursor:pointer">Reset centang</button></div>';
+ KU.forEach(function(u){
+  var c=C[cIdx(u.id)];
+  h+='<div class="bj-card"><h3>'+c.n+'</h3><div class="bj-meta">UTS '+u.uts+' · '+c.d+'</div><div class="bj-note">'+u.note+'</div>';
+  u.k.forEach(function(k,i){
+   var key='uts:'+u.id+':'+i;
+   h+='<details><summary><span class="bj-tag">'+(i+1)+'</span>'+k.t+'</summary><div>'+
+    '<div class="bj-sub">📖 Penjelasan</div><ul>'+k.p.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>'+
+    '<div class="bj-sub">✍️ Kerangka jawaban / contoh</div><ul>'+k.a.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>'+
+    '<label class="bj-ks"><input type="checkbox" data-u="'+key+'"'+(st[key]?' checked':'')+'><span class="tx">Saya sudah paham poin ini</span></label></div></details>';
+  });
+  h+='<button type="button" class="bj-btn" data-go="'+u.id+'" style="border:0;cursor:pointer">'+(c.empty?'📂 Buka folder Drive':'📖 Buka ringkasan &amp; latihan soal')+'</button></div>';
+ });
+ var belum=C.filter(function(c){ return !kuOf(c.id); }).map(function(c){ return c.n; });
+ if(belum.length) h+='<div class="bj-note">Kisi-kisi belum ada untuk: '+belum.join(', ')+'. Akan ditambahkan setelah dosen membagikannya.</div>';
+ return h;
+}
+function kisiBind(){
+ var boxes=document.querySelectorAll('#bjApp input[data-u]');
+ function prog(){ var n=0; boxes.forEach(function(b){ if(b.checked) n++; }); var p=boxes.length?Math.round(n/boxes.length*100):0, pg=$('#bjUg'), pt=$('#bjUt'); if(pg) pg.style.width=p+'%'; if(pt) pt.textContent='Sudah dipahami '+n+' dari '+boxes.length+' poin kisi-kisi ('+p+'%)'; }
+ boxes.forEach(function(b){ b.onchange=function(){ var st=ksGet(); if(b.checked) st[b.dataset.u]=1; else delete st[b.dataset.u]; ksPut(st); prog(); }; });
+ var r=$('#bjUr'); if(r) r.onclick=function(){ var st=ksGet(); boxes.forEach(function(b){ delete st[b.dataset.u]; }); ksPut(st); render(); };
+ document.querySelectorAll('#bjApp [data-go]').forEach(function(b){ b.onclick=function(){ goCourse(b.dataset.go); }; });
+ prog();
+}
+function goCourse(id){
+ for(var d=0;d<DAYS.length;d++){ for(var s=0;s<DAYS[d].s.length;s++){ if(DAYS[d].s[s][0]===id){ di=d; si=s; } } }
+ mode='kuliah'; tab='sum'; flt=''; render(); window.scrollTo({top:0,behavior:'smooth'});
+}
 function nav(){
- $('#bjDays').innerHTML=DAYS.map(function(d,i){ return '<button type="button" class="'+(i===di?'on':'')+'" data-d="'+i+'"><b>Hari '+(i+1)+'</b><span>'+d.n+'</span><small>'+d.t+' 2026</small></button>'; }).join('');
+ $('#bjMode').innerHTML='<button type="button" data-m="kuliah" class="'+(mode==='kuliah'?'on':'')+'">📅 Jadwal Kuliah</button><button type="button" data-m="kisi" class="'+(mode==='kisi'?'on':'')+'">🎯 Kisi-kisi UTS</button>';
+ document.querySelectorAll('#bjMode button').forEach(function(b){ b.onclick=function(){ mode=b.dataset.m; render(); }; });
+ var on=mode==='kuliah';
+ $('#bjDays').style.display=on?'':'none'; $('#bjSlots').style.display=on?'':'none';
+ if(!on){ $('#bjDays').innerHTML=''; $('#bjSlots').innerHTML=''; return; }
+ $('#bjDays').innerHTML=DAYS.map(function(d,i){ return '<button type="button" class="'+(i===di?'on':'')+'" data-d="'+i+'"><b>'+(i===todayIdx?'Hari ini':'Kuliah')+'</b><span>'+d.n+'</span><small>'+d.s.length+' mata kuliah</small></button>'; }).join('');
  $('#bjSlots').innerHTML=DAYS[di].s.map(function(s,i){ var c=C[cIdx(s[0])]; return '<button type="button" class="'+(i===si?'on':'')+'" data-s="'+i+'"><small>'+s[1]+' WIB</small><b>'+c.n+'</b><span>'+c.d+'</span></button>'; }).join('');
  document.querySelectorAll('#bjDays button').forEach(function(b){b.onclick=function(){di=+b.dataset.d;si=0;tab='sum';flt='';render();}});
  document.querySelectorAll('#bjSlots button').forEach(function(b){b.onclick=function(){si=+b.dataset.s;tab='sum';flt='';render();}});
 }
+function bindKisiBtn(){ document.querySelectorAll('#bjApp [data-kisi]').forEach(function(b){ b.onclick=function(){ mode='kisi'; render(); window.scrollTo({top:0,behavior:'smooth'}); }; }); }
 function render(){
- nav(); cur=cIdx(DAYS[di].s[si][0]); var c=C[cur], h='';
- h+='<div class="bj-card"><h3>'+c.n+'</h3><div class="bj-meta">UTS '+DAYS[di].n+', '+DAYS[di].t+' · '+DAYS[di].s[si][1]+' WIB · '+c.d+' · <a href="'+D+c.l+S+'" target="_blank" rel="noopener">📂 Buka folder Drive</a></div>';
- if(c.empty){ $('#bjApp').innerHTML=h+'<div class="bj-empty"><div style="font-size:2rem">📭</div><p><b>Materi belum tersedia.</b></p><a class="bj-btn" href="'+D+c.l+S+'" target="_blank" rel="noopener">Buka folder Drive</a></div></div>'; return; }
- h+='<div class="bj-tabs"><button data-t="sum" class="'+(tab==='sum'?'on':'')+'">📖 Ringkasan</button><button data-t="mcq" class="'+(tab==='mcq'?'on':'')+'">📝 Soal PG ('+c.mcq.length+')</button><button data-t="es" class="'+(tab==='es'?'on':'')+'">✍️ Esai ('+c.es.length+')</button><button data-t="ks" class="'+(tab==='ks'?'on':'')+'">🎯 Kisi-kisi</button></div></div>';
+ nav(); if(mode==='kisi'){ $('#bjApp').innerHTML=kisiHtml(); kisiBind(); return; }
+ cur=cIdx(DAYS[di].s[si][0]); var c=C[cur], h='';
+ h+='<div class="bj-card"><h3>'+c.n+'</h3><div class="bj-meta">Kuliah hari '+DAYS[di].n+' · '+DAYS[di].s[si][1]+' WIB · '+c.d+' · <a href="'+D+c.l+S+'" target="_blank" rel="noopener">📂 Buka folder Drive</a></div>';
+ if(kuOf(c.id)) h+='<div class="bj-note">🎯 Kisi-kisi UTS mata kuliah ini sudah tersedia. <button type="button" class="bj-btn" data-kisi style="border:0;cursor:pointer;margin:0 0 0 6px;padding:6px 12px">Lihat kisi-kisi</button></div>';
+ if(c.empty){ $('#bjApp').innerHTML=h+'<div class="bj-empty"><div style="font-size:2rem">📭</div><p><b>Materi belum tersedia.</b></p><a class="bj-btn" href="'+D+c.l+S+'" target="_blank" rel="noopener">Buka folder Drive</a></div></div>'; bindKisiBtn(); return; }
+ h+='<div class="bj-tabs"><button data-t="sum" class="'+(tab==='sum'?'on':'')+'">📖 Ringkasan</button><button data-t="mcq" class="'+(tab==='mcq'?'on':'')+'">📝 Soal PG ('+c.mcq.length+')</button><button data-t="es" class="'+(tab==='es'?'on':'')+'">✍️ Esai ('+c.es.length+')</button><button data-t="ks" class="'+(tab==='ks'?'on':'')+'">✅ Checklist</button></div></div>';
  if(tab==='sum'){
   if(c.sum.length>2) h+='<div class="bj-chips">'+c.sum.map(function(s,k){ var t=s.h.split(' – ')[0]; if(t.length>24) t=t.slice(0,22)+'…'; return '<button type="button" data-j="'+k+'">'+t+'</button>'; }).join('')+'</div>';
   c.sum.forEach(function(s,k){ h+='<div class="bj-card" id="bjs-'+k+'"><h3>'+s.h+'</h3><ul>'+s.i.map(function(x){return '<li>'+x+'</li>'}).join('')+'</ul></div>'; }); }
@@ -4728,7 +4959,7 @@ function render(){
   h+='<div class="bj-card"><h3>Soal Esai</h3>'+c.es.map(function(e,i){return '<details><summary>'+(e[2]?'<span class="bj-tag">'+e[2].replace('P','P-')+'</span>':'')+(i+1)+'. '+e[0]+'</summary><div><b>Jawaban singkat:</b> '+e[1]+'</div></details>'}).join('')+(c.jur?jurnal():'')+'</div>';
  }
  if(tab==='ks') h+=ksHtml(c);
- $('#bjApp').innerHTML=h;
+ $('#bjApp').innerHTML=h; bindKisiBtn();
  document.querySelectorAll('#bjApp .bj-tabs button').forEach(function(b){b.onclick=function(){tab=b.dataset.t;render()}});
  document.querySelectorAll('#bjApp [data-j]').forEach(function(b){ b.onclick=function(){ var e=document.getElementById('bjs-'+b.dataset.j); if(e) e.scrollIntoView({behavior:'smooth',block:'start'}); }; });
  if(tab==='ks') ksBind();
